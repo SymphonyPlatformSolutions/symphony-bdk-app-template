@@ -1,0 +1,13 @@
+{
+  "applications": [
+    {
+      "type": "sandbox",
+      "id": "template",
+      "name": "Template for Extesion-App",
+      "blurb": "This is a template for extension-app using React Lib!",
+      "publisher": "Symphony",
+      "url": "https://localhost:4000/controller.html",
+      "domain": "localhost"
+    }
+  ]
+}
