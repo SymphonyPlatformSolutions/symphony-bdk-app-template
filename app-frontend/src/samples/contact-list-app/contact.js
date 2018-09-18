@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import './style.scss';
 
 // Validatin the props in this component
 Contact.propTypes = {
@@ -9,7 +10,7 @@ Contact.propTypes = {
 
 function Contact(props) {
   return (
-    <div className="tempo-text-primary">
+    <div className="color-text">
       <ul>
         <li>ID: {props.id}</li>
         <li>First Name: {props.name}</li>

@@ -1,31 +1,26 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+/* eslint-disable */
+// Disaling LINT for CommonsJS
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js')('mock');
 const path = require('path');
 
 module.exports = merge(commonConfig, {
-    mode: 'mock',
-    devtool: 'eval-source-map',
+  mode: 'development',
+  devtool: 'eval-source-map',
 
-    module: {
+  module: {
+    rules: [{
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader']
+    }, ],
+  },
 
-        rules: [
-            {
-              test: /\.css$/
-            },
-      ],
-    },
-
-    resolve: {
-        extensions: ['', '.js', '.jsx']
-      },
-
-    devServer: {
-        inline: true,
-        contentBase: path.resolve(__dirname, "dist"),
-        port: 4000,
-        headers: {
-            "Access-Control-Allow-Origin": "*"
-        }
+  devServer: {
+    inline: true,
+    contentBase: path.resolve(__dirname, 'dist'),
+    port: 4000,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
     }
+  }
 });
