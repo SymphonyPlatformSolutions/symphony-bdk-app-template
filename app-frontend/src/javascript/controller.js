@@ -1,3 +1,4 @@
+/* eslint-disable */
 // Create our own local controller service.
 // We have namespaced local services with "template:"
 let templateControllerService = SYMPHONY.services.register("template:controller");
@@ -18,7 +19,7 @@ SYMPHONY.remote.hello().then(function(data) {
         // The userReferenceId persists until the application is uninstalled by the user.
         // If the application is reinstalled, the userReferenceId will change.
         let userId = response.userReferenceId;
-
+        
         // Subscribe to Symphony's services:
         // To use the services, you must subscribe to it from your application
         const modulesService = SYMPHONY.services.subscribe("modules");
