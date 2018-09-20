@@ -5,7 +5,7 @@ const merge = require('webpack-merge');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const commonConfig = require('./webpack.common.js')('prod');
-const PATH = path.resolve(__dirname + '/../../../target/classes/META-INF/resources/webjars/', '');
+const PATH = path.resolve(__dirname + '/dist/', '');
 
 module.exports = merge(commonConfig, {
   mode: 'production',
@@ -19,7 +19,8 @@ module.exports = merge(commonConfig, {
   module: {
     rules: [{
       test: /\.css$/,
-      use: [MiniCssExtractPlugin.loader, 'css-loader']
+      test: /\.scss$/,
+      use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
     }, ]
   },
 
