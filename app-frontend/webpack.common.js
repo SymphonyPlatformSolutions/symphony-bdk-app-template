@@ -1,69 +1,83 @@
+/* eslint-disable */
+// Disabling LINT for CommonsJS
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
-var apiHost = '';
+// These configurations depends on how your server, 
+// app(javascript folder) and controller(javascript folder) are configured.
+let appEntry = '';
+let controllerEntry = '';
 let setApi = function (env) {
-    if(env === 'mock') {
-        apiHost = 'http://localhost:3000';
-    }
-    if(env === 'dev') {
-        apiHost = 'https://192.168.3.143:8080/bot';
-    }
-    if(env === 'prod') {
-        apiHost = 'https://192.168.3.143:8080';
-    }
-
-    console.log("Api Host: ", apiHost);
+  if(env === 'mock') {
+    controllerEntry = './mock-js/controller-mock.js';
+    appEntry = './mock-js/app-mock.js';
+  }
+  if(env === 'dev') {
+      controllerEntry = './src/javascript/controller.js';
+      appEntry = './src/javascript/app.js';
+  }
+  if(env === 'prod') {
+      controllerEntry = './src/javascript/controller.js';
+      appEntry = './src/javascript/app.js';
+  }
 }
 
-
 module.exports = env => {
-    console.log('Current environment: ', env);
-    setApi(env);
-    return {
-        entry: {
-            controller: path.resolve(__dirname, "./src/javascript/controller.js"),
-            app: path.resolve(__dirname, "./src/javascript/app.js")
-        },
+  console.log('Current environment: ', env);
+  setApi(env);
+  return {
+    entry: {
+      controller: path.resolve(__dirname, controllerEntry),
+      app: path.resolve(__dirname, appEntry)
+    },
 
-        output: {
-            path: path.resolve(__dirname, "dist"),
-            filename: "[name].bundle.js"
-        },
+    output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].bundle.js',
+      publicPath: '/',
+    },
 
-        module: {
-            loaders: [
-                { test: /\.css$/, loader: "style!css"},
-                    {
-                    test: /\.jsx?$/,
-                    loader: 'babel-loader',
-                    exclude: /node_modules/,
-                    query: {
-                        presets: ['es2015', 'react']
-                    }
-                }
-            ]
+    module: {
+      rules: [
+        {
+          test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+          use: [{
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
+          }]
         },
+        {
+          test: /\.jsx?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+          query: {
+            presets: ['es2015', 'react', 'stage-2']
+          }
+        }
+      ]
+    },
 
-        plugins: [
-            new HtmlWebpackPlugin({
-                filename: "controller.html",
-                template: "./src/html/controller.html",
-                inject: false
-            }),
-            new HtmlWebpackPlugin({
-                filename: "app.html",
-                template: "./src/html/app.html",
-                inject: false
-            }),
-            new webpack.DefinePlugin({
-                'process.env.apiHost': JSON.stringify(apiHost)
-            })
-        ],
+    resolve: {
+      extensions: ['.js', '.jsx']
+    },
 
-        resolve: {
-            extensions: ['', '.js', '.jsx']
-        },
-    };
+    plugins: [
+      new HtmlWebpackPlugin({
+        filename: 'controller.html',
+        template: './src/html/controller.html',
+        inject: false
+      }),
+      new HtmlWebpackPlugin({
+        filename: 'app.html',
+        template: './src/html/app.html',
+        inject: false
+      }),
+      // new webpack.DefinePlugin({
+      //   'process.env.apiHost': JSON.stringify(apiHost)
+      // }),
+    ],
+  };
 };

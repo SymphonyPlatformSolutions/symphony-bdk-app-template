@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import AppRest from '../samples/contact-list-app/app-rest';
+/* eslint-disable */
+import React from 'react';
+import './app.scss';
 
-// Top Level render component
-
-class App extends Component {
-    render(){
-        return (            
-            <AppRest />
-        );
-    }
+class App extends React.PureComponent {
+  render() {
+    return (
+      <div className="hello-world">Template App</div>
+    )
+  };
 }
 
 export default App;
