@@ -1,23 +1,26 @@
 /* eslint-disable */
-// Disaling LINT for CommonsJS
+// Disabling LINT for CommonsJS
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 // These configurations depends on how your server, 
 // app(javascript folder) and controller(javascript folder) are configured.
-var apiHost = '';
+let appEntry = '';
+let controllerEntry = '';
 let setApi = function (env) {
-  if (env === 'mock') {
-    apiHost = 'http://localhost:3000';
+  if(env === 'mock') {
+    controllerEntry = './mock-js/controller-mock.js';
+    appEntry = './mock-js/app-mock.js';
   }
-  if (env === 'dev') {
-    apiHost = 'https://192.168.3.143:8080/bot';
+  if(env === 'dev') {
+      controllerEntry = './src/javascript/controller.js';
+      appEntry = './src/javascript/app.js';
   }
-  if (env === 'prod') {
-    apiHost = 'https://192.168.3.143:8080';
+  if(env === 'prod') {
+      controllerEntry = './src/javascript/controller.js';
+      appEntry = './src/javascript/app.js';
   }
-  console.log('Api Host: ', apiHost);
 }
 
 module.exports = env => {
@@ -25,8 +28,8 @@ module.exports = env => {
   setApi(env);
   return {
     entry: {
-      controller: path.resolve(__dirname, './src/javascript/controller.js'),
-      app: path.resolve(__dirname, './src/javascript/app.js')
+      controller: path.resolve(__dirname, controllerEntry),
+      app: path.resolve(__dirname, appEntry)
     },
 
     output: {
@@ -72,9 +75,9 @@ module.exports = env => {
         template: './src/html/app.html',
         inject: false
       }),
-      new webpack.DefinePlugin({
-        'process.env.apiHost': JSON.stringify(apiHost)
-      }),
+      // new webpack.DefinePlugin({
+      //   'process.env.apiHost': JSON.stringify(apiHost)
+      // }),
     ],
   };
 };

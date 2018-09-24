@@ -17,7 +17,7 @@ module.exports = merge(commonConfig, {
 
   devServer: {
     inline: true,
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, 'mock-js'),
     port: 4000,
     headers: {
       'Access-Control-Allow-Origin': '*'

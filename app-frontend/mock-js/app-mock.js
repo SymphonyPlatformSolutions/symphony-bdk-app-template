@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../components/app';
+import App from '../src/components/app';
 
 // Create our own local service pertaining to the application module
 // We have namespaced local services with 'template:'
