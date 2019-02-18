@@ -1,8 +1,6 @@
-/* eslint-disable */
-// Disaling LINT for CommonsJS
 const merge = require('webpack-merge');
-const commonConfig = require('./webpack.common.js')('mock');
 const path = require('path');
+const commonConfig = require('./webpack.common.js')('mock');
 
 module.exports = merge(commonConfig, {
   mode: 'development',
@@ -11,16 +9,16 @@ module.exports = merge(commonConfig, {
   module: {
     rules: [{
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader']
-    }, ],
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+    }],
   },
 
   devServer: {
     inline: true,
-    contentBase: path.resolve(__dirname, 'mock-js'),
+    contentBase: path.resolve(__dirname, 'javascript-mock'),
     port: 4000,
     headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  }
+      'Access-Control-Allow-Origin': '*',
+    },
+  },
 });

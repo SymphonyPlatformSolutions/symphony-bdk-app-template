@@ -1,11 +1,10 @@
-/* eslint-disable */
-// Disaling LINT for CommonsJS
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const commonConfig = require('./webpack.common.js')('prod');
-const PATH = path.resolve(__dirname + '/dist/', '');
+
+const PATH = path.resolve(`${__dirname}/dist/`, '');
 
 module.exports = merge(commonConfig, {
   mode: 'production',
@@ -13,21 +12,20 @@ module.exports = merge(commonConfig, {
   output: {
     path: PATH,
     filename: '[name].bundle.js',
-    publicPath: '/'
+    publicPath: '/',
   },
 
   module: {
     rules: [{
-      test: /\.css$/,
       test: /\.scss$/,
-      use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-    }, ]
+      use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+    }],
   },
 
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css'
+      chunkFilename: '[id].css',
     }),
   ],
 
@@ -36,9 +34,9 @@ module.exports = merge(commonConfig, {
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: true,
-          ecma: 6
-        }
-      })
-    ]
+          ecma: 6,
+        },
+      }),
+    ],
   },
 });
