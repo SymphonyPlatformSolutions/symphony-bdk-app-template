@@ -1,62 +1,89 @@
 /* global SYMPHONY */
-import { initApp, getUserJWT } from 'symphony-app-authentication-fe';
+import { initApp } from 'symphony-app-authentication-fe';
+import { setupURL, setupControllerURL } from '../utils/setup-url';
+import GeneralEnricher from '../services/general-enricher';
 
-// Create our own local controller service.
-// We have namespaced local services with "template:"
-const templateControllerService = SYMPHONY.services.register('template:controller');
-SYMPHONY.services.register('message:controller');
+const confluenceControllerService = SYMPHONY.services.register('confluence:controller');
+SYMPHONY.services.register('confluence:controller');
+SYMPHONY.services.register('confluence:enricher');
 
-// template as id application
-// authenticationURL as back-end URl
-const controllers = ['template:controller', 'message:controller'];
-const authenticationURL = `https://${window.location.host}/template`;
+const controllers = ['confluence:controller', 'confluence:enricher'];
+const authenticationURL = setupURL();
+const CONTROLLER_PREFIX = setupControllerURL();
 
 const config = {
-  appId: 'template',
+  appId: 'confluence',
   dependencies: ['modules', 'applications-nav', 'ui', 'entity'],
   exportedDependencies: controllers,
   baseAuthenticationUrl: authenticationURL,
 };
 
 const bootstrap = () => {
-  // Subscribe to Symphony's services:
-  // To use the services, you must subscribe to it from your application
   const modulesService = SYMPHONY.services.subscribe('modules');
   const navService = SYMPHONY.services.subscribe('applications-nav');
-  SYMPHONY.services.subscribe('ui');
+  const uiService = SYMPHONY.services.subscribe('ui');
+  SYMPHONY.services.subscribe('entity');
   const entityService = SYMPHONY.services.subscribe('entity');
+  const enricher = new GeneralEnricher('confluence:enricher', [
+    'org.symphony.ms.devtools.confluence.page',
+    'org.symphony.ms.devtools.confluence.blogpost',
+    'org.symphony.ms.devtools.confluence.loginResponse',
+  ]);
 
-  // Register a renderer for a "type" of entity
+  enricher.init();
+  enricher.register();
+
   entityService.registerRenderer(
     'com.symphony.timer',
     {},
     'message:controller',
   );
 
-  // LEFT NAV: Add an entry to the left navigation for our application
-  navService.add('template-nav', 'Template', 'template:controller');
+  // FOR USE ON ROUTES
+  confluenceControllerService.implement({
+    trigger() {
+      const configUrl = `https://${CONTROLLER_PREFIX}/app.html?queryObj={"page": "config"}`;
 
-  // Implement some methods on our local service. These will be invoked by user actions.
-  templateControllerService.implement({
-    // LEFT NAV & MODULE: When the left navigation item is clicked on,
-    // invoke Symphony's module service to show our application in the grid
-    select(id) {
-      if (id === 'template-nav') {
-        // Focus the left navigation item when clicked
-        navService.focus('template-nav');
-      }
-      modulesService.show('template', { title: 'template Task Manager' }, 'template:controller', `https://${window.location.host}/template/webjars/app.html`, {
-        // You must specify canFloat in the module options so that the module can be pinned
-        canFloat: true,
-      });
-      // Focus the module after it is shown
-      modulesService.focus('template');
+      modulesService.show(
+        'confluence',
+        {
+          title: 'Confluence',
+          icon: `https://${CONTROLLER_PREFIX}/assets/app-icon.svg`,
+        },
+        'confluence:controller',
+        configUrl,
+        { canFloat: true },
+      );
     },
   });
 
-  const jwt = getUserJWT();
-  // Set JWT into local cache
-  localStorage.setItem('jwt', jwt);
+  const navSettings = {
+    title: 'Confluence',
+    icon: `https://${CONTROLLER_PREFIX}/assets/app-icon.svg`,
+  };
+  navService.add('confluence-nav', navSettings, 'confluence:controller');
+  uiService.registerExtension('app-settings', 'confluence', 'confluence:controller', { label: 'Configure' });
+
+  confluenceControllerService.implement({
+    select(id) {
+      if (id === 'confluence-nav') {
+        navService.focus('confluence-nav');
+      }
+      modulesService.show(
+        'confluence',
+        {
+          title: 'Confluence',
+          icon: `https://${CONTROLLER_PREFIX}/assets/app-icon.svg`,
+        },
+        'confluence:controller',
+        `https://${CONTROLLER_PREFIX}/app.html`,
+        {
+          canFloat: true,
+        },
+      );
+      modulesService.focus('confluence');
+    },
+  });
 };
 
 initApp(config)
