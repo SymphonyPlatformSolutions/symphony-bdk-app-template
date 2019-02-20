@@ -1,7 +1,6 @@
-/* global SYMPHONY */
-
 import GeneralEnricher from '../src/services/general-enricher';
 
+/* global SYMPHONY */
 const templateControllerService = SYMPHONY.services.register('template:controller');
 SYMPHONY.services.register('template:enricher');
 
@@ -34,7 +33,7 @@ SYMPHONY.remote.hello().then(() => {
         modulesService.show(
           'template',
           {
-            title: 'template',
+            title: 'Template',
             icon: 'https://localhost:4000/assets/app-icon.svg',
           },
           'template:controller',
@@ -45,7 +44,7 @@ SYMPHONY.remote.hello().then(() => {
     });
 
     const navSettings = {
-      title: 'template',
+      title: 'Template',
       icon: 'https://localhost:4000/assets/app-icon.svg',
     };
     navService.add('template-nav', navSettings, 'template:controller');
@@ -57,7 +56,7 @@ SYMPHONY.remote.hello().then(() => {
         modulesService.show(
           'template',
           {
-            title: 'template',
+            title: 'Template',
             icon: 'https://localhost:4000/assets/app-icon.svg',
           },
           'template:controller',

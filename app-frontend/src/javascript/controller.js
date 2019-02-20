@@ -26,9 +26,7 @@ const bootstrap = () => {
   SYMPHONY.services.subscribe('entity');
   const entityService = SYMPHONY.services.subscribe('entity');
   const enricher = new GeneralEnricher('template:enricher', [
-    'org.symphony.ms.devtools.template.page',
-    'org.symphony.ms.devtools.template.blogpost',
-    'org.symphony.ms.devtools.template.loginResponse',
+    'org.symphony.ms.devtools.myEntity',
   ]);
 
   enricher.init();
