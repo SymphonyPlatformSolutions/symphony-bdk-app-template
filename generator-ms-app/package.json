@@ -1,5 +1,5 @@
 {
-  "name": "ms-templates",
+  "name": "generator-ms-app",
   "version": "1.0.0",
   "description": "ms-template with app generator",
   "main": "index.js",
