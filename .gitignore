@@ -21,3 +21,4 @@ app-frontend/coverage
 app-frontend/.vscode
 app-frontend.DS_Store
 app-frontend/npm-debug.log
+node_modules
