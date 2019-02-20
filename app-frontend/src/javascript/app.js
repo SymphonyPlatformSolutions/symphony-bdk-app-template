@@ -6,7 +6,7 @@ import configureStore from '../store/store-config';
 import '../sass/main.scss';
 import Routes from '../routes/routes';
 
-const confluenceAppService = SYMPHONY.services.register('confluence:app');
+const templateAppService = SYMPHONY.services.register('template:app');
 
 SYMPHONY.remote.hello().then((data) => {
   let themeColor = data.themeV2.name;
@@ -14,9 +14,9 @@ SYMPHONY.remote.hello().then((data) => {
   document.body.className = `symphony-external-app ${themeColor.toLowerCase()} ${themeSize}`;
 
   SYMPHONY.application.connect(
-    'confluence',
+    'template',
     ['modules', 'applications-nav', 'ui', 'extended-user-info', 'extended-user-service'],
-    ['confluence:app'],
+    ['template:app'],
   ).then((response) => {
     const userId = response.userReferenceId;
     const modulesService = SYMPHONY.services.subscribe('modules');
@@ -31,12 +31,12 @@ SYMPHONY.remote.hello().then((data) => {
       });
     });
 
-    modulesService.addMenuItem('confluence', 'About Confluence', 'confluence-menu-item');
-    modulesService.setHandler('confluence', 'confluence:app');
-    confluenceAppService.implement({
+    modulesService.addMenuItem('template', 'About template', 'template-menu-item');
+    modulesService.setHandler('template', 'template:app');
+    templateAppService.implement({
       menuSelect: (itemId) => {
-        if (itemId === 'confluence-menu-item') {
-          document.getElementById('about-confluence-app').className = '';
+        if (itemId === 'template-menu-item') {
+          document.getElementById('about-template-app').className = '';
         }
       },
     });

@@ -8,12 +8,12 @@ const setupURL = () => {
     // Using JSON Server
     ROOT_URL = 'http://localhost:3000';
     // Using Back-End Running Locally without JWT
-    // ROOT_URL = 'https://192.168.3.211/confluence';
+    // ROOT_URL = 'https://192.168.3.211/template';
   } else if (currEnv === envs.DEV) {
     // BE from another PC
-    ROOT_URL = 'https://54bb3b1b.ngrok.io/confluence';
+    ROOT_URL = 'https://54bb3b1b.ngrok.io/template';
   } else {
-    ROOT_URL = `https://${window.location.host}/confluence`;
+    ROOT_URL = `https://${window.location.host}/template`;
   }
 
   return ROOT_URL;
@@ -24,7 +24,7 @@ const setupLinkPrefix = () => {
   let LINK_PREFIX = '';
 
   if (currEnv === envs.PROD) {
-    LINK_PREFIX = '/confluence/app';
+    LINK_PREFIX = '/template/app';
   }
 
   return LINK_PREFIX;
@@ -39,7 +39,7 @@ const setupControllerURL = () => {
   }
 
   if (currEnv === envs.PROD) {
-    CONTROLLER_LINK = `${window.location.host}/confluence/app`;
+    CONTROLLER_LINK = `${window.location.host}/template/app`;
   }
 
   return CONTROLLER_LINK;

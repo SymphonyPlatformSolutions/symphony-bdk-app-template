@@ -3,16 +3,16 @@ import { initApp } from 'symphony-app-authentication-fe';
 import { setupURL, setupControllerURL } from '../utils/setup-url';
 import GeneralEnricher from '../services/general-enricher';
 
-const confluenceControllerService = SYMPHONY.services.register('confluence:controller');
-SYMPHONY.services.register('confluence:controller');
-SYMPHONY.services.register('confluence:enricher');
+const templateControllerService = SYMPHONY.services.register('template:controller');
+SYMPHONY.services.register('template:controller');
+SYMPHONY.services.register('template:enricher');
 
-const controllers = ['confluence:controller', 'confluence:enricher'];
+const controllers = ['template:controller', 'template:enricher'];
 const authenticationURL = setupURL();
 const CONTROLLER_PREFIX = setupControllerURL();
 
 const config = {
-  appId: 'confluence',
+  appId: 'template',
   dependencies: ['modules', 'applications-nav', 'ui', 'entity'],
   exportedDependencies: controllers,
   baseAuthenticationUrl: authenticationURL,
@@ -24,10 +24,10 @@ const bootstrap = () => {
   const uiService = SYMPHONY.services.subscribe('ui');
   SYMPHONY.services.subscribe('entity');
   const entityService = SYMPHONY.services.subscribe('entity');
-  const enricher = new GeneralEnricher('confluence:enricher', [
-    'org.symphony.ms.devtools.confluence.page',
-    'org.symphony.ms.devtools.confluence.blogpost',
-    'org.symphony.ms.devtools.confluence.loginResponse',
+  const enricher = new GeneralEnricher('template:enricher', [
+    'org.symphony.ms.devtools.template.page',
+    'org.symphony.ms.devtools.template.blogpost',
+    'org.symphony.ms.devtools.template.loginResponse',
   ]);
 
   enricher.init();
@@ -40,17 +40,17 @@ const bootstrap = () => {
   );
 
   // FOR USE ON ROUTES
-  confluenceControllerService.implement({
+  templateControllerService.implement({
     trigger() {
       const configUrl = `https://${CONTROLLER_PREFIX}/app.html?queryObj={"page": "config"}`;
 
       modulesService.show(
-        'confluence',
+        'template',
         {
-          title: 'Confluence',
+          title: 'template',
           icon: `https://${CONTROLLER_PREFIX}/assets/app-icon.svg`,
         },
-        'confluence:controller',
+        'template:controller',
         configUrl,
         { canFloat: true },
       );
@@ -58,30 +58,30 @@ const bootstrap = () => {
   });
 
   const navSettings = {
-    title: 'Confluence',
+    title: 'template',
     icon: `https://${CONTROLLER_PREFIX}/assets/app-icon.svg`,
   };
-  navService.add('confluence-nav', navSettings, 'confluence:controller');
-  uiService.registerExtension('app-settings', 'confluence', 'confluence:controller', { label: 'Configure' });
+  navService.add('template-nav', navSettings, 'template:controller');
+  uiService.registerExtension('app-settings', 'template', 'template:controller', { label: 'Configure' });
 
-  confluenceControllerService.implement({
+  templateControllerService.implement({
     select(id) {
-      if (id === 'confluence-nav') {
-        navService.focus('confluence-nav');
+      if (id === 'template-nav') {
+        navService.focus('template-nav');
       }
       modulesService.show(
-        'confluence',
+        'template',
         {
-          title: 'Confluence',
+          title: 'template',
           icon: `https://${CONTROLLER_PREFIX}/assets/app-icon.svg`,
         },
-        'confluence:controller',
+        'template:controller',
         `https://${CONTROLLER_PREFIX}/app.html`,
         {
           canFloat: true,
         },
       );
-      modulesService.focus('confluence');
+      modulesService.focus('template');
     },
   });
 };

@@ -8,8 +8,8 @@ let controllerEntry = '';
 let currEnv = '';
 const setApi = (env) => {
   if (env === 'mock') {
-    controllerEntry = './javascript-mock/controller-mock.js';
-    appEntry = './javascript-mock/app-mock.js';
+    controllerEntry = './mock-js/controller-mock.js';
+    appEntry = './mock-js/app-mock.js';
     currEnv = 'MOCK';
   }
   if (env === 'dev') {

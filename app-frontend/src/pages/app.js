@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React from 'react';
-import './app.scss';
 
 class App extends React.PureComponent {
   render() {
