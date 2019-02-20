@@ -1,6 +1,7 @@
+/* global SYMPHONY */
+
 import GeneralEnricher from '../src/services/general-enricher';
 
-/* global SYMPHONY */
 const templateControllerService = SYMPHONY.services.register('template:controller');
 SYMPHONY.services.register('template:enricher');
 

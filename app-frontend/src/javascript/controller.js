@@ -1,4 +1,5 @@
 /* global SYMPHONY */
+
 import { initApp } from 'symphony-app-authentication-fe';
 import { setupURL, setupControllerURL } from '../utils/setup-url';
 import GeneralEnricher from '../services/general-enricher';
