@@ -1,10 +1,16 @@
 /* eslint-disable */
 import React from 'react';
+import Header from '../components/header';
 
 class App extends React.PureComponent {
   render() {
     return (
-      <div className="hello-world">Template App</div>
+      <div>
+        <Header />
+        <div className="page-container">
+          TEMPLATE PAGE
+        </div>
+      </div>
     )
   };
 }

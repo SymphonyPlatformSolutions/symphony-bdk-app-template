@@ -48,7 +48,6 @@ export default class GeneralEnricher {
     };
   }
 
-  // this will be used later
   action(data) {
     this.dialogsService = SYMPHONY.services.subscribe('dialogs');
     let fullURL;

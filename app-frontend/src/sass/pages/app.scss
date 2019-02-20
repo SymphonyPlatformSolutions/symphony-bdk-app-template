@@ -1,13 +1,4 @@
-$color-primary: #fff;
-$color-secondary: #161616;
-
-.hello-world {
-  margin: auto;
-  width: 8em;
-  color: $color-primary;
-  text-align: center;
-  border: 2px solid $color-secondary;
-  border-radius: 3px;
-  font-size: 2em;
-  background-color: #181818
-};
+.page-container {
+  display: flex;
+  justify-content: center;
+}
