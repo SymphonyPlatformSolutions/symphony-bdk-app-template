@@ -1,11 +1,5 @@
 /* global SYMPHONY */
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from '../store/store-config';
-import '../sass/main.scss';
-import Routes from '../routes/routes';
+<%= imports %>
 
 const templateAppService = SYMPHONY.services.register('template:app');
 
@@ -41,18 +35,6 @@ SYMPHONY.remote.hello().then((data) => {
         }
       },
     });
-    const store = configureStore();
-
-    ReactDOM.render(
-      <Provider store={store}>
-        <div>
-          <Routes
-            userId={userId}
-            jwtService={extendedUserInfoService}
-          />
-        </div>
-      </Provider>,
-      document.getElementById('root'),
-    );
+    <%= reactDOM %>
   });
 });
