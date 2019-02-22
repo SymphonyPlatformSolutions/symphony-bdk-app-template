@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import Header from '../components/header';
 
@@ -11,8 +10,8 @@ class App extends React.PureComponent {
           TEMPLATE PAGE
         </div>
       </div>
-    )
-  };
+    );
+  }
 }
 
 export default App;

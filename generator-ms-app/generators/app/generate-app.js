@@ -16,7 +16,31 @@
   }
 
   writingControllerHTML() {
-    
+    this.fs.copy(
+      this.templatePath('src/html/controller.html'),
+      this.destinationPath('src/html/controller.html')
+    )
+  }
+
+  writingComponents() {
+    this.fs.copy(
+      this.templatePath('src/components/header.js'),
+      this.destinationPath('src/components/header.js')
+    )
+  }
+
+  writingPages() {
+    this.fs.copy(
+      this.templatePath('src/pages/app.js'),
+      this.destinationPath('src/pages/app.js')
+    )
+  }
+
+  writingRoutes() {
+    this.fs.copy(
+      this.templatePath('src/routes/routes.js'),
+      this.destinationPath('src/routes/routes.js')
+    )
   }
 
   writingDefaultAppJS() {
@@ -24,6 +48,31 @@
       this.templatePath('src/javascript/app.js'),
       this.destinationPath('src/javascript/app.js'),
       { imports: 'import \'\../sass/main.scss\'\;' }
+    )
+  }
+
+  writingWithReact() {
+    this.fs.copyTpl(
+      this.templatePath('src/javascript/app.js'),
+      this.destinationPath('src/javascript/app.js'),
+      {
+        imports: `
+        import React from 'react';
+        import ReactDOM from 'react-dom';
+        import '../sass/main.scss';
+        `,
+        reactDOM: `
+        ReactDOM.render(
+            <div>
+              <Routes
+                userId={userId}
+                jwtService={extendedUserInfoService}
+              />
+            </div>,
+          document.getElementById('root'),
+        );
+        `
+      }
     )
   }
 
@@ -58,4 +107,4 @@
   }
 }
 
-module.exports = GenerateApp
+module.exports = GenerateApp;
