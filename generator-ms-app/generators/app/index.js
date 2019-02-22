@@ -34,7 +34,13 @@ module.exports = class extends Generator {
   writing() {
     console.log(this.answers);
     const writeApp = new GenerateApp();
+    const writeRedux = new GenerateRedux();
+    const writeConfigs = new GenerateConfigs();
+    const writeMocks = new GenerateMocks();
+
     writeApp.writingAssets.call(this);
+    writeApp.writingSass.call(this);
+    writeApp.writingAppHTML.call(this);
     // writeApp.writingWithReduxAppJS.call(this);
     // if (this.answers.appType === 'Default JS App') {
     //   writeApp.writingDefaultAppJS.call(this);
