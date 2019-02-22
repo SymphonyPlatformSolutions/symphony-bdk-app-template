@@ -1,36 +1,22 @@
 class GenerateRedux {
-  writingActionsTypes() {
+  writingActions() {
     this.fs.copy(
-      this.templatePath('src/actions/action-types.js'),
-      this.destinationPath('src/actions/action-type.js')
+      this.templatePath('src/actions'),
+      this.destinationPath('src/actions')
     )
   }
 
-  writingActionsJwtService() {
+  writingReducers() {
     this.fs.copy(
-      this.templatePath('src/actions/action-jwt-service.js'),
-      this.destinationPath('src/actions/action-jwt-service.js')
-    )
-  }
-
-  writingRootReducer() {
-    this.fs.copy(
-      this.templatePath('src/reducers/root-reducer.js'),
-      this.destinationPath('src/reducers/root-reducer.js')
-    )
-  }
-
-  writingReducerJwt() {
-    this.fs.copy(
-      this.templatePath('src/reducers/reducer-jwt.js'),
-      this.destinationPath('src/reducers/reducer-jwt.js')
+      this.templatePath('src/reducers'),
+      this.destinationPath('src/reducers')
     )
   }
 
   writingStore() {
     this.fs.copy(
-      this.templatePath('src/store/store-config.js'),
-      this.destinationPath('src/reducers/store-config.js')
+      this.templatePath('src/store'),
+      this.destinationPath('src/store')
     )
   }
 

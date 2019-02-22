@@ -16,7 +16,7 @@ module.exports = class extends Generator {
         type: 'list',
         name: 'appType',
         message: 'Chose the App Type: ',
-        choices: ['Default JS App', 'With Redux', 'With React']
+        choices: ['Default MS Template(REDUX)', 'With React', 'Without React/Redux']
       },
       {
         type: 'input',
@@ -35,9 +35,9 @@ module.exports = class extends Generator {
     console.log(this.answers);
     const writeApp = new GenerateApp();
     writeApp.writingAssets.call(this);
-    writeApp.writingWithReduxAppJS.call(this);
-    if (this.answers.appType === 'Default JS App') {
-      writeApp.writingDefaultAppJS.call(this);
-    }
+    // writeApp.writingWithReduxAppJS.call(this);
+    // if (this.answers.appType === 'Default JS App') {
+    //   writeApp.writingDefaultAppJS.call(this);
+    // }
   }
 }

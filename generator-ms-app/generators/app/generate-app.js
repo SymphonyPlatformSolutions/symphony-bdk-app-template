@@ -2,8 +2,15 @@
 
    writingAssets() {
     this.log('Entrei na function')
-    this.fs.copy(this.templatePath('src/assets/app-icon.svg'),
-      this.destinationPath('src/assets/app-icon.svg')
+    this.fs.copy(this.templatePath('src/assets'),
+      this.destinationPath('src/assets')
+    );
+  }
+
+  writingSass() {
+    this.fs.copy(
+      this.templatePath('src/sass'),
+      this.destinationPath('src/sass')
     );
   }
 
@@ -12,35 +19,35 @@
       this.templatePath('src/html/app.html'),
       this.destinationPath('src/html/app.html'),
       { title: this.answers.name }
-    )
+    );
   }
 
   writingControllerHTML() {
     this.fs.copy(
       this.templatePath('src/html/controller.html'),
       this.destinationPath('src/html/controller.html')
-    )
+    );
   }
 
   writingComponents() {
     this.fs.copy(
-      this.templatePath('src/components/header.js'),
-      this.destinationPath('src/components/header.js')
-    )
+      this.templatePath('src/components'),
+      this.destinationPath('src/components')
+    );
   }
 
   writingPages() {
     this.fs.copy(
-      this.templatePath('src/pages/app.js'),
-      this.destinationPath('src/pages/app.js')
-    )
+      this.templatePath('src/pages'),
+      this.destinationPath('src/page')
+    );
   }
 
   writingRoutes() {
     this.fs.copy(
-      this.templatePath('src/routes/routes.js'),
-      this.destinationPath('src/routes/routes.js')
-    )
+      this.templatePath('src/routes'),
+      this.destinationPath('src/routes')
+    );
   }
 
   writingDefaultAppJS() {
@@ -48,7 +55,7 @@
       this.templatePath('src/javascript/app.js'),
       this.destinationPath('src/javascript/app.js'),
       { imports: 'import \'\../sass/main.scss\'\;' }
-    )
+    );
   }
 
   writingWithReact() {
@@ -73,7 +80,7 @@
         );
         `
       }
-    )
+    );
   }
 
   writingWithReduxAppJS() {
@@ -103,7 +110,7 @@
           document.getElementById('root'),
         );`
     }
-    )
+    );
   }
 }
 

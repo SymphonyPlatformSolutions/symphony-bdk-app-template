@@ -1,4 +1,11 @@
 class GenerateConfigs {
+  writingBundleJSON() {
+    this.fs.copy(
+      this.templatePath('dist/bundle.json'),
+      this.destinationPath('dist/bundle.json')
+    )
+  }
+
   writingGeneralEnricher() {
     this.fs.copy(
       this.templatePath('src/services/general-enricher.js'),
@@ -13,17 +20,10 @@ class GenerateConfigs {
     )
   }
 
-  writingEnvsConstants() {
+  writingUtils() {
     this.fs.copy(
-      this.templatePath('src/utils/envs-constants.js'),
-      this.destinationPath('src/utils/envs-constants.js')
-    )
-  }
-
-  writingSetupUrl() {
-    this.fs.copy(
-      this.templatePath('src/utils/setup-url.js'),
-      this.destinationPath('src/utils/setup-url')
+      this.templatePath('src/utils'),
+      this.destinationPath('src/utils')
     )
   }
 
