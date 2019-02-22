@@ -6,7 +6,8 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
     this.log(chalk.magenta('/------------------------------------/'));
-    this.log(chalk.blue('/WELCOME TO MS GENERATOR!/'));
+    this.log(chalk.blue('/-------WELCOME TO MS GENERATOR!-------/'));
+    this.log(chalk.magenta('/------------------------------------/'));
 
   }
 
@@ -34,13 +35,13 @@ module.exports = class extends Generator {
   writing() {
     console.log(this.answers);
     const writeApp = new GenerateApp();
-    const writeRedux = new GenerateRedux();
-    const writeConfigs = new GenerateConfigs();
-    const writeMocks = new GenerateMocks();
+    // const writeRedux = new GenerateRedux();
+    // const writeConfigs = new GenerateConfigs();
+    // const writeMocks = new GenerateMocks();
 
-    writeApp.writingAssets.call(this);
-    writeApp.writingSass.call(this);
-    writeApp.writingAppHTML.call(this);
+    writeApp.writingSRC.call(this);
+    // writeApp.writingSass.call(this);
+    // writeApp.writingAppHTML.call(this);
     // writeApp.writingWithReduxAppJS.call(this);
     // if (this.answers.appType === 'Default JS App') {
     //   writeApp.writingDefaultAppJS.call(this);

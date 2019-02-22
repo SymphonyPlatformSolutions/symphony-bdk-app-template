@@ -1,4 +1,26 @@
- class GenerateApp {
+const GenerateRedux = require('./generate-redux');
+const GenerateConfigs = require('./generate-configs');
+
+class GenerateApp {
+
+  writingSRC() {
+
+    const writeConfigs = new GenerateConfigs();
+    const writeRedux = new GenerateRedux();
+
+    console.log('thsss', this.answers.appType);
+    if(this.answers.appType === 'Default MS Template(Redux)') {
+      this.writingAssets();
+      this.writingSass();
+      this.writingComponents();
+      this.writingAppHTML();
+      this.writingControllerHTML();
+      this.writingControllerJS();
+      this.writingWithReduxAppJS();
+      writeConfigs.writeConfigs();
+      writeRedux.writingRedux();
+    }
+  }
 
    writingAssets() {
     this.log('Entrei na function')
@@ -58,7 +80,14 @@
     );
   }
 
-  writingWithReact() {
+  writingControllerJS() {
+    this.fs.copy(
+      this.templatePath('src/javascript/controller.js'),
+      this.destinationPath('src/javascript/controller.js')
+    )
+  }
+
+  writingWithReactAppJS() {
     this.fs.copyTpl(
       this.templatePath('src/javascript/app.js'),
       this.destinationPath('src/javascript/app.js'),

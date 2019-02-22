@@ -1,4 +1,9 @@
 class GenerateRedux {
+  writingRedux() {
+    this.writingActions();
+    this.writingReducers();
+    this.writingStore();
+  }
   writingActions() {
     this.fs.copy(
       this.templatePath('src/actions'),

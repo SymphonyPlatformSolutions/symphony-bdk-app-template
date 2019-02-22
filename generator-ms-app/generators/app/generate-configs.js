@@ -1,4 +1,21 @@
 class GenerateConfigs {
+
+  writingConfigs() {
+    this.writingBundleJSON();
+    this.writingGeneralEnricher();
+    this.writingUserRooms();
+    this.writingUtils();
+    this.writingBabelrc();
+    this.writingEslintignore();
+    this.writingEslint();
+    this.writingGitignore();
+    this.writingPackageJSON();
+    this.writingWebpackCommon();
+    this.writingWebpackDev();
+    this.writingWebpackProd();
+    this.writingWebpackMock();
+  }
+
   writingBundleJSON() {
     this.fs.copy(
       this.templatePath('dist/bundle.json'),
