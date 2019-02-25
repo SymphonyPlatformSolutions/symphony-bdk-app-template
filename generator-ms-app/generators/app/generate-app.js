@@ -1,15 +1,15 @@
 const GenerateRedux = require('./generate-redux');
 const GenerateConfigs = require('./generate-configs');
+const writeConfigs = new GenerateConfigs(this);
+const writeRedux = new GenerateRedux();
 
 class GenerateApp {
-
+  constructor(context) {
+     this.generator = context;
+  }
+  
   writingSRC() {
-
-    const writeConfigs = new GenerateConfigs();
-    const writeRedux = new GenerateRedux();
-
-    console.log('thsss', this.answers.appType);
-    if(this.answers.appType === 'Default MS Template(Redux)') {
+    if(this.generator.answers.appType === 'Default MS Template(REDUX)') {
       this.writingAssets();
       this.writingSass();
       this.writingComponents();
@@ -22,75 +22,74 @@ class GenerateApp {
     }
   }
 
-   writingAssets() {
-    this.log('Entrei na function')
-    this.fs.copy(this.templatePath('src/assets'),
-      this.destinationPath('src/assets')
+  writingAssets() {
+    this.generator.fs.copy(this.generator.templatePath('src/assets'),
+      this.generator.destinationPath('src/assets')
     );
   }
 
   writingSass() {
-    this.fs.copy(
-      this.templatePath('src/sass'),
-      this.destinationPath('src/sass')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/sass'),
+      this.generator.destinationPath('src/sass')
     );
   }
 
   writingAppHTML() {
-    this.fs.copyTpl(
-      this.templatePath('src/html/app.html'),
-      this.destinationPath('src/html/app.html'),
-      { title: this.answers.name }
+    this.generator.fs.copyTpl(
+      this.generator.templatePath('src/html/app.html'),
+      this.generator.destinationPath('src/html/app.html'),
+      { title: this.generator.answers.name }
     );
   }
 
   writingControllerHTML() {
-    this.fs.copy(
-      this.templatePath('src/html/controller.html'),
-      this.destinationPath('src/html/controller.html')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/html/controller.html'),
+      this.generator.destinationPath('src/html/controller.html')
     );
   }
 
   writingComponents() {
-    this.fs.copy(
-      this.templatePath('src/components'),
-      this.destinationPath('src/components')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/components'),
+      this.generator.destinationPath('src/components')
     );
   }
 
   writingPages() {
-    this.fs.copy(
-      this.templatePath('src/pages'),
-      this.destinationPath('src/page')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/pages'),
+      this.generator.destinationPath('src/page')
     );
   }
 
   writingRoutes() {
-    this.fs.copy(
-      this.templatePath('src/routes'),
-      this.destinationPath('src/routes')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/routes'),
+      this.generator.destinationPath('src/routes')
     );
   }
 
   writingDefaultAppJS() {
-    this.fs.copyTpl(
-      this.templatePath('src/javascript/app.js'),
-      this.destinationPath('src/javascript/app.js'),
+    this.generator.fs.copyTpl(
+      this.generator.templatePath('src/javascript/app.js'),
+      this.generator.destinationPath('src/javascript/app.js'),
       { imports: 'import \'\../sass/main.scss\'\;' }
     );
   }
 
   writingControllerJS() {
-    this.fs.copy(
-      this.templatePath('src/javascript/controller.js'),
-      this.destinationPath('src/javascript/controller.js')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/javascript/controller.js'),
+      this.generator.destinationPath('src/javascript/controller.js')
     )
   }
 
   writingWithReactAppJS() {
-    this.fs.copyTpl(
-      this.templatePath('src/javascript/app.js'),
-      this.destinationPath('src/javascript/app.js'),
+    this.generator.fs.copyTpl(
+      this.generator.templatePath('src/javascript/app.js'),
+      this.generator.destinationPath('src/javascript/app.js'),
       {
         imports: `
         import React from 'react';
@@ -113,9 +112,9 @@ class GenerateApp {
   }
 
   writingWithReduxAppJS() {
-    this.fs.copyTpl(
-      this.templatePath('src/javascript/app.js'),
-      this.destinationPath('src/javascript/app.js'),
+    this.generator.fs.copyTpl(
+      this.generator.templatePath('src/javascript/app.js'),
+      this.generator.destinationPath('src/javascript/app.js'),
       { 
         imports:
        `import React from 'react';
