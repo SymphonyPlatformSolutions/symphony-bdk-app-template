@@ -28,9 +28,9 @@ module.exports = class extends Generator {
     ])
   }
 
-  install() {
-    this.npmInstall();
-  }
+  // install() {
+  //   this.npmInstall();
+  // }
 
   writing() {
     console.log(this.answers);

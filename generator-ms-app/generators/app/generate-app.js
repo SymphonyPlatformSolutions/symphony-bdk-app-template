@@ -1,11 +1,13 @@
 const GenerateRedux = require('./generate-redux');
 const GenerateConfigs = require('./generate-configs');
-const writeConfigs = new GenerateConfigs(this);
-const writeRedux = new GenerateRedux();
+// const writeConfigs = new GenerateConfigs(this);
+// const writeRedux = new GenerateRedux(this);
 
 class GenerateApp {
-  constructor(context) {
-     this.generator = context;
+  constructor(generator) {
+     this.generator = generator;
+     this.writeConfigs = new GenerateConfigs(this.generator);
+     const writeRedux = new GenerateRedux(this.generator);
   }
   
   writingSRC() {
@@ -17,8 +19,16 @@ class GenerateApp {
       this.writingControllerHTML();
       this.writingControllerJS();
       this.writingWithReduxAppJS();
-      writeConfigs.writeConfigs();
-      writeRedux.writingRedux();
+      this.writeConfigs.writingConfigs();
+      // this.writeRedux.writingRedux();
+    }
+    else if(this.generator.answers.appType === 'With React') {
+      this.writingAssets();
+      this.writingSass();
+      this.writingComponents();
+      this.writingAppHTML();
+      this.writingControllerHTML();
+      this.writingControllerJS();
     }
   }
 

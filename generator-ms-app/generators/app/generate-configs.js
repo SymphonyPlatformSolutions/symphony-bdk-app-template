@@ -1,5 +1,9 @@
 class GenerateConfigs {
 
+  constructor(generator) {
+    this.generator = generator;
+  }
+
   writingConfigs() {
     this.writingBundleJSON();
     this.writingGeneralEnricher();
@@ -17,100 +21,101 @@ class GenerateConfigs {
   }
 
   writingBundleJSON() {
-    this.fs.copy(
-      this.templatePath('dist/bundle.json'),
-      this.destinationPath('dist/bundle.json')
+    this.generator.fs.copyTpl(
+      this.generator.templatePath('dist/bundle.json'),
+      this.generator.destinationPath('dist/bundle.json'),
+      { name: this.generator.answers.name }
     )
   }
 
   writingGeneralEnricher() {
-    this.fs.copy(
-      this.templatePath('src/services/general-enricher.js'),
-      this.destinationPath('src/services/general-enricher.js')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/services/general-enricher.js'),
+      this.generator.destinationPath('src/services/general-enricher.js')
     )
   }
 
   writingUserRooms() {
-    this.fs.copy(
-      this.templatePath('src/services/user-rooms.js'),
-      this.destinationPath('src/services/user-rooms')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/services/user-rooms.js'),
+      this.generator.destinationPath('src/services/user-rooms')
     )
   }
 
   writingUtils() {
-    this.fs.copy(
-      this.templatePath('src/utils'),
-      this.destinationPath('src/utils')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/utils'),
+      this.generator.destinationPath('src/utils')
     )
   }
 
   writingBabelrc() {
-    this.fs.copy(
-      this.templatePath('.babelrc'),
-      this.destinationPath('.babelrc')
+    this.generator.fs.copy(
+      this.generator.templatePath('.babelrc'),
+      this.generator.destinationPath('.babelrc')
     )
   }
 
   writingEslintignore() {
-    this.fs.copy(
-      this.templatePath('.eslintignore'),
-      this.destinationPath('.eslintignore')
+    this.generator.fs.copy(
+      this.generator.templatePath('.eslintignore'),
+      this.generator.destinationPath('.eslintignore')
     )
   }
 
   writingEslint() {
-    this.fs.copy(
-      this.templatePath('.eslintrc.yml'),
-      this.destinationPath('.eslintrc.yml')
+    this.generator.fs.copy(
+      this.generator.templatePath('.eslintrc.yml'),
+      this.generator.destinationPath('.eslintrc.yml')
     )
   }
 
   writingGitignore() {
-    this.fs.copy(
-      this.templatePath('.gitignore'),
-      this.destinationPath('.gitignore')
+    this.generator.fs.copy(
+      this.generator.templatePath('.gitignore'),
+      this.generator.destinationPath('.gitignore')
     )
   }
 
   writingPackageJSON() {
-    this.fs.copy(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json')
+    this.generator.fs.copy(
+      this.generator.templatePath('package.json'),
+      this.generator.destinationPath('package.json')
     )
   }
 
   writingBabelrc() {
-    this.fs.copy(
-      this.templatePath('README.md'),
-      this.destinationPath('README.md')
+    this.generator.fs.copy(
+      this.generator.templatePath('README.md'),
+      this.generator.destinationPath('README.md')
     )
   }
 
   writingWebpackCommon() {
-    this.fs.copy(
-      this.templatePath('webpack.common.js'),
-      this.destinationPath('webpack.common.js')
+    this.generator.fs.copy(
+      this.generator.templatePath('webpack.common.js'),
+      this.generator.destinationPath('webpack.common.js')
     )
   }
 
   writingWebpackDev() {
-    this.fs.copy(
-      this.templatePath('webpack.dev.js'),
-      this.destinationPath('webpack.dev.js')
+    this.generator.fs.copy(
+      this.generator.templatePath('webpack.dev.js'),
+      this.generator.destinationPath('webpack.dev.js')
     )
   }
 
   writingWebpackMock() {
-    this.fs.copy(
-      this.templatePath('webpack.mock.js'),
-      this.destinationPath('webpack.mock.js')
+    this.generator.fs.copy(
+      this.generator.templatePath('webpack.mock.js'),
+      this.generator.destinationPath('webpack.mock.js')
     )
   }
 
   writingWebpackProd() {
-    this.fs.copy(
-      this.templatePath('webpack.prod.js'),
-      this.destinationPath('webpack.prod.js')
+    this.generator.fs.copy(
+      this.generator.templatePath('webpack.prod.js'),
+      this.generator.destinationPath('webpack.prod.js')
     )
   }
 }
