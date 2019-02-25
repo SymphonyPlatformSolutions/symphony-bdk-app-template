@@ -116,7 +116,8 @@ class GenerateApp {
             </div>,
           document.getElementById('root'),
         );
-        `
+        `,
+        appName: this.generator.answers.name,
       }
     );
   }
