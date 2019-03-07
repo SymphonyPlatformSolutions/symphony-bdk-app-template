@@ -11,7 +11,7 @@ class GenerateApp {
   }
   
   writingSRC() {
-    if(this.generator.answers.appType === 'Default MS Template(REDUX)') {
+    if(this.generator.answers.appType === 'Default MS Template(React & Redux)') {
       this.writingAssets();
       this.writingSass();
       this.writingComponents();
@@ -118,6 +118,7 @@ class GenerateApp {
         );
         `,
         appName: this.generator.answers.name,
+        appId: this.generator.answers.appId,
       }
     );
   }

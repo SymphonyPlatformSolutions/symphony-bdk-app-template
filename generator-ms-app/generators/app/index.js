@@ -6,7 +6,7 @@ module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
     this.log(chalk.magenta('/------------------------------------/'));
-    this.log(chalk.blue('/-------WELCOME TO MS GENERATOR!-------/'));
+    this.log(chalk.blue('/------WELCOME TO MS GENERATOR!------/'));
     this.log(chalk.magenta('/------------------------------------/'));
 
   }
@@ -16,15 +16,20 @@ module.exports = class extends Generator {
       {
         type: 'list',
         name: 'appType',
-        message: 'Chose the App Type: ',
-        choices: ['Default MS Template(REDUX)', 'With React', 'Without React/Redux']
+        message: 'Choose the App Type: ',
+        choices: ['Default MS Template(React & Redux)', 'React', 'Modern JS']
       },
       {
         type: 'input',
         name: 'name',
-        message: 'Type your project name: ',
+        message: 'Project name: ',
         default: this.appname,
       },
+      {
+        type: 'input',
+        name: 'appId',
+        message: 'Application ID:'
+      }
     ])
   }
 
@@ -33,7 +38,6 @@ module.exports = class extends Generator {
   // }
 
   writing() {
-    console.log(this.answers);
     const writeApp = new GenerateApp(this);
     // const writeRedux = new GenerateRedux();
     // const writeConfigs = new GenerateConfigs();
