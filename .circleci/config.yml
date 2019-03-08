@@ -25,7 +25,6 @@ jobs:
       - run:
           name: Test package
           command: |
-            cd generator-ms-app
             npm test
       - run:
           name:
