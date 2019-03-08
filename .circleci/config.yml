@@ -29,7 +29,7 @@ jobs:
       - run:
           name:
           command: |
-            source ../.circleci/scripts/test-result
+            source ./.circleci/scripts/test-result
       - persist_to_workspace:
           root: ~/project
           path: ./
