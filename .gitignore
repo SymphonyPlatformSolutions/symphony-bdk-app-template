@@ -16,8 +16,8 @@
 *.iml
 *.ipr
 
-generator-ms-app/coverage
-generator-ms-app/.vscode
-generator-ms-app.DS_Store
-generator-ms-app/npm-debug.log
+coverage
+.vscode
+.DS_Store
+npm-debug.log
 node_modules
