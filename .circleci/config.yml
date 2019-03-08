@@ -32,7 +32,7 @@ jobs:
             source ./.circleci/scripts/test-result
       - persist_to_workspace:
           root: ~/project
-          path: ./
+          path: .circleci
 
   publish:
     <<: *defaults
