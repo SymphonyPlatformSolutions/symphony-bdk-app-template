@@ -11,7 +11,7 @@ class GenerateApp {
   writingSRC() {
     if(this.generator.answers.appType === 'Default MS Template(React & Redux)') {
       this.writingAssets();
-      this.writingSass();
+      this.writingStyles();
       this.writingComponents();
       this.writingAppHTML();
       this.writingControllerHTML();
@@ -22,7 +22,7 @@ class GenerateApp {
     }
     else if(this.generator.answers.appType === 'React') {
       this.writingAssets();
-      this.writingSass();
+      this.writingStyles();
       this.writingComponents();
       this.writingAppHTML();
       this.writingControllerHTML();
@@ -31,7 +31,7 @@ class GenerateApp {
     }
     else if(this.generator.answers.appType === 'Modern JS') {
       this.writingAssets();
-      this.writingSass();
+      this.writingStyles();
       this.writingComponents();
       this.writingAppHTML();
       this.writingControllerHTML();
@@ -46,11 +46,14 @@ class GenerateApp {
     );
   }
 
-  writingSass() {
-    this.generator.fs.copy(
-      this.generator.templatePath('src/sass'),
-      this.generator.destinationPath('src/sass')
-    );
+  writingStyles() {
+    if (this.generator.answers.appStyle === 'Yes') {
+      this.generator.fs.copy(
+        this.generator.templatePath('src/sass'),
+        this.generator.destinationPath('src/sass')
+      );
+    }
+    return null;
   }
 
   writingAppHTML() {
@@ -136,8 +139,8 @@ class GenerateApp {
       this.generator.templatePath('src/javascript/app.js'),
       this.generator.destinationPath('src/javascript/app.js'),
       { 
-        imports:
-       `import React from 'react';
+        imports:`
+        import React from 'react';
         import ReactDOM from 'react-dom';
         import { Provider } from 'react-redux';
         import configureStore from '../store/store-config';
