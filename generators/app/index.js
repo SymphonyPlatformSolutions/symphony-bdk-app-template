@@ -20,6 +20,12 @@ module.exports = class extends Generator {
         choices: ['Default MS Template(React & Redux)', 'React', 'Modern JS']
       },
       {
+        type: 'list',
+        name: 'appStyle',
+        message: 'Would you like to use Sass?',
+        choices: ['Yes', 'No']
+      },
+      {
         type: 'input',
         name: 'name',
         message: 'Project name: ',
@@ -39,9 +45,6 @@ module.exports = class extends Generator {
 
   writing() {
     const writeApp = new GenerateApp(this);
-    // const writeRedux = new GenerateRedux();
-    // const writeConfigs = new GenerateConfigs();
-    // const writeMocks = new GenerateMocks();
 
     writeApp.writingSRC();
 

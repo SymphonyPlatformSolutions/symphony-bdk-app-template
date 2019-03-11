@@ -1,27 +1,32 @@
 class GenerateRedux {
+
+  constructor(generator) {
+    this.generator = generator;
+  }
+
   writingRedux() {
     this.writingActions();
     this.writingReducers();
     this.writingStore();
   }
   writingActions() {
-    this.fs.copy(
-      this.templatePath('src/actions'),
-      this.destinationPath('src/actions')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/actions'),
+      this.generator.destinationPath('src/actions')
     )
   }
 
   writingReducers() {
-    this.fs.copy(
-      this.templatePath('src/reducers'),
-      this.destinationPath('src/reducers')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/reducers'),
+      this.generator.destinationPath('src/reducers')
     )
   }
 
   writingStore() {
-    this.fs.copy(
-      this.templatePath('src/store'),
-      this.destinationPath('src/store')
+    this.generator.fs.copy(
+      this.generator.templatePath('src/store'),
+      this.generator.destinationPath('src/store')
     )
   }
 

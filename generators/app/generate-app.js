@@ -1,13 +1,11 @@
 const GenerateRedux = require('./generate-redux');
 const GenerateConfigs = require('./generate-configs');
-// const writeConfigs = new GenerateConfigs(this);
-// const writeRedux = new GenerateRedux(this);
 
 class GenerateApp {
   constructor(generator) {
      this.generator = generator;
      this.writeConfigs = new GenerateConfigs(this.generator);
-     const writeRedux = new GenerateRedux(this.generator);
+     this.writeRedux = new GenerateRedux(this.generator);
   }
   
   writingSRC() {
@@ -20,15 +18,25 @@ class GenerateApp {
       this.writingControllerJS();
       this.writingWithReduxAppJS();
       this.writeConfigs.writingConfigs();
-      // this.writeRedux.writingRedux();
+      this.writeRedux.writingRedux();
     }
-    else if(this.generator.answers.appType === 'With React') {
+    else if(this.generator.answers.appType === 'React') {
       this.writingAssets();
       this.writingSass();
       this.writingComponents();
       this.writingAppHTML();
       this.writingControllerHTML();
       this.writingControllerJS();
+      this.writeConfigs.writingConfigs();
+    }
+    else if(this.generator.answers.appType === 'Modern JS') {
+      this.writingAssets();
+      this.writingSass();
+      this.writingComponents();
+      this.writingAppHTML();
+      this.writingControllerHTML();
+      this.writingControllerJS();
+      this.writeConfigs.writingConfigs();
     }
   }
 
