@@ -1,7 +1,9 @@
 /* global SYMPHONY */
-<%= imports %>
+<%- imports %>
 
-const AppService = SYMPHONY.services.register('appName:app');
+const appId = <%= appId %>;
+const appName = <%= appName %>;
+const AppService = SYMPHONY.services.register(`${appId}:app`);
 
 SYMPHONY.remote.hello().then((data) => {
   let themeColor = data.themeV2.name;
@@ -11,7 +13,7 @@ SYMPHONY.remote.hello().then((data) => {
   SYMPHONY.application.connect(
     'template',
     ['modules', 'applications-nav', 'ui', 'extended-user-info', 'extended-user-service'],
-    ['appName:app'],
+    [`${appId}:app`],
   ).then((response) => {
     const userId = response.userReferenceId;
     const modulesService = SYMPHONY.services.subscribe('modules');
@@ -26,12 +28,12 @@ SYMPHONY.remote.hello().then((data) => {
       });
     });
 
-    modulesService.addMenuItem('appName', 'Abouta', 'appName-menu-item');
-    modulesService.setHandler('appName', 'appName:app');
+    modulesService.addMenuItem(`${appName}`, 'About', 'appName-menu-item');
+    modulesService.setHandler(`${appName}`, `${appId}:app`);
     templateAppService.implement({
       menuSelect: (itemId) => {
         if (itemId === 'appName-menu-item') {
-          document.getElementById('about-appName-app').className = '';
+          document.getElementById(`about-${appName}-app`).className = '';
         }
       },
     });

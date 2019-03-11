@@ -48,9 +48,10 @@ class GenerateApp {
 
   writingStyles() {
     if (this.generator.answers.appStyle === 'Yes') {
-      this.generator.fs.copy(
+      this.generator.fs.copyTpl(
         this.generator.templatePath('src/sass'),
-        this.generator.destinationPath('src/sass')
+        this.generator.destinationPath('src/sass'),
+        { importStyles: `import '../sass/main.scss';` }
       );
     }
     return null;
@@ -115,7 +116,6 @@ class GenerateApp {
         imports: `
         import React from 'react';
         import ReactDOM from 'react-dom';
-        import '../sass/main.scss';
         `,
         reactDOM: `
         ReactDOM.render(
@@ -138,14 +138,14 @@ class GenerateApp {
     this.generator.fs.copyTpl(
       this.generator.templatePath('src/javascript/app.js'),
       this.generator.destinationPath('src/javascript/app.js'),
-      { 
+      {
         imports:`
         import React from 'react';
         import ReactDOM from 'react-dom';
         import { Provider } from 'react-redux';
         import configureStore from '../store/store-config';
-        import '../sass/main.scss';
-        import Routes from '../routes/routes';'`,
+        import Routes from '../routes/routes';'
+        `,
         reactDOM: `
         const store = configureStore();
 
@@ -159,8 +159,10 @@ class GenerateApp {
             </div>
           </Provider>,
           document.getElementById('root'),
-        );`
-    }
+        );`,
+        appName: this.generator.answers.name,
+        appId: this.generator.answers.appId,
+    },
     );
   }
 }

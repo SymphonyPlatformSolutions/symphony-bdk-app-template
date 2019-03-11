@@ -34,7 +34,8 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'appId',
-        message: 'Application ID:'
+        message: 'Application ID: ',
+        default: this.appname,
       }
     ])
   }
