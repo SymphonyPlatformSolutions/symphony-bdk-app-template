@@ -102,10 +102,11 @@ class GenerateApp {
   }
 
   writingControllerJS() {
-    this.generator.fs.copy(
+    this.generator.fs.copyTpl(
       this.generator.templatePath('src/javascript/controller.js'),
-      this.generator.destinationPath('src/javascript/controller.js')
-    )
+      this.generator.destinationPath('src/javascript/controller.js'),
+      { appId: this.generator.answers.appId }
+    );
   }
 
   writingWithReactAppJS() {

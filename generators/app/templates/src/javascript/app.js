@@ -37,6 +37,6 @@ SYMPHONY.remote.hello().then((data) => {
         }
       },
     });
-    <%= reactDOM %>
+    <%- reactDOM %>
   });
 });
