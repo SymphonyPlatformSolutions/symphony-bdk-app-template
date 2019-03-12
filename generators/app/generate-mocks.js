@@ -5,10 +5,6 @@ class GenerateMock {
     this.writeRedux = new GenerateRedux(this.generator);
   }
 
-  writingMockJS() {
-
-  }
-
   writingMockJsonServer() {
     this.generator.copy(
       this.generator.templatePath('mock-json-server'),
