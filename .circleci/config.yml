@@ -49,9 +49,9 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-          name: Publish package
-          command: |
-            echo "npm run publish || true"
+        name: Publish package
+        command: |
+          echo "npm run publish || true"
 
 workflows:
   version: 2
