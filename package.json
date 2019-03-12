@@ -15,14 +15,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SymphonyOSF/ms-templates.git"
+    "url": "git+https://github.com/SymphonyPlatformSolutions/sms-dev-fe-template-app.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SymphonyOSF/ms-templates/issues"
+    "url": "https://github.com/SymphonyPlatformSolutions/sms-dev-fe-template-app/issues"
   },
-  "homepage": "https://github.com/SymphonyOSF/ms-templates#readme",
+  "homepage": "https://github.com/SymphonyPlatformSolutions/sms-dev-fe-template-app#readme",
   "dependencies": {
     "chalk": "^2.4.2",
     "yeoman-generator": "^3.2.0"
