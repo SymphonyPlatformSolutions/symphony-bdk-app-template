@@ -7,8 +7,6 @@ const setupURL = () => {
   if (currEnv === envs.MOCK) {
     // Using JSON Server
     ROOT_URL = 'http://localhost:3000';
-    // Using Back-End Running Locally without JWT
-    // ROOT_URL = 'https://192.168.3.211/template';
   } else if (currEnv === envs.DEV) {
     // BE from another PC
     ROOT_URL = 'https://54bb3b1b.ngrok.io/template';

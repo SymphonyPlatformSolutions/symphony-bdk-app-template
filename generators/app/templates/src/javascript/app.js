@@ -28,7 +28,7 @@ SYMPHONY.remote.hello().then((data) => {
       });
     });
 
-    modulesService.addMenuItem(`${appName}`, 'About', 'appName-menu-item');
+    modulesService.addMenuItem(`${appName}`, 'About', `${appName}-menu-item`);
     modulesService.setHandler(`${appName}`, `${appId}:app`);
     templateAppService.implement({
       menuSelect: (itemId) => {

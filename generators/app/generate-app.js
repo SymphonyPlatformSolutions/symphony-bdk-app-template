@@ -140,11 +140,11 @@ class GenerateApp {
       this.generator.destinationPath('src/javascript/app.js'),
       {
         imports:`
-        import React from 'react';
-        import ReactDOM from 'react-dom';
-        import { Provider } from 'react-redux';
-        import configureStore from '../store/store-config';
-        import Routes from '../routes/routes';'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import configureStore from '../store/store-config';
+import Routes from '../routes/routes';'
         `,
         reactDOM: `
         const store = configureStore();
