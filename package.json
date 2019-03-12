@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "semantic-release": "semantic-release pre && npm publish --access private && semantic-release post"
+    "publish": "npm publish --access private"
   },
   "files": [
     "generators"
@@ -17,16 +17,6 @@
     "type": "git",
     "url": "git+https://github.com/SymphonyOSF/ms-templates.git"
   },
-  "release": {
-    "branch": "master",
-    "ci": true,
-    "plugins": [
-      "@semantic-release/commit-analyzer",
-      "@semantic-release/github",
-      "@semantic-release/npm",
-      "@semantic-release/release-notes-generator"
-    ]
-  },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -36,13 +26,5 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "yeoman-generator": "^3.2.0"
-  },
-  "devDependencies": {
-    "@semantic-release/commit-analyzer": "^6.1.0",
-    "@semantic-release/github": "^5.2.10",
-    "@semantic-release/npm": "^5.1.4",
-    "@semantic-release/release-notes-generator": "^7.1.4",
-    "semantic-release": "^15.13.3"
   }
-
 }
