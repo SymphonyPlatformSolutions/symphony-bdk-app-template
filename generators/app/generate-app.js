@@ -117,8 +117,8 @@ class GenerateApp {
       this.generator.destinationPath('src/javascript/app.js'),
       {
         imports: `
-        import React from 'react';
-        import ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
         `,
         reactDOM: `
         ReactDOM.render(
