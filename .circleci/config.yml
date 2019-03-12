@@ -43,7 +43,7 @@ jobs:
       - run:
         name: Publish package
         command: |
-          echo "npm run semantic-release || true"
+          echo "npm run publish || true"
 
 workflows:
   version: 2
