@@ -26,6 +26,7 @@ class GenerateApp {
       this.writingComponents();
       this.writingAppHTML();
       this.writingControllerHTML();
+      this.writingWithReactAppJS();
       this.writingControllerJS();
       this.writeConfigs.writingConfigs();
     }
@@ -35,6 +36,7 @@ class GenerateApp {
       this.writingComponents();
       this.writingAppHTML();
       this.writingControllerHTML();
+      this.writingDefaultAppJS();
       this.writingControllerJS();
       this.writeConfigs.writingConfigs();
     }
@@ -61,7 +63,8 @@ class GenerateApp {
     this.generator.fs.copyTpl(
       this.generator.templatePath('src/html/app.html'),
       this.generator.destinationPath('src/html/app.html'),
-      { title: this.generator.answers.name }
+      { title: this.generator.answers.name,
+    }
     );
   }
 
@@ -97,7 +100,6 @@ class GenerateApp {
     this.generator.fs.copyTpl(
       this.generator.templatePath('src/javascript/app.js'),
       this.generator.destinationPath('src/javascript/app.js'),
-      { imports: 'import \'\../sass/main.scss\'\;' }
     );
   }
 

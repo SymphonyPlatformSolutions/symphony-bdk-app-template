@@ -1,4 +1,5 @@
 /* global SYMPHONY */
+
 <%- imports %>
 
 const appId = <%= appId %>;
@@ -11,7 +12,7 @@ SYMPHONY.remote.hello().then((data) => {
   document.body.className = `symphony-external-app ${themeColor.toLowerCase()} ${themeSize}`;
 
   SYMPHONY.application.connect(
-    'template',
+    `${appId}`,
     ['modules', 'applications-nav', 'ui', 'extended-user-info', 'extended-user-service'],
     [`${appId}:app`],
   ).then((response) => {
@@ -32,7 +33,7 @@ SYMPHONY.remote.hello().then((data) => {
     modulesService.setHandler(`${appName}`, `${appId}:app`);
     templateAppService.implement({
       menuSelect: (itemId) => {
-        if (itemId === 'appName-menu-item') {
+        if (itemId === `${appName}-menu-item`) {
           document.getElementById(`about-${appName}-app`).className = '';
         }
       },
