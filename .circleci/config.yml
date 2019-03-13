@@ -6,7 +6,7 @@ defaults: &defaults
   working_directory: ~/project
 
 jobs:
-  test:
+  lint_and_test:
     <<: *defaults
     steps:
       - checkout
@@ -22,6 +22,14 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Lint
+          command: |
+            npm run linter
+      - run:
+          name:
+          command: |
+            source ./.circleci/scripts/lint-result
       - run:
           name: Test package
           command: |
@@ -49,10 +57,10 @@ workflows:
   version: 2
   check_package:
     jobs:
-      - test
+      - lint_and_test
       - publish:
           requires:
-            - test
+            - lint_and_test
           filters:
             branches:
               only: develop
