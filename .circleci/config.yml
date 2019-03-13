@@ -65,7 +65,6 @@ workflows:
       - publish:
           requires:
             - lint_and_test
-
           filters:
             branches:
               only: develop

@@ -1,13 +1,10 @@
 /* global SYMPHONY */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import configureStore from '../src/store/store-config';
-import '../src/sass/main.scss';
-import Routes from '../src/routes/routes';
+<%- imports %>
 
-const templateAppService = SYMPHONY.services.register('template:app');
+const appId = <%= appId %>;
+const appName = <%= appName %>;
+const AppService = SYMPHONY.services.register(`${appId}:app`);
 
 SYMPHONY.remote.hello().then((data) => {
   let themeColor = data.themeV2.name;
@@ -15,9 +12,9 @@ SYMPHONY.remote.hello().then((data) => {
   document.body.className = `symphony-external-app ${themeColor.toLowerCase()} ${themeSize}`;
 
   SYMPHONY.application.connect(
-    'template',
+    `${appId}`,
     ['modules', 'applications-nav', 'ui', 'extended-user-service'],
-    ['template:app'],
+    [`${appId}:app`],
   ).then((response) => {
     const userId = response.userReferenceId;
     const modulesService = SYMPHONY.services.subscribe('modules');
@@ -31,26 +28,15 @@ SYMPHONY.remote.hello().then((data) => {
       });
     });
 
-    modulesService.addMenuItem('template', 'About template', 'template-menu-item');
-    modulesService.setHandler('template', 'template:app');
+    modulesService.addMenuItem(`${appName}`, 'About', `${appName}-menu-item`);
+    modulesService.setHandler(`${appName}`, `${appId}:app`);
     templateAppService.implement({
       menuSelect: (itemId) => {
-        if (itemId === 'template-menu-item') {
-          document.getElementById('about-template-app').className = '';
+        if (itemId === `${appName}-menu-item`) {
+          document.getElementById(`about-${appName}-app`).className = '';
         }
       },
     });
-    const store = configureStore();
-    ReactDOM.render(
-      <Provider store={store}>
-        <div>
-          <Routes
-            userId={userId}
-            jwtService={undefined}
-          />
-        </div>
-      </Provider>,
-      document.getElementById('root'),
-    );
+    <%- reactDOM %>
   });
 });
