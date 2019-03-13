@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Lint
           command: |
-            echo "npm run linter"
+            echo "npm run lint"
       - run:
           name:
           command: |
@@ -49,18 +49,15 @@ jobs:
       - attach_workspace:
           at: ~/project
       - run:
-        name: Publish package
-        command: |
-          echo "npm run publish || true"
+          name: Publish package
+          command: |
+            echo "npm run publish || true"
 
 workflows:
   version: 2
   check_package:
     jobs:
       - lint_and_test
-      - publish:
-          requires:
-            - lint_and_test
       - publish:
           requires:
             - lint_and_test
