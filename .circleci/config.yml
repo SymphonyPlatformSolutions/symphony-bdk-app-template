@@ -22,14 +22,10 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run:
-          name: Lint
-          command: |
-            echo "npm run lint"
-      - run:
-          name:
-          command: |
-            source ./.circleci/scripts/lint-result
+      # - run:
+      #     name: Lint
+      #     command: |
+      #       npm run lint
       - run:
           name: Test package
           command: |
