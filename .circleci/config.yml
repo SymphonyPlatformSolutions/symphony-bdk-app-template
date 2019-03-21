@@ -27,10 +27,6 @@ jobs:
           command: |
             npm run lint
       - run:
-          name:
-          command: |
-            source ./.circleci/scripts/lint-result
-      - run:
           name: Test package
           command: |
             npm test
