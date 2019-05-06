@@ -1,1 +1,7 @@
-templates
+/dist/*
+/node_modules/*
+.circleci/*
+.docker/*
+/coverage/*
+/scripts/*
+/styleguide/*
