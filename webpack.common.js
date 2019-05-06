@@ -8,8 +8,8 @@ let controllerEntry = '';
 let currEnv = '';
 const setApi = (env) => {
   if (env === 'mock') {
-    controllerEntry = './mock-js/controller-mock.js';
-    appEntry = './mock-js/app-mock.js';
+    controllerEntry = './javascript-mock/controller-mock.js';
+    appEntry = './javascript-mock/app-mock.js';
     currEnv = 'MOCK';
   }
   if (env === 'dev') {
@@ -46,7 +46,7 @@ module.exports = (env) => {
           use: [{
             loader: 'url-loader',
             options: {
-              limit: 8192,
+              limit: 81920,
             },
           }],
         },
@@ -55,7 +55,7 @@ module.exports = (env) => {
           loader: 'babel-loader',
           exclude: /node_modules/,
           query: {
-            presets: ['es2015', 'react', 'stage-2'],
+            presets: ['@babel/react', '@babel/preset-env'],
           },
         },
       ],
@@ -80,7 +80,7 @@ module.exports = (env) => {
         'process.env.currEnv': JSON.stringify(currEnv),
       }),
       new CopyWebpackPlugin([
-        { from: './src/assets', to: 'assets' },
+        { from: 'src/assets', to: 'assets' },
       ]),
     ],
   };

@@ -1,3 +1,4 @@
+/* eslint-disable */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge');
 const path = require('path');
@@ -12,20 +13,20 @@ module.exports = merge(commonConfig, {
   output: {
     path: PATH,
     filename: '[name].bundle.js',
-    publicPath: '/',
+    publicPath: '/'
   },
 
   module: {
     rules: [{
       test: /\.scss$/,
-      use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-    }],
+      use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+    }, ]
   },
 
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',
-      chunkFilename: '[id].css',
+      chunkFilename: '[id].css'
     }),
   ],
 
@@ -34,9 +35,9 @@ module.exports = merge(commonConfig, {
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: true,
-          ecma: 6,
-        },
-      }),
-    ],
+          ecma: 6
+        }
+      })
+    ]
   },
 });

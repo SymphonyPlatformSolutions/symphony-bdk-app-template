@@ -1,6 +1,8 @@
+/* eslint-disable */
+// Disaling LINT for CommonsJS
 const merge = require('webpack-merge');
-const path = require('path');
 const commonConfig = require('./webpack.common.js')('dev');
+const path = require('path');
 
 module.exports = merge(commonConfig, {
   mode: 'development',
@@ -8,8 +10,8 @@ module.exports = merge(commonConfig, {
   module: {
     rules: [{
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
-    }],
+      use: ['style-loader', 'css-loader', 'sass-loader']
+    }, ],
   },
 
   devServer: {
@@ -17,8 +19,8 @@ module.exports = merge(commonConfig, {
     contentBase: path.resolve(__dirname, 'dist'),
     port: 4000,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': '*'
     },
     disableHostCheck: true,
-  },
+  }
 });
