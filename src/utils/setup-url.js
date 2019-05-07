@@ -9,7 +9,7 @@ const setupURL = () => {
     ROOT_URL = 'http://localhost:3000';
   } else if (currEnv === envs.DEV) {
     // BE from another PC
-    ROOT_URL = 'https://54bb3b1b.ngrok.io/template';
+    ROOT_URL = 'Enter a Valid URL';
   } else {
     ROOT_URL = `https://${window.location.host}/template`;
   }
@@ -28,19 +28,13 @@ const setupLinkPrefix = () => {
   return LINK_PREFIX;
 };
 
-const setupControllerURL = () => {
+const frontendURL = () => {
   const { currEnv } = process.env;
-  let CONTROLLER_LINK = '';
 
-  if (currEnv === envs.DEV) {
-    CONTROLLER_LINK = 'localhost:4000';
+  if (currEnv !== envs.PROD) {
+    return 'https://localhost:4000';
   }
-
-  if (currEnv === envs.PROD) {
-    CONTROLLER_LINK = `${window.location.host}/template/app`;
-  }
-
-  return CONTROLLER_LINK;
+  return `https://${window.location.host}`;
 };
 
-export { setupURL, setupLinkPrefix, setupControllerURL };
+export { setupURL, setupLinkPrefix, frontendURL };

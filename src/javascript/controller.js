@@ -1,10 +1,10 @@
 /* global SYMPHONY */
 // import { initApp } from 'symphony-app-authentication-fe';
-import AuthController from '../services/auth/auth-controller';
+import AuthenticationController from '../services/controller-services/authentication-controller';
 import { frontendURL, setupURL, setupLinkPrefix } from '../utils/setup-url';
-import GeneralEnricher from '../services/general-enricher';
+import GeneralEnricher from '../services/enrichers/general-enricher';
 import { APP_ID, APP_NAV_BAR_TITLE } from '../utils/app-constants';
-import { showExtensionApp } from '../services/extension-app-services';
+import { showExtensionApp } from '../services/controller-services/extension-app-services';
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
 SYMPHONY.services.register(`${APP_ID}:enricher`);
@@ -20,7 +20,7 @@ const config = {
   baseAuthenticationUrl: AUTH_URL,
 };
 
-const authController = new AuthController(config);
+const authController = new AuthenticationController(config);
 
 const bootstrap = () => {
   const modulesService = SYMPHONY.services.subscribe('modules');
@@ -47,7 +47,7 @@ const bootstrap = () => {
       showExtensionApp();
       modulesService.focus(APP_ID);
     },
-    trigger(uiClass, id, payload, data) {
+    trigger(uiClass) {
       if (uiClass === 'app-settings') {
         showExtensionApp(`${FRONTEND_SERVE_URL}${LINK_PREFIX}/app.html?queryObj={"page":"config"}`);
       }
