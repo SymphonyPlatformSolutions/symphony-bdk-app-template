@@ -3,8 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { APP_ID, APP_TITLE } from '../utils/app-constants';
 import configureStore from '../store/store-config';
 import Routes from '../routes/routes';
+
+const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 
 SYMPHONY.remote.hello().then((data) => {
   let themeColor = data.themeV2.name;
@@ -12,9 +15,9 @@ SYMPHONY.remote.hello().then((data) => {
   document.body.className = `symphony-external-app ${themeColor.toLowerCase()} ${themeSize}`;
 
   SYMPHONY.application.connect(
-    `${appId}`,
+    APP_ID,
     ['modules', 'applications-nav', 'ui', 'extended-user-info', 'extended-user-service'],
-    [`${appId}:app`],
+    [`${APP_ID}:app`],
   ).then((response) => {
     const userId = response.userReferenceId;
     const modulesService = SYMPHONY.services.subscribe('modules');
@@ -31,16 +34,18 @@ SYMPHONY.remote.hello().then((data) => {
       });
     });
 
-    modulesService.addMenuItem(`${appName}`, 'About', `${appName}-menu-item`);
-    modulesService.setHandler(`${appName}`, `${appId}:app`);
-    templateAppService.implement({
+    modulesService.addMenuItem(APP_ID, `About ${APP_TITLE}`, `${APP_ID}-menu-item`);
+    modulesService.setHandler(APP_ID, `${APP_ID}:app`);
+    appService.implement({
       menuSelect: (itemId) => {
-        if (itemId === `${appName}-menu-item`) {
-          document.getElementById(`about-${appName}-app`).className = '';
+        if (itemId === `${APP_ID}-menu-item`) {
+          document.getElementById(`about-${APP_ID}-app`).className = '';
         }
       },
     });
+
     const store = configureStore();
+
     ReactDOM.render(
       <Provider store={store}>
         <div>
