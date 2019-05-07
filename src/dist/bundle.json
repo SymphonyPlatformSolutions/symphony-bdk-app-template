@@ -1,0 +1,13 @@
+{
+  "applications": [
+    {
+      "type": "sandbox",
+      "id": "template",
+      "name": "Template for Extesion-App",
+      "blurb": "This is Gitlab integration app, using React Lib!",
+      "publisher": "Symphony",
+      "url": "https://psdev.symphony.com/template/app/controller.html",
+      "domain": "psdev.symphony.com"
+    }
+  ]
+}

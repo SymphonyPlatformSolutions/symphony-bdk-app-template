@@ -1,10 +1,9 @@
 /* global SYMPHONY */
 
-<%- imports %>
-
-const appId = <%= appId %>;
-const appName = <%= appName %>;
-const AppService = SYMPHONY.services.register(`${appId}:app`);
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import Routes from '../routes/routes';
 
 SYMPHONY.remote.hello().then((data) => {
   let themeColor = data.themeV2.name;
@@ -38,6 +37,13 @@ SYMPHONY.remote.hello().then((data) => {
         }
       },
     });
-    <%- reactDOM %>
+    const store = configureStore();
+    ReactDOM.render(
+      <Provider store={store}>
+        <div>
+          <Routes userId={userId} jwtService={extendedUserInfoService} />
+        </div>
+      </Provider>, document.getElementById('root'),
+    );
   });
 });
