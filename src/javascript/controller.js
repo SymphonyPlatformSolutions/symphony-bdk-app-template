@@ -34,7 +34,7 @@ const bootstrap = () => {
 
   const navSettings = {
     title: APP_NAV_BAR_TITLE,
-    icon: `${FRONTEND_SERVE_URL}/gitlab/app/assets/app-icon.png`,
+    icon: `${FRONTEND_SERVE_URL}/template/app/assets/app-icon.png`,
   };
   navService.add(`${APP_ID}-nav`, navSettings, `${APP_ID}:controller`);
   uiService.registerExtension('app-settings', APP_ID, `${APP_ID}:controller`, { label: 'Configure' });

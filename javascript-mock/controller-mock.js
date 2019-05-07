@@ -2,7 +2,7 @@
 import GeneralEnricher from '../src/services/enrichers/general-enricher';
 import { APP_ID, APP_NAV_BAR_TITLE } from '../src/utils/app-constants';
 import { setupLinkPrefix, frontendURL } from '../src/utils/setup-url';
-import { showExtensionApp } from '../src/services/extension-app-services';
+import { showExtensionApp } from '../src/services/controller-services/extension-app-services';
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
 SYMPHONY.services.register(`${APP_ID}:enricher`);
@@ -40,7 +40,7 @@ SYMPHONY.remote.hello().then(() => {
         showExtensionApp();
         modulesService.focus(APP_ID);
       },
-      trigger(uiClass, id, payload, data) {
+      trigger(uiClass) {
         if (uiClass === 'app-settings') {
           showExtensionApp(`${FRONTEND_SERVE_URL}${LINK_PREFIX}/app.html?queryObj={"page":"config"}`);
         }
