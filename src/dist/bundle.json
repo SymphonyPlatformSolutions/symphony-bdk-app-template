@@ -2,9 +2,9 @@
   "applications": [
     {
       "type": "sandbox",
-      "id": "template",
-      "name": "Template for Extesion-App",
-      "blurb": "This is Gitlab integration app, using React Lib!",
+      "id": "templateapp",
+      "name": "Template for Extension-App",
+      "blurb": "This is template for app integration, using React Lib!",
       "publisher": "Symphony",
       "url": "https://psdev.symphony.com/template/app/controller.html",
       "domain": "psdev.symphony.com"
