@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import configureStore from '../store/store-config';
 import Routes from '../routes/routes';
 
 SYMPHONY.remote.hello().then((data) => {
@@ -25,6 +26,8 @@ SYMPHONY.remote.hello().then((data) => {
         themeColor = theme.themeV2.name;
         themeSize = theme.themeV2.size;
         document.body.className = `symphony-external-app ${themeColor} ${themeSize}`;
+      }).catch((error) => {
+        throw new Error('Unable to Configure the Extension App theme', error);
       });
     });
 
@@ -45,5 +48,9 @@ SYMPHONY.remote.hello().then((data) => {
         </div>
       </Provider>, document.getElementById('root'),
     );
+  }).catch((error) => {
+    throw new Error('Unable to reach the SYMPHONY services to Extension App', error);
   });
+}).catch((error) => {
+  throw new Error('Unable to reach the data for Extension App, please verify the Authentication with Server.', error);
 });

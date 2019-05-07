@@ -1,5 +1,5 @@
 /* global SYMPHONY */
-import GeneralEnricher from '../src/services/general-enricher';
+import GeneralEnricher from '../src/services/enrichers/general-enricher';
 import { APP_ID, APP_NAV_BAR_TITLE } from '../src/utils/app-constants';
 import { setupLinkPrefix, frontendURL } from '../src/utils/setup-url';
 import { showExtensionApp } from '../src/services/extension-app-services';
