@@ -24,13 +24,13 @@ SYMPHONY.remote.hello().then(() => {
 
     enricher.init();
     enricher.register();
-
-    uiService.registerExtension('app-settings', APP_ID, `${APP_ID}:controller`, { label: 'Configure Application!' });
+    uiService.registerExtension('app-settings', APP_ID, `${APP_ID}:controller`, { label: 'Configure' });
 
     const navSettings = {
       title: APP_NAV_BAR_TITLE,
       icon: 'https://localhost:4000/assets/app-icon.png',
     };
+
     navService.add(`${APP_ID}-nav`, navSettings, `${APP_ID}:controller`);
     controllerService.implement({
       select(id) {
@@ -46,5 +46,9 @@ SYMPHONY.remote.hello().then(() => {
         }
       },
     });
+  }).catch((error) => {
+    console.error('Unable to register the Controller Application', error);
   });
+}).catch((error) => {
+  console.error('Unable to reach the data for Extension App, please verify the Authentication with Server.', error);
 });

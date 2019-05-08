@@ -1,11 +1,18 @@
 /* global SYMPHONY */
 
+const ENRICHER_EVENTS = [
+  'com.symphony.ms.devtools.template.test',
+];
 export default class GeneralEnricher {
   constructor(name, messageEvents, userId) {
     this.name = name;
     this.messageEvents = messageEvents;
     this.implements = ['render', 'action'];
     this.userId = userId;
+  }
+
+  static getMessages() {
+    return ENRICHER_EVENTS;
   }
 
   getName() {
