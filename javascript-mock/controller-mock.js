@@ -50,5 +50,5 @@ SYMPHONY.remote.hello().then(() => {
     console.error('Unable to register the Controller Application', error);
   });
 }).catch((error) => {
-  console.error('Unable to reach the data for Extension App, please verify the Authentication with Server.', error);
+  console.error('Unable to register the Controller Application', error);
 });

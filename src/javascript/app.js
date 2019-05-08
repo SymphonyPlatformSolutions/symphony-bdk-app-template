@@ -55,8 +55,8 @@ SYMPHONY.remote.hello().then((data) => {
       </Provider>, document.getElementById('root'),
     );
   }).catch((error) => {
-    throw new Error('Unable to reach the SYMPHONY services to Extension App', error);
+    throw new Error('Unable to connect the application on client', error);
   });
 }).catch((error) => {
-  throw new Error('Unable to reach the data for Extension App, please verify the Authentication with Server.', error);
+  throw new Error('Unable to reach the data for Extension App, please verify the Authentication with Server', error);
 });
