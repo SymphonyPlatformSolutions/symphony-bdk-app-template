@@ -4,10 +4,44 @@
   "description": "Generic Template for Applications",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --maxWorkers=1",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --maxWorkers=1",
     "build": "webpack --env.prod --progress --config webpack.prod.js",
     "start": "webpack-dev-server --watch --progress --colors --https --env.dev --config webpack.dev.js ",
     "start:mock": "webpack-dev-server --watch --progress --colors --https --env.mock --config webpack.mock.js & nodemon mock-json-server/mock-server.js "
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "https://localhost/",
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/utils/setup-tests.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80
+      }
+    },
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "clover"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/reducers/root-reducer.js",
+      "!src/mock-json-server/**",
+      "!src/javascript/**",
+      "!src/dist/**",
+      "!src/utils/**",
+      "!src/store/**"
+    ]
   },
   "repository": {
     "type": "git",
