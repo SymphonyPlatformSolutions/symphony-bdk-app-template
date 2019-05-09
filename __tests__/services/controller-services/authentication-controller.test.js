@@ -44,7 +44,6 @@ describe('An Authentication Controller', () => {
     auth.init().catch((error) => {
       expect(error).toEqual('Fail to register application APP_ID');
     });
-    // done();
   });
 
   it('Should call SYMPHONY register upon constructor configs', () => {
