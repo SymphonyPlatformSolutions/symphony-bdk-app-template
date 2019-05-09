@@ -45,7 +45,7 @@ export default class AuthenticationController {
       .then(this.validateAppTokens)
       .then(this.getJwtFromSymph)
       .then(this.validateJwtToken)
-      .fail((e) => {
+      .catch((e) => {
         console.error(`Fail to register application ${this.appId}`);
         throw e;
       });
