@@ -6,7 +6,10 @@ import { Provider } from 'react-redux';
 import { APP_ID, APP_TITLE } from '../utils/app-constants';
 import configureStore from '../store/store-config';
 import Routes from '../routes/routes';
+import { handleOutline } from '../utils/help-functions';
 import '../sass/main.scss';
+
+handleOutline(); // Accessibility
 
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 

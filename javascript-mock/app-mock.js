@@ -6,9 +6,13 @@ import { Provider } from 'react-redux';
 import configureStore from '../src/store/store-config';
 import Routes from '../src/routes/routes';
 import { APP_ID, APP_TITLE } from '../src/utils/app-constants';
+import { handleOutline } from '../src/utils/help-functions';
 import '../src/sass/main.scss';
 
+handleOutline(); // Accessibility
+
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
+
 SYMPHONY.remote.hello().then((data) => {
   let themeSize = data.themeV2.size;
   document.body.className = `symphony-external-app light ${themeSize}`;

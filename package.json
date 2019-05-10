@@ -39,8 +39,11 @@
       "!src/mock-json-server/**",
       "!src/javascript/**",
       "!src/dist/**",
-      "!src/utils/**",
-      "!src/store/**"
+      "!src/store/**",
+      "!src/utils/app-constants.js",
+      "!src/utils/envs-constants.js",
+      "!src/utils/setup-tests.js",
+      "!src/utils/setup-url.js"
     ]
   },
   "repository": {
