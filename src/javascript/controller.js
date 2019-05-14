@@ -3,7 +3,7 @@
 import AuthenticationController from '../services/controller-services/authentication-controller';
 import { frontendURL, setupURL, setupLinkPrefix } from '../utils/setup-url';
 import GeneralEnricher from '../services/enrichers/general-enricher';
-import { APP_ID, APP_NAV_BAR_TITLE } from '../utils/app-constants';
+import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../utils/app-constants';
 import { showExtensionApp } from '../services/controller-services/extension-app-services';
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
@@ -34,7 +34,7 @@ const bootstrap = () => {
 
   const navSettings = {
     title: APP_NAV_BAR_TITLE,
-    icon: `${FRONTEND_SERVE_URL}/template/app/assets/app-icon.png`,
+    icon: `${FRONTEND_SERVE_URL}/template/app/assets/${APP_ICON_NAME}`,
   };
   navService.add(`${APP_ID}-nav`, navSettings, `${APP_ID}:controller`);
   uiService.registerExtension('app-settings', APP_ID, `${APP_ID}:controller`, { label: 'Configure' });

@@ -1,6 +1,6 @@
 /* global SYMPHONY */
 import GeneralEnricher from '../src/services/enrichers/general-enricher';
-import { APP_ID, APP_NAV_BAR_TITLE } from '../src/utils/app-constants';
+import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../src/utils/app-constants';
 import { setupLinkPrefix, frontendURL } from '../src/utils/setup-url';
 import { showExtensionApp } from '../src/services/controller-services/extension-app-services';
 
@@ -28,7 +28,7 @@ SYMPHONY.remote.hello().then(() => {
 
     const navSettings = {
       title: APP_NAV_BAR_TITLE,
-      icon: 'https://localhost:4000/assets/app-icon.png',
+      icon: `https://localhost:4000/assets/${APP_ICON_NAME}`,
     };
 
     navService.add(`${APP_ID}-nav`, navSettings, `${APP_ID}:controller`);

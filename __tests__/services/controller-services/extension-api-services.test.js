@@ -1,6 +1,6 @@
 /* global SYMPHONY */
 
-import { APP_ID, APP_TITLE } from '../../../src/utils/app-constants';
+import { APP_ID, APP_TITLE, APP_ICON_NAME } from '../../../src/utils/app-constants';
 import { setupLinkPrefix, frontendURL } from '../../../src/utils/setup-url';
 import { showExtensionApp } from '../../../src/services/controller-services/extension-app-services';
 
@@ -22,7 +22,7 @@ describe('Extension App Services', () => {
     expect(SYMPHONY.services.subscribe).toBeCalledWith('modules');
     expect(showMock).toBeCalledWith(
       APP_ID,
-      { title: APP_TITLE, icon: `${frontendURL()}${setupLinkPrefix()}/assets/app-icon.png` },
+      { title: APP_TITLE, icon: `${frontendURL()}${setupLinkPrefix()}/assets/${APP_ICON_NAME}` },
       `${APP_ID}:controller`,
       `${frontendURL()}${setupLinkPrefix()}/app.html`,
       { canFloat: true },
@@ -34,7 +34,7 @@ describe('Extension App Services', () => {
     expect(SYMPHONY.services.subscribe).toBeCalledWith('modules');
     expect(showMock).toBeCalledWith(
       APP_ID,
-      { title: APP_TITLE, icon: `${frontendURL()}${setupLinkPrefix()}/assets/app-icon.png` },
+      { title: APP_TITLE, icon: `${frontendURL()}${setupLinkPrefix()}/assets/${APP_ICON_NAME}` },
       `${APP_ID}:controller`,
       TEMPLATE_URL,
       { canFloat: true },
