@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import jwtReducer from './reducer-jwt';
+import userReducer from './reducer-user';
 
 const rootReducer = combineReducers({
-  jwt: jwtReducer,
+  user: userReducer,
 });
 
 export default rootReducer;

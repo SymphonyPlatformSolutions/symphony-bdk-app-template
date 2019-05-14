@@ -1,6 +1,6 @@
-import UserRooms from '../../src/services/user-rooms';
+import getUserRooms from '../../src/services/user-rooms-service';
 
-describe('User Rooms', () => {
+describe('Get User Rooms', () => {
   it('Should handle Symphony service of getRooms() with success', (done) => {
     global.SYMPHONY = {
       services: {
@@ -11,7 +11,7 @@ describe('User Rooms', () => {
       },
     };
 
-    UserRooms()
+    getUserRooms()
       .then((rooms) => {
         expect(rooms).toEqual([]);
       })
@@ -32,7 +32,7 @@ describe('User Rooms', () => {
       },
     };
 
-    UserRooms()
+    getUserRooms()
       .catch((error) => {
         expect(error).toEqual(new Error('No response from Symphony UI extended-user-Service in getting rooms'));
       })

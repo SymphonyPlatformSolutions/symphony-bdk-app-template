@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  jwt: state.jwt.jwt,
+  jwt: state.user.jwt,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RoutesContainer);
