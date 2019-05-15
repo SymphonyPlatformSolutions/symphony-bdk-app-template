@@ -1,0 +1,14 @@
+{
+  "applications": [
+    {
+      "type": "sandbox",
+      "id": "templateapp",
+      "name": "Template for Extension-App",
+      "blurb": "This is template for app integration, using React Lib!",
+      "publisher": "Symphony",
+      "url": "https://localhost:4000/controller.html",
+      "domain": "localhost",
+      "iconUrl": "https://nx1.symphony.com:8050/template/webjars/icon.png"
+    }
+  ]
+}
