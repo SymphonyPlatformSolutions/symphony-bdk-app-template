@@ -8,13 +8,6 @@ module.exports = merge(commonConfig, {
   mode: 'development',
   devtool: 'eval-source-map',
 
-  module: {
-    rules: [{
-      test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader']
-    }, ],
-  },
-
   devServer: {
     inline: true,
     contentBase: path.resolve(__dirname, 'javascript-mock'),

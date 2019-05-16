@@ -7,13 +7,6 @@ const path = require('path');
 module.exports = merge(commonConfig, {
   mode: 'development',
 
-  module: {
-    rules: [{
-      test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader']
-    }, ],
-  },
-
   devServer: {
     inline: true,
     contentBase: path.resolve(__dirname, 'dist'),
