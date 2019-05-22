@@ -14,9 +14,8 @@ handleOutline(); // Accessibility
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 
 SYMPHONY.remote.hello().then((data) => {
-  let themeColor = data.themeV2.name;
   let themeSize = data.themeV2.size;
-  document.body.className = `symphony-external-app ${themeColor.toLowerCase()} ${themeSize}`;
+  document.body.className = `symphony-external-app light ${themeSize}`;
 
   SYMPHONY.application.connect(
     APP_ID,
@@ -30,11 +29,8 @@ SYMPHONY.remote.hello().then((data) => {
 
     uiService.listen('themeChangeV2', () => {
       SYMPHONY.remote.hello().then((theme) => {
-        themeColor = theme.themeV2.name;
         themeSize = theme.themeV2.size;
-        document.body.className = `symphony-external-app ${themeColor} ${themeSize}`;
-      }).catch((error) => {
-        throw new Error('Unable to Configure the Extension App theme', error);
+        document.body.className = `symphony-external-app light ${themeSize}`;
       });
     });
 
