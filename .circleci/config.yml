@@ -15,7 +15,7 @@ jobs:
            - v1-dependencies-{{ checksum "package.json" }}
            - v1-dependencies-
       - run:
-          name: dependencies_install
+          name: Dependencies Install
           command: |
             npm install
       - save_cache:
@@ -29,9 +29,41 @@ jobs:
       - run:
           name: Test package
           command: |
-            npm test
+            npm run test
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .circleci
+
+  sonarqube_analysis:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project 
+
+      - run: 
+          name: SonarQube Analysis Dependencies
+          command: |
+            echo "sudo apt-get install -qq -y gettext"
+
+            echo "curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip \
+              -o sonar-scanner-cli-3.3.0.1492-linux.zip
+            unzip sonar-scanner-cli-3.3.0.1492-linux.zip"
+
+            echo "export SONAR_TOKEN="9f3ce6e128ed13760fa04624a792d6730741f2b5"
+            export SONARQUBE_URL="https://sonarqube-dev.symphonymarket.solutions"
+            envsubst < .circleci/templates/sonar-project.properties.tpl > sonar-project.properties"
+
+            echo "envsubst <.circleci/templates/sonar-scanner.properties.tpl > ./sonar-scanner-3.3.0.1492-linux/conf/sonar-scanner.properties"
+      - run: 
+          name: Run SonarQube Analysis
+          command: | 
+            echo "chmod +x ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner"
+
+            echo "./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner"
       - run:
-          name:
+          name: Get Test Result
           command: |
             source ./.circleci/scripts/test-result
       - persist_to_workspace:
@@ -47,14 +79,18 @@ jobs:
       - run:
           name: Publish package
           command: |
-            echo "npm run publish || true"
+            echo "npm run publish --access private || true"
 
 workflows:
   version: 2
   check_package:
     jobs:
       - lint_and_test
+      - sonarqube_analysis:
+          requires:
+            - lint_and_test
       - publish:
+          type: approval
           requires:
             - lint_and_test
           filters:
