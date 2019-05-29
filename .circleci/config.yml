@@ -34,6 +34,7 @@ jobs:
           root: ~/project
           paths:
             - .circleci
+            - test-report.xml
 
   sonarqube_analysis:
     <<: *defaults
