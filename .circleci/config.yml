@@ -53,7 +53,7 @@ jobs:
 
             envsubst < .circleci/templates/sonar-project.properties.tpl > sonar-project.properties
 
-            echo envsubst <.circleci/templates/sonar-scanner.properties.tpl > ./sonar-scanner-3.3.0.1492-linux/conf/sonar-scanner.properties
+            envsubst < .circleci/templates/sonar-scanner.properties.tpl > sonar-scanner-3.3.0.1492-linux/conf/sonar-scanner.properties
       - run: 
           name: Run SonarQube Analysis
           command: | 
