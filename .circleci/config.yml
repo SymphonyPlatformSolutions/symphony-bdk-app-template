@@ -30,10 +30,17 @@ jobs:
           name: Test package
           command: |
             npm run test
+            
+      - run:
+          name: Run Coverage
+          command: |
+            npm run test:coverage || true
+
       - persist_to_workspace:
           root: ~/project
           paths:
             - .circleci
+            .coverage
             - test-report.xml
 
   sonarqube_analysis:
