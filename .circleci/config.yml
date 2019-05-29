@@ -30,7 +30,7 @@ jobs:
           name: Test package
           command: |
             npm run test
-            
+
       - run:
           name: Run Coverage
           command: |
@@ -40,7 +40,7 @@ jobs:
           root: ~/project
           paths:
             - .circleci
-            .coverage
+            - coverage
             - test-report.xml
 
   sonarqube_analysis:
