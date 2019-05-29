@@ -1,0 +1,12 @@
+sonar.host.url=https://sonarqube-dev.symphonymarket.solutions
+sonar.projectKey=sms-dev-fe-template-app
+soanr.projectName=Generic Template for Applications
+sonar.projectVersion=1.0.0
+sonar.scm.provider=git
+sonar.sources=./src/
+sonar.tests=./__tests__
+sonar.javascript.lcov.reportPaths=./coverage/lcov.info
+sonar.login=${ANALYSIS_TOKEN}
+sonar.links.ci=https://circleci.com/gh/SymphonyPlatformSolutions/sms-dev-fe-template-app
+sonar.links.scm=https://github.com/SymphonyPlatformSolutions/sms-dev-tool-template-app.git
+sonar.testExecutionReportPaths=test-report.xml
