@@ -45,11 +45,11 @@ jobs:
       - run: 
           name: SonarQube Analysis Dependencies
           command: |
-            echo "sudo apt-get install -qq -y gettext"
+            sudo apt-get install -qq -y gettext
 
-            echo "curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip \
+            curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip \
               -o sonar-scanner-cli-3.3.0.1492-linux.zip
-            unzip sonar-scanner-cli-3.3.0.1492-linux.zip"
+            unzip sonar-scanner-cli-3.3.0.1492-linux.zip
 
             envsubst < .circleci/templates/sonar-project.properties.tpl > sonar-project.properties
 
