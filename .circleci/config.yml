@@ -51,17 +51,15 @@ jobs:
               -o sonar-scanner-cli-3.3.0.1492-linux.zip
             unzip sonar-scanner-cli-3.3.0.1492-linux.zip"
 
-            echo "export SONAR_TOKEN="9f3ce6e128ed13760fa04624a792d6730741f2b5"
-            export SONARQUBE_URL="https://sonarqube-dev.symphonymarket.solutions"
-            envsubst < .circleci/templates/sonar-project.properties.tpl > sonar-project.properties"
+            envsubst < .circleci/templates/sonar-project.properties.tpl > sonar-project.properties
 
-            echo "envsubst <.circleci/templates/sonar-scanner.properties.tpl > ./sonar-scanner-3.3.0.1492-linux/conf/sonar-scanner.properties"
+            echo envsubst <.circleci/templates/sonar-scanner.properties.tpl > ./sonar-scanner-3.3.0.1492-linux/conf/sonar-scanner.properties
       - run: 
           name: Run SonarQube Analysis
           command: | 
-            echo "chmod +x ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner"
+            chmod +x ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner
 
-            echo "./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner"
+            ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner
       - run:
           name: Get Test Result
           command: |
