@@ -1,3 +1,4 @@
+import Api from '../services/api/api';
 import { simplifyRooms } from '../utils/help-functions';
 import {
   JWT_AUTH_SUCCESS,
@@ -18,6 +19,7 @@ export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     // JWT
     case JWT_AUTH_SUCCESS:
+      Api.setJwt(action.jwt);
       return {
         ...state,
         jwt: action.payload,
