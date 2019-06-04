@@ -7,9 +7,12 @@ import configureStore from '../src/store/store-config';
 import Routes from '../src/routes/routes';
 import { APP_ID, APP_TITLE } from '../src/utils/app-constants';
 import { handleOutline } from '../src/utils/help-functions';
+import Logger from '../src/services/logger/logger';
 import '../src/sass/main.scss';
 
 handleOutline(); // Accessibility
+
+Logger.setAppTitle(APP_TITLE);
 
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 
@@ -52,8 +55,8 @@ SYMPHONY.remote.hello().then((data) => {
       document.getElementById('root'),
     );
   }).catch((error) => {
-    console.error('Unable to connect the application on client', error);
+    Logger.error('Unable to connect the MOCK application on client', error);
   });
 }).catch((error) => {
-  console.error('Unable to reach the data for Extension App, please verify the Authentication with Server.', error);
+  Logger.error('Unable to reach the data for the MOCK Extension App, please verify the Authentication with Server', error);
 });

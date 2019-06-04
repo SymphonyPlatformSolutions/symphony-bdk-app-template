@@ -8,6 +8,7 @@ import {
   GET_ALLOWED_USER_ROOMS_SUCCESS,
   GET_ALLOWED_USER_ROOMS_FAILURE,
 } from '../actions/action-types';
+import Logger from '../services/logger/logger';
 
 const INITIAL_STATE = {
   allUserRooms: null,
@@ -20,6 +21,7 @@ export default function (state = INITIAL_STATE, action) {
     // JWT
     case JWT_AUTH_SUCCESS:
       Api.setJwt(action.jwt);
+      Logger.setJwt(action.payload);
       return {
         ...state,
         jwt: action.payload,
