@@ -3,15 +3,35 @@ const jsonServer = require('json-server');
 
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
-// Use here your fake data file.
-const mockFile = require('./mock-file');
+const { generateDemoInfo } = require('./mock-file');
+
+// Mock delay, for testing loading states. Units are in ms.
+const MOCK_DELAY = 1000;
+
+function send(callback) {
+  if (MOCK_DELAY) {
+    setTimeout(callback, MOCK_DELAY);
+  } else {
+    callback();
+  }
+}
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
-// server.use(router)
-server.get('/tasks', (req, res) => {
-  res.jsonp(mockFile());
+
+/*
+  -- DEMO
+  Demo endpoint, serving a very simple body payload, to show an example of how to externalize
+  mock content.
+  It can - and should - be deleted when developing your own integration.
+*/
+server.get('/demoEndpoint', (req, res) => {
+  send(() => {
+    const value = generateDemoInfo();
+    res.jsonp(value);
+  });
 });
+
 server.listen(3000, () => {
   console.log('JSON Server is running');
 });
