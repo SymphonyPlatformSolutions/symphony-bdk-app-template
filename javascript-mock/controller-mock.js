@@ -13,7 +13,7 @@ Logger.setAppTitle(APP_TITLE);
 const FRONTEND_SERVE_URL = frontendURL();
 const LINK_PREFIX = setupLinkPrefix();
 
-SYMPHONY.remote.hello().then(() => {
+SYMPHONY.remote.hello().then((initialData) => {
   SYMPHONY.application.register(
     APP_ID,
     ['modules', 'applications-nav', 'ui', 'entity', 'dialogs', 'extended-user-info'],
@@ -27,6 +27,12 @@ SYMPHONY.remote.hello().then(() => {
 
     enricher.init();
     enricher.register();
+    enricher.setTheme(initialData.themeV2);
+
+    uiService.listen('themeChangeV2', (data) => {
+      enricher.setTheme(data);
+    });
+
     uiService.registerExtension('app-settings', APP_ID, `${APP_ID}:controller`, { label: 'Configure' });
 
     const navSettings = {

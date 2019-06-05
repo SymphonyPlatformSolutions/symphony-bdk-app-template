@@ -11,14 +11,20 @@ export default class AuthenticationController {
     this.dependencies = dependencies;
     this.exportedDependencies = exportedDependencies;
     this.authApiCaller = new AuthApiCaller(baseAuthenticationUrl);
+    this.initialData = {
+      themeV2: { name: 'light', size: 'normal' },
+    };
 
     if (!dependencies.find(el => el === 'extended-user-info')) {
       this.dependencies = [...dependencies, 'extended-user-info'];
     } else this.dependencies = dependencies;
   }
 
-  authenticate = () => this.authApiCaller.authenticate(this.appId)
-    .catch(e => Promise.reject({ at: 'Authenticate', error: e }));
+  authenticate = (initialData) => {
+    this.initialData = initialData;
+    return this.authApiCaller.authenticate(this.appId)
+      .catch(e => Promise.reject({ at: 'Authenticate', error: e }));
+  };
 
   registerAuthenticatedApp = (appTokens) => {
     Logger.info('Extension App authentication Success');
@@ -60,7 +66,10 @@ export default class AuthenticationController {
       .then(this.validateAppTokens)
       .then(this.getJwtFromSymph)
       .then(this.validateJwtToken)
-      .then(() => Logger.info('JWT validation success'))
+      .then(() => {
+        Logger.info('JWT validation success');
+        return this.initialData;
+      })
       .catch((e) => {
         Logger.error(`Failed to register application ${this.appId}... Failed on step "${e.at}"`, e.error || null);
         throw e;

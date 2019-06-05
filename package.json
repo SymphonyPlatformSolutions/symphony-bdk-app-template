@@ -76,6 +76,7 @@
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "styled-components": "^4.2.1",
     "yup": "^0.27.0"
   },
   "devDependencies": {
@@ -93,6 +94,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
+    "babel-plugin-styled-components": "^1.10.0",
     "copy-webpack-plugin": "^5.0.3",
     "coverage-percentage": "0.0.2",
     "css-loader": "^2.1.1",

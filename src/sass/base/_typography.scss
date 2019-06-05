@@ -1,1 +1,8 @@
 // Sass Typography
+html, body, textarea {
+  color: $font-grey;
+
+  &.dark {
+    color: $color-white;
+  }
+}

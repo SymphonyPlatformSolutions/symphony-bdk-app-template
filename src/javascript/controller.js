@@ -3,7 +3,9 @@
 import AuthenticationController from '../services/controller-services/authentication-controller';
 import { frontendURL, setupURL, setupLinkPrefix } from '../utils/setup-url';
 import GeneralEnricher from '../services/enrichers/general-enricher';
-import { APP_ID, APP_TITLE, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../utils/app-constants';
+import {
+  APP_ID, APP_TITLE, APP_NAV_BAR_TITLE, APP_ICON_NAME,
+} from '../utils/app-constants';
 import { showExtensionApp } from '../services/controller-services/extension-app-services';
 import Logger from '../services/logger/logger';
 
@@ -25,7 +27,7 @@ const config = {
 
 const authController = new AuthenticationController(config);
 
-const bootstrap = () => {
+const bootstrap = (initialData) => {
   const modulesService = SYMPHONY.services.subscribe('modules');
   const navService = SYMPHONY.services.subscribe('applications-nav');
   const uiService = SYMPHONY.services.subscribe('ui');
@@ -34,6 +36,11 @@ const bootstrap = () => {
 
   enricher.init();
   enricher.register();
+  enricher.setTheme(initialData.themeV2);
+
+  uiService.listen('themeChangeV2', (data) => {
+    enricher.setTheme(data);
+  });
 
   const navSettings = {
     title: APP_NAV_BAR_TITLE,
@@ -59,5 +66,5 @@ const bootstrap = () => {
 };
 
 authController.init()
-  .then(() => bootstrap())
+  .then(initialData => bootstrap(initialData))
   .fail(e => Logger.error('Error setting up Extension App', e.error || e));
