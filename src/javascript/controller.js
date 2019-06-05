@@ -3,8 +3,11 @@
 import AuthenticationController from '../services/controller-services/authentication-controller';
 import { frontendURL, setupURL, setupLinkPrefix } from '../utils/setup-url';
 import GeneralEnricher from '../services/enrichers/general-enricher';
-import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../utils/app-constants';
+import { APP_ID, APP_TITLE, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../utils/app-constants';
 import { showExtensionApp } from '../services/controller-services/extension-app-services';
+import Logger from '../services/logger/logger';
+
+Logger.setAppTitle(APP_TITLE);
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
 SYMPHONY.services.register(`${APP_ID}:enricher`);
@@ -57,4 +60,4 @@ const bootstrap = () => {
 
 authController.init()
   .then(() => bootstrap())
-  .fail(e => console.error(e));
+  .fail(e => Logger.error('Error setting up Extension App', e.error || e));

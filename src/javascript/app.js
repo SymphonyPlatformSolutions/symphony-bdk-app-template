@@ -8,8 +8,11 @@ import configureStore from '../store/store-config';
 import Routes from '../routes/routes';
 import { handleOutline } from '../utils/help-functions';
 import '../sass/main.scss';
+import Logger from '../services/logger/logger';
 
 handleOutline(); // Accessibility
+
+Logger.setAppTitle(APP_TITLE);
 
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 
@@ -54,8 +57,10 @@ SYMPHONY.remote.hello().then((data) => {
       </Provider>, document.getElementById('root'),
     );
   }).catch((error) => {
+    Logger.error('Unable to connect the application on client', error);
     throw new Error('Unable to connect the application on client', error);
   });
 }).catch((error) => {
+  Logger.error('Unable to reach the data for the Extension App, please verify the Authentication with Server', error);
   throw new Error('Unable to reach the data for Extension App, please verify the Authentication with Server', error);
 });

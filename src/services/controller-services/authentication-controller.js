@@ -1,7 +1,7 @@
 /* global SYMPHONY */
-/* eslint no-console: ["error", { allow: ["warn", "error"] }] */
 
 import AuthApiCaller from './controller-api-caller';
+import Logger from '../logger/logger';
 
 export default class AuthenticationController {
   constructor({
@@ -17,26 +17,41 @@ export default class AuthenticationController {
     } else this.dependencies = dependencies;
   }
 
-  authenticate = () => this.authApiCaller.authenticate(this.appId);
+  authenticate = () => this.authApiCaller.authenticate(this.appId)
+    .catch(e => Promise.reject({ at: 'Authenticate', error: e }));
 
   registerAuthenticatedApp = (appTokens) => {
+    Logger.info('Extension App authentication Success');
     this.tokenA = appTokens.data.appToken;
     const tokens = {
       appId: this.appId,
       tokenA: this.tokenA,
     };
-    return SYMPHONY.application.register(tokens, this.dependencies, this.exportedDependencies);
+    return SYMPHONY.application.register(tokens, this.dependencies, this.exportedDependencies)
+      .catch(e => Promise.reject({ at: 'Register', error: e }));
   }
 
-  validateAppTokens = symphonyToken => this.authApiCaller.validateTokens(
-    this.tokenA,
-    symphonyToken.tokenS,
-    this.appId,
-  );
+  validateAppTokens = (symphonyToken) => {
+    Logger.info('Authenticated Extension App registration Success');
+    return this.authApiCaller.validateTokens(
+      this.tokenA,
+      symphonyToken.tokenS,
+      this.appId,
+    )
+      .catch(e => Promise.reject({ at: 'Validate App Tokens', error: e }));
+  }
 
-  getJwtFromSymph = () => SYMPHONY.services.subscribe('extended-user-info').getJwt();
+  getJwtFromSymph = () => {
+    Logger.info('Extension App token validation Success');
+    return SYMPHONY.services.subscribe('extended-user-info').getJwt()
+      .catch(e => Promise.reject({ at: 'Get JWT from Symphony', error: e }));
+  };
 
-  validateJwtToken = jwt => this.authApiCaller.validateJwt(jwt)
+  validateJwtToken = (jwt) => {
+    Logger.info('Got JWT from Symphony Success');
+    this.authApiCaller.validateJwt(jwt)
+      .catch(e => Promise.reject({ at: 'Validate JWT', error: e }));
+  };
 
   init() {
     return SYMPHONY.remote.hello()
@@ -45,8 +60,9 @@ export default class AuthenticationController {
       .then(this.validateAppTokens)
       .then(this.getJwtFromSymph)
       .then(this.validateJwtToken)
+      .then(() => Logger.info('JWT validation success'))
       .catch((e) => {
-        console.error(`Fail to register application ${this.appId}`);
+        Logger.error(`Failed to register application ${this.appId}... Failed on step "${e.at}"`, e.error || null);
         throw e;
       });
   }

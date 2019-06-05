@@ -1,11 +1,14 @@
 /* global SYMPHONY */
 import GeneralEnricher from '../src/services/enrichers/general-enricher';
-import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../src/utils/app-constants';
+import { APP_ID, APP_TITLE, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../src/utils/app-constants';
 import { setupLinkPrefix, frontendURL } from '../src/utils/setup-url';
 import { showExtensionApp } from '../src/services/controller-services/extension-app-services';
+import Logger from '../src/services/logger/logger';
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
 SYMPHONY.services.register(`${APP_ID}:enricher`);
+
+Logger.setAppTitle(APP_TITLE);
 
 const FRONTEND_SERVE_URL = frontendURL();
 const LINK_PREFIX = setupLinkPrefix();
@@ -47,8 +50,8 @@ SYMPHONY.remote.hello().then(() => {
       },
     });
   }).catch((error) => {
-    console.error('Unable to register the Controller Application', error);
+    Logger.error('Unable to connect the MOCK controller on client', error);
   });
 }).catch((error) => {
-  console.error('Unable to register the Controller Application', error);
+  Logger.error('Unable to start Symphony handshake for MOCK Extension App Controller', error);
 });

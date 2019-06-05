@@ -25,9 +25,11 @@ export default class GeneralEnricher {
 
   register() {
     const entity = SYMPHONY.services.subscribe('entity');
-    this.messageEvents.forEach((element) => {
-      entity.registerRenderer(element, {}, this.name);
-    });
+    if (this.messageEvents) {
+      this.messageEvents.forEach((element) => {
+        entity.registerRenderer(element, {}, this.name);
+      });
+    }
 
     this.dialogsService = SYMPHONY.services.subscribe('dialogs');
   }
