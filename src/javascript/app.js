@@ -9,6 +9,7 @@ import Routes from '../routes/routes';
 import { handleOutline } from '../utils/help-functions';
 import '../sass/main.scss';
 import Logger from '../services/logger/logger';
+import ThemeProvider from '../components/theme/theme-provider';
 
 handleOutline(); // Accessibility
 
@@ -16,9 +17,9 @@ Logger.setAppTitle(APP_TITLE);
 
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 
-SYMPHONY.remote.hello().then((data) => {
-  let themeSize = data.themeV2.size;
-  document.body.className = `symphony-external-app light ${themeSize}`;
+SYMPHONY.remote.hello().then((initialData) => {
+  const initialTheme = initialData.themeV2;
+  document.body.className = `integration-app-body ${initialTheme.name.toLowerCase()} ${initialTheme.size}`;
 
   SYMPHONY.application.connect(
     APP_ID,
@@ -29,13 +30,6 @@ SYMPHONY.remote.hello().then((data) => {
     const modulesService = SYMPHONY.services.subscribe('modules');
     const uiService = SYMPHONY.services.subscribe('ui');
     const extendedUserInfoService = SYMPHONY.services.subscribe('extended-user-info');
-
-    uiService.listen('themeChangeV2', () => {
-      SYMPHONY.remote.hello().then((theme) => {
-        themeSize = theme.themeV2.size;
-        document.body.className = `symphony-external-app light ${themeSize}`;
-      });
-    });
 
     modulesService.addMenuItem(APP_ID, `About ${APP_TITLE}`, `${APP_ID}-menu-item`);
     modulesService.setHandler(APP_ID, `${APP_ID}:app`);
@@ -51,9 +45,11 @@ SYMPHONY.remote.hello().then((data) => {
 
     ReactDOM.render(
       <Provider store={store}>
-        <div>
-          <Routes userId={userId} jwtService={extendedUserInfoService} />
-        </div>
+        <ThemeProvider uiService={uiService} theme={initialTheme}>
+          <div>
+            <Routes userId={userId} jwtService={extendedUserInfoService} />
+          </div>
+        </ThemeProvider>
       </Provider>, document.getElementById('root'),
     );
   }).catch((error) => {

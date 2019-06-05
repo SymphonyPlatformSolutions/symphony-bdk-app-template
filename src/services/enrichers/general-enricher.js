@@ -15,6 +15,10 @@ export default class GeneralEnricher {
     return ENRICHER_EVENTS;
   }
 
+  setTheme(theme) {
+    this.theme = theme;
+  }
+
   getName() {
     return this.name;
   }
@@ -25,6 +29,7 @@ export default class GeneralEnricher {
 
   register() {
     const entity = SYMPHONY.services.subscribe('entity');
+
     if (this.messageEvents) {
       this.messageEvents.forEach((element) => {
         entity.registerRenderer(element, {}, this.name);

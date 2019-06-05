@@ -1,4 +1,12 @@
 body {
+  &.light {
+    background-color: $color-white;
+  }
+
+  &.dark {
+    background-color: $color-dark;
+  }
+
   & :focus {
     outline: none;
   }
