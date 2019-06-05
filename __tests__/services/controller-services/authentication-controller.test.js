@@ -12,12 +12,10 @@ describe('An Authentication Controller', () => {
 
   global.SYMPHONY = {
     application: {
-      register: jest.fn(() => (
-        config
-      )),
+      register: jest.fn(() => new Promise(r => r(config))),
     },
     remote: {
-      hello: jest.fn(() => new Promise(resolve => resolve([]))),
+      hello: jest.fn(() => new Promise(r => r())),
     },
   };
 
@@ -28,21 +26,20 @@ describe('An Authentication Controller', () => {
     expect(global.SYMPHONY.remote.hello).toHaveBeenCalled();
   });
 
-  it('Should return a "Fail to register" upon error during remote.hello() function running', () => {
+  it('Should return a "Fail to register" upon error during remote.hello() function running', (done) => {
     global.SYMPHONY = {
       application: {
-        register: jest.fn(() => (
-          config
-        )),
+        register: jest.fn(() => new Promise(r => r(config))),
       },
       remote: {
-        hello: jest.fn(jest.fn(() => new Promise(reject => reject()))),
+        hello: jest.fn(() => new Promise((res, reject) => reject({ at: 'Authenticate', error: 'Error' }))),
       },
     };
     const auth = new AuthenticationController(config);
 
     auth.init().catch((error) => {
-      expect(error).toEqual('Fail to register application APP_ID');
+      expect(error).toEqual({ at: 'Authenticate', error: 'Error' });
+      done();
     });
   });
 
