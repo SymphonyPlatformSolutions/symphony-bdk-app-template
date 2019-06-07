@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/header';
-import DemoComponentContainer from '../components/demo-component/demo-component-container';
+import DemoComponentContainer from '../components/demo/demo-component-container';
 
 class App extends React.PureComponent {
   render() {
@@ -11,7 +11,7 @@ class App extends React.PureComponent {
           TEMPLATE PAGE
         </div>
         <div>
-          <h1>Random Brazilian Fruits and Veggies</h1>
+          <h1>Fruit Basket</h1>
           <DemoComponentContainer />
         </div>
       </div>

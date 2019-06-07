@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import getDemoContent from '../../actions/action-demo';
-import DemoComponent from './demo-component';
+import { getDemoContent, updateDemoContent, deleteDemoContent } from '../../actions/action-demo';
+import DemoComponentList from './demo-component-list';
 /*
   -- DEMO
   Demo action, showing how to dispatch information into the Redux State, using the Api
@@ -15,12 +15,26 @@ export function DemoContainer(props) {
   const {
     actions, loading, content, error,
   } = props;
-
+  const [elementInProcess, toggleInProcess] = useState(null);
   useEffect(() => {
     actions.getDemoContent();
   }, []);
 
-  if (loading || !content) {
+  if (!loading && (elementInProcess || elementInProcess === 0)) {
+    toggleInProcess(null);
+  }
+
+  const submitCallback = (newContent) => {
+    toggleInProcess(newContent.id);
+    actions.updateDemoContent(newContent.id, newContent);
+  };
+
+  const deleteCallback = (id) => {
+    toggleInProcess(id);
+    actions.deleteDemoContent(id);
+  };
+
+  if (loading && (!elementInProcess && elementInProcess !== 0)) {
     return (<p>Loading something neat...</p>);
   }
 
@@ -33,7 +47,16 @@ export function DemoContainer(props) {
     );
   }
 
-  return <div>{content.map(el => <DemoComponent key={el.name} {...el} />)}</div>;
+  return (
+    <div>
+      <DemoComponentList
+        content={content}
+        submitCallback={submitCallback}
+        deleteCallback={deleteCallback}
+        elementInProcess={elementInProcess}
+      />
+    </div>
+  );
 }
 
 DemoContainer.propTypes = {
@@ -50,7 +73,7 @@ DemoContainer.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getDemoContent }, dispatch),
+  actions: bindActionCreators({ getDemoContent, updateDemoContent, deleteDemoContent }, dispatch),
 });
 const mapStateToProps = ({ demo: { loading, content, error } }) => ({ loading, content, error });
 

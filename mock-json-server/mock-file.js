@@ -6,28 +6,19 @@
   It can - and should - be deleted when developing your own integration.
 */
 function generateDemoInfo() {
-  const fruit = [
-    { name: 'Guarana', isFruit: true },
-    { name: 'Açaí', isFruit: true },
-    { name: 'Pitaya', isFruit: true },
-    { name: 'Graviola', isFruit: true },
-    { name: 'Sapoti', isFruit: true },
-    { name: 'Pitanga', isFruit: true },
-    { name: 'Cará', isFruit: false },
-    { name: 'Moranga', isFruit: false },
-    { name: 'Chuchu', isFruit: false },
-    { name: 'Jiló', isFruit: false },
-    { name: 'Maxixe', isFruit: false },
+  return [
+    { id: 0, name: 'Guarana', isFruit: true },
+    { id: 1, name: 'Açaí', isFruit: true },
+    { id: 2, name: 'Pitaya', isFruit: true },
+    { id: 3, name: 'Graviola', isFruit: true },
+    { id: 4, name: 'Sapoti', isFruit: true },
+    { id: 5, name: 'Pitanga', isFruit: true },
+    { id: 6, name: 'Cará', isFruit: false },
+    { id: 7, name: 'Moranga', isFruit: false },
+    { id: 8, name: 'Chuchu', isFruit: false },
+    { id: 9, name: 'Jiló', isFruit: false },
+    { id: 10, name: 'Maxixe', isFruit: false },
   ];
-  const numInArray = Math.floor(Math.random() * (fruit.length - 2)) + 2;
-  const returnValue = [];
-  for (let i = 0; i < numInArray; i += 1) {
-    returnValue.push(fruit.splice(Math.floor(Math.random() * fruit.length), 1)[0]);
-  }
-
-  return {
-    content: returnValue,
-  };
 }
 
 module.exports = { generateDemoInfo };
