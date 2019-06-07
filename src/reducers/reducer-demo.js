@@ -10,6 +10,8 @@ import {
   -- DEMO
   Demo Reducer, for the purpose of showing a full react-redux flow.
   It can - and should - be deleted when developing your own integration.
+  It receives an object from the action dispatch and maps it into a format
+  that the Frontend will use.
   {
     name:
     id:
@@ -17,6 +19,25 @@ import {
     loading:
   }
 */
+const mapElementsToLoadingFalse = arr => arr.map(el => ({ ...el, loading: false }));
+const overrideLoadingById = (arr, id, newLoading) => arr.map((el) => {
+  if (el.id === id) {
+    return {
+      ...el,
+      loading: newLoading,
+    };
+  }
+  return el;
+});
+const updateElementById = (arr, newContent, newLoading) => arr.map((el) => {
+  if (el.id === newContent.id) {
+    return {
+      ...newContent,
+      loading: newLoading,
+    };
+  }
+  return el;
+});
 
 const INITIAL_STATE = {
   loadingList: true,
@@ -36,16 +57,7 @@ export default function (state = INITIAL_STATE, action) {
     case POST_DEMO:
       return {
         ...state,
-        // Externalize function
-        content: state.content.map((el) => {
-          if (el.id === action.payload) {
-            return {
-              ...el,
-              loading: true,
-            };
-          }
-          return el;
-        }),
+        content: overrideLoadingById(state.content, action.payload, true),
       };
     case GET_DEMO_FAILURE:
     case UPDATE_DEMO_FAILURE:
@@ -53,31 +65,20 @@ export default function (state = INITIAL_STATE, action) {
     case POST_DEMO_FAILURE:
       return {
         ...state,
+        content: mapElementsToLoadingFalse(state.content),
         error: JSON.stringify(action.payload),
-        content: state.content.map(el => ({ ...el, loading: false })),
       };
     case GET_DEMO_SUCCESS:
       return {
         ...state,
         loading: false,
-        content: action.payload.content.map(el => ({
-          ...el,
-          loading: false,
-        })),
+        content: mapElementsToLoadingFalse(action.payload),
         error: null,
       };
     case UPDATE_DEMO_SUCCESS:
       return {
         ...state,
-        content: state.content.map((el) => {
-          if (el.id === action.payload.id) {
-            return {
-              ...action.payload,
-              loading: false,
-            };
-          }
-          return el;
-        }),
+        content: updateElementById(state.content, action.payload, false),
       };
     case DELETE_DEMO_SUCCESS:
       return {

@@ -12,7 +12,6 @@ import {
   service.
   It can - and should - be deleted when developing your own integration.
 */
-
 const ENDPOINT = 'demoEndpoint';
 
 export function getDemoContent() {
@@ -28,7 +27,10 @@ export function updateDemoContent(id, content) {
   return (dispatch) => {
     dispatch({ type: UPDATE_DEMO, payload: id });
     return Api.put(`${ENDPOINT}/${id}`, content)
-      .then(() => dispatch({ type: UPDATE_DEMO_SUCCESS, payload: { ...content, id } }))
+      .then(() => dispatch({
+        type: UPDATE_DEMO_SUCCESS,
+        payload: { ...content, id },
+      }))
       .catch(response => dispatch({ type: UPDATE_DEMO_FAILURE, payload: response.data }));
   };
 }
@@ -46,7 +48,13 @@ export function createDemoContent(content) {
   return (dispatch) => {
     dispatch({ type: POST_DEMO, payload: null });
     return Api.post(`${ENDPOINT}`, content)
-      .then(response => dispatch({ type: POST_DEMO_SUCCESS, payload: { ...content, id: response.body } }))
+      .then(response => dispatch({
+        type: POST_DEMO_SUCCESS,
+        payload: {
+          ...content,
+          id: response.body,
+        },
+      }))
       .catch(response => dispatch({ type: POST_DEMO_FAILURE, payload: response.data }));
   };
 }

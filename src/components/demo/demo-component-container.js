@@ -13,7 +13,6 @@ import DemoComponentList from './demo-component-list';
   service.
   It can - and should - be deleted when developing your own integration.
 */
-
 export function DemoContainer(props) {
   const {
     actions, loading, content, error,
@@ -22,18 +21,6 @@ export function DemoContainer(props) {
   useEffect(() => {
     actions.getDemoContent();
   }, []);
-
-  const submitHandler = (newContent) => {
-    actions.updateDemoContent(newContent.id, newContent);
-  };
-
-  const deleteHandler = (id) => {
-    actions.deleteDemoContent(id);
-  };
-
-  const createHandler = (newContent) => {
-    actions.createDemoContent(newContent);
-  };
 
   if (loading) {
     return (<p>Loading something neat...</p>);
@@ -52,9 +39,9 @@ export function DemoContainer(props) {
     <div>
       <DemoComponentList
         content={content}
-        submitHandler={submitHandler}
-        deleteHandler={deleteHandler}
-        createHandler={createHandler}
+        submitHandler={newContent => actions.updateDemoContent(newContent.id, newContent)}
+        deleteHandler={actions.deleteDemoContent}
+        createHandler={actions.createDemoContent}
         addEmptyComponentHandler={actions.addNewComponent}
         cancelCreationHandler={actions.cancelNewComponent}
       />
