@@ -67,6 +67,14 @@ server.delete('/demoEndpoint/:id', (req, res) => {
   }
 });
 
+server.post('/demoEndpoint', (req, res) => {
+  const newId = fruit.reduce((acc, el) => (el.id > acc ? el.id : acc), -1) + 1;
+  fruit.push({ ...req.body, id: newId });
+  send(() => {
+    res.jsonp(newId);
+  });
+});
+
 server.listen(3000, () => {
   console.log('JSON Server is running');
 });

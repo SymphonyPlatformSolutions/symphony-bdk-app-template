@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { getDemoContent, updateDemoContent, deleteDemoContent } from '../../actions/action-demo';
+import {
+  getDemoContent, updateDemoContent, deleteDemoContent, createDemoContent,
+} from '../../actions/action-demo';
 import DemoComponentList from './demo-component-list';
 /*
   -- DEMO
@@ -34,6 +36,11 @@ export function DemoContainer(props) {
     actions.deleteDemoContent(id);
   };
 
+  const createCallback = (newContent) => {
+    toggleInProcess('new');
+    actions.createDemoContent(newContent);
+  };
+
   if (loading && (!elementInProcess && elementInProcess !== 0)) {
     return (<p>Loading something neat...</p>);
   }
@@ -54,6 +61,7 @@ export function DemoContainer(props) {
         submitCallback={submitCallback}
         deleteCallback={deleteCallback}
         elementInProcess={elementInProcess}
+        createCallback={createCallback}
       />
     </div>
   );
@@ -73,7 +81,9 @@ DemoContainer.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ getDemoContent, updateDemoContent, deleteDemoContent }, dispatch),
+  actions: bindActionCreators({
+    getDemoContent, updateDemoContent, deleteDemoContent, createDemoContent,
+  }, dispatch),
 });
 const mapStateToProps = ({ demo: { loading, content, error } }) => ({ loading, content, error });
 

@@ -6,6 +6,7 @@ export default function DemoComponent({
   isFruit, name,
   submitCallback, deleteCallback,
   isLoading,
+  isCreate, cancelCreationCallback,
 }) {
   const [{ typedName, fruitChecked }, setTransientData] = useState({ typedName: name, fruitChecked: isFruit });
   const [{ savedName, savedFruit }, setSavedData] = useState({ savedName: name, savedFruit: isFruit });
@@ -17,7 +18,7 @@ export default function DemoComponent({
     toggleEdit(false);
   }
 
-  if (isEdit) {
+  if (isCreate || isEdit) {
     return (
       <div>
         <input
@@ -50,7 +51,16 @@ export default function DemoComponent({
           Vegetable
         </label>
         <Button onClick={() => submitCallback({ name: typedName, isFruit: fruitChecked })}>Submit</Button>
-        <Button onClick={() => { setTransientData({ typedName: name, fruitChecked: isFruit }); toggleEdit(false); }}>Cancel</Button>
+        <Button onClick={() => {
+          if (!isCreate) {
+            setTransientData({ typedName: name, fruitChecked: isFruit });
+            toggleEdit(false);
+          } else {
+            cancelCreationCallback();
+          }
+        }}
+        >Cancel
+        </Button>
         {isLoading && <Loading>Loading...</Loading>}
       </div>
     );

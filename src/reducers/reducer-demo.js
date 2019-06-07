@@ -2,6 +2,7 @@ import {
   GET_DEMO, GET_DEMO_SUCCESS, GET_DEMO_FAILURE,
   UPDATE_DEMO, UPDATE_DEMO_SUCCESS, UPDATE_DEMO_FAILURE,
   DELETE_DEMO, DELETE_DEMO_SUCCESS, DELETE_DEMO_FAILURE,
+  POST_DEMO, POST_DEMO_SUCCESS, POST_DEMO_FAILURE,
 } from '../actions/action-types';
 
 /*
@@ -21,6 +22,7 @@ export default function (state = INITIAL_STATE, action) {
     case GET_DEMO:
     case UPDATE_DEMO:
     case DELETE_DEMO:
+    case POST_DEMO:
       return {
         ...state,
         loading: true,
@@ -35,6 +37,7 @@ export default function (state = INITIAL_STATE, action) {
     case GET_DEMO_FAILURE:
     case UPDATE_DEMO_FAILURE:
     case DELETE_DEMO_FAILURE:
+    case POST_DEMO_FAILURE:
       return {
         ...state,
         loading: false,
@@ -55,6 +58,12 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         content: state.content.filter(el => el.id !== action.payload),
+        loading: false,
+      };
+    case POST_DEMO_SUCCESS:
+      return {
+        ...state,
+        content: [...state.content, action.payload],
         loading: false,
       };
     default:

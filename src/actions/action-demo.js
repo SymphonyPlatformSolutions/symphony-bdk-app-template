@@ -3,6 +3,7 @@ import {
   GET_DEMO, GET_DEMO_SUCCESS, GET_DEMO_FAILURE,
   UPDATE_DEMO, UPDATE_DEMO_SUCCESS, UPDATE_DEMO_FAILURE,
   DELETE_DEMO, DELETE_DEMO_SUCCESS, DELETE_DEMO_FAILURE,
+  POST_DEMO, POST_DEMO_SUCCESS, POST_DEMO_FAILURE,
 } from './action-types';
 /*
   -- DEMO
@@ -37,5 +38,14 @@ export function deleteDemoContent(id) {
     return Api.delete(`${ENDPOINT}/${id}`)
       .then(() => dispatch({ type: DELETE_DEMO_SUCCESS, payload: id }))
       .catch(response => dispatch({ type: DELETE_DEMO_FAILURE, payload: response.data }));
+  };
+}
+
+export function createDemoContent(content) {
+  return (dispatch) => {
+    dispatch({ type: POST_DEMO });
+    return Api.post(`${ENDPOINT}`, content)
+      .then(response => dispatch({ type: POST_DEMO_SUCCESS, payload: { ...content, id: response.body } }))
+      .catch(response => dispatch({ type: POST_DEMO_FAILURE, payload: response.data }));
   };
 }
