@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import {
   getDemoContent, updateDemoContent, deleteDemoContent, createDemoContent,
+  addNewComponent, cancelNewComponent,
 } from '../../actions/action-demo';
 import DemoComponentList from './demo-component-list';
 /*
@@ -17,31 +18,24 @@ export function DemoContainer(props) {
   const {
     actions, loading, content, error,
   } = props;
-  const [elementInProcess, toggleInProcess] = useState(null);
+
   useEffect(() => {
     actions.getDemoContent();
   }, []);
 
-  if (!loading && (elementInProcess || elementInProcess === 0)) {
-    toggleInProcess(null);
-  }
-
-  const submitCallback = (newContent) => {
-    toggleInProcess(newContent.id);
+  const submitHandler = (newContent) => {
     actions.updateDemoContent(newContent.id, newContent);
   };
 
-  const deleteCallback = (id) => {
-    toggleInProcess(id);
+  const deleteHandler = (id) => {
     actions.deleteDemoContent(id);
   };
 
-  const createCallback = (newContent) => {
-    toggleInProcess('new');
+  const createHandler = (newContent) => {
     actions.createDemoContent(newContent);
   };
 
-  if (loading && (!elementInProcess && elementInProcess !== 0)) {
+  if (loading) {
     return (<p>Loading something neat...</p>);
   }
 
@@ -58,10 +52,11 @@ export function DemoContainer(props) {
     <div>
       <DemoComponentList
         content={content}
-        submitCallback={submitCallback}
-        deleteCallback={deleteCallback}
-        elementInProcess={elementInProcess}
-        createCallback={createCallback}
+        submitHandler={submitHandler}
+        deleteHandler={deleteHandler}
+        createHandler={createHandler}
+        addEmptyComponentHandler={actions.addNewComponent}
+        cancelCreationHandler={actions.cancelNewComponent}
       />
     </div>
   );
@@ -82,7 +77,12 @@ DemoContainer.defaultProps = {
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({
-    getDemoContent, updateDemoContent, deleteDemoContent, createDemoContent,
+    getDemoContent,
+    updateDemoContent,
+    deleteDemoContent,
+    createDemoContent,
+    addNewComponent,
+    cancelNewComponent,
   }, dispatch),
 });
 const mapStateToProps = ({ demo: { loading, content, error } }) => ({ loading, content, error });

@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import DemoComponent from './demo-component';
 
 export default function DemoComponentList(props) {
   const {
-    content, submitCallback, elementInProcess, deleteCallback,
-    createCallback,
+    content, submitHandler, deleteHandler,
+    createHandler, addEmptyComponentHandler, cancelCreationHandler,
   } = props;
-
-  const [isCreating, toggleCreating] = useState(false);
-  const [requestSent, toggleSent] = useState(false);
 
   if (!content || !content.length) {
     return (
@@ -18,31 +16,39 @@ export default function DemoComponentList(props) {
     );
   }
 
-  if (requestSent && elementInProcess !== 'new') {
-    toggleCreating(false);
-    toggleSent(false);
-  }
-
   return (
     <div>
-      {content.map(el => (
+      {content.map((el, index) => (
         <DemoComponent
           key={el.id}
+          isCreate={el.id === null}
           {...el}
-          submitCallback={newValue => submitCallback({ id: el.id, ...newValue })}
-          deleteCallback={() => deleteCallback(el.id)}
-          isLoading={elementInProcess === el.id}
+          submitHandler={(newValue) => {
+            if (el.id !== null) {
+              submitHandler({ id: el.id, ...newValue });
+            } else {
+              createHandler(newValue);
+            }
+          }}
+          innerIndex={index}
+          cancelCreationHandler={() => cancelCreationHandler()}
+          deleteHandler={() => deleteHandler(el.id)}
         />
       ))}
-      {isCreating && (
-      <DemoComponent
-        isCreate
-        submitCallback={(newValue) => { toggleSent(true); createCallback(newValue); }}
-        cancelCreationCallback={() => toggleCreating(false)}
-        isLoading={elementInProcess === 'new'}
-      />
-      )}
-      {!isCreating && <button onClick={() => toggleCreating(true)}>Create</button>}
+      <button onClick={() => addEmptyComponentHandler()}>Create</button>
     </div>
   );
 }
+
+DemoComponentList.propTypes = {
+  content: PropTypes.array,
+  submitHandler: PropTypes.func.isRequired,
+  deleteHandler: PropTypes.func.isRequired,
+  createHandler: PropTypes.func.isRequired,
+  addEmptyComponentHandler: PropTypes.func.isRequired,
+  cancelCreationHandler: PropTypes.func.isRequired,
+};
+
+DemoComponentList.defaultProps = {
+  content: null,
+};

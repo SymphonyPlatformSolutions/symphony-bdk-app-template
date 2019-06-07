@@ -26,3 +26,6 @@ export const DELETE_DEMO_FAILURE = 'DELETE_DEMO_FAILURE';
 export const POST_DEMO = 'POST_DEMO';
 export const POST_DEMO_SUCCESS = 'POST_DEMO_SUCCESS';
 export const POST_DEMO_FAILURE = 'POST_DEMO_FAILURE';
+
+export const ADD_DEMO = 'ADD_DEMO';
+export const REMOVE_DEMO = 'REMOVE_DEMO';

@@ -4,12 +4,18 @@ import PropTypes from 'prop-types';
 
 export default function DemoComponent({
   isFruit, name,
-  submitCallback, deleteCallback,
-  isLoading,
-  isCreate, cancelCreationCallback,
+  submitHandler, deleteHandler,
+  isCreate, cancelCreationHandler,
+  loading, innerIndex,
 }) {
-  const [{ typedName, fruitChecked }, setTransientData] = useState({ typedName: name, fruitChecked: isFruit });
-  const [{ savedName, savedFruit }, setSavedData] = useState({ savedName: name, savedFruit: isFruit });
+  const [{ typedName, fruitChecked }, setTransientData] = useState({
+    typedName: name,
+    fruitChecked: isFruit,
+  });
+  const [{ savedName, savedFruit }, setSavedData] = useState({
+    savedName: name,
+    savedFruit: isFruit,
+  });
   const [isEdit, toggleEdit] = useState(false);
 
   if (name !== savedName || isFruit !== savedFruit) {
@@ -20,84 +26,151 @@ export default function DemoComponent({
 
   if (isCreate || isEdit) {
     return (
-      <div>
-        <input
-          value={typedName}
-          type="text"
-          placeholder="Fruit Name"
-          onChange={e => setTransientData({
-            typedName: e.target.value,
-            fruitChecked,
-          })}
-        />
-        <label htmlFor="fruit">
-          <Radio
-            checked={fruitChecked}
-            type="radio"
-            id="fruit"
-            name="fruitOrVeg"
-            onChange={() => setTransientData({ typedName, fruitChecked: true })}
-          />
-          Fruit
-        </label>
-        <label htmlFor="vegetable">
-          <Radio
-            checked={!fruitChecked}
-            type="radio"
-            id="vegetable"
-            name="fruitOrVeg"
-            onChange={() => setTransientData({ typedName, fruitChecked: false })}
-          />
-          Vegetable
-        </label>
-        <Button onClick={() => submitCallback({ name: typedName, isFruit: fruitChecked })}>Submit</Button>
-        <Button onClick={() => {
-          if (!isCreate) {
-            setTransientData({ typedName: name, fruitChecked: isFruit });
-            toggleEdit(false);
-          } else {
-            cancelCreationCallback();
-          }
-        }}
-        >Cancel
-        </Button>
-        {isLoading && <Loading>Loading...</Loading>}
-      </div>
+      <ComponentContainer>
+        <FruitContainer>
+          <InputContainer>
+            <Input
+              value={typedName}
+              type="text"
+              placeholder="Fruit Name"
+              onChange={e => setTransientData({
+                typedName: e.target.value,
+                fruitChecked,
+              })}
+            />
+            <CheckContainer>
+              <label htmlFor={`fruit_${innerIndex}`}>
+                <Radio
+                  checked={fruitChecked}
+                  type="radio"
+                  id={`fruit_${innerIndex}`}
+                  name={`fruitOrVegetable_${innerIndex}`}
+                  onChange={() => setTransientData({ typedName, fruitChecked: true })}
+                />
+              Fruit
+              </label>
+              <label htmlFor={`vegetable_${innerIndex}`}>
+                <Radio
+                  checked={!fruitChecked}
+                  type="radio"
+                  id={`vegetable_${innerIndex}`}
+                  name={`fruitOrVegetable_${innerIndex}`}
+                  onChange={() => setTransientData({ typedName, fruitChecked: false })}
+                />
+              Vegetable
+              </label>
+            </CheckContainer>
+          </InputContainer>
+          <ButtonContainer>
+            <Button onClick={() => submitHandler({ name: typedName, isFruit: fruitChecked })}>Submit</Button>
+            <Button onClick={() => {
+              if (!isCreate) {
+                setTransientData({ typedName: name, fruitChecked: isFruit });
+                toggleEdit(false);
+              } else {
+                cancelCreationHandler();
+              }
+            }}
+            >Cancel
+            </Button>
+          </ButtonContainer>
+        </FruitContainer>
+        <LoadingContainer>
+          {loading && <Loading>Loading...</Loading>}
+        </LoadingContainer>
+      </ComponentContainer>
     );
   }
 
   return (
-    <div>
-      <Label>
-        <Fruit>{isFruit ? '🍉' : '🥕'}</Fruit>{name}
-        <button onClick={() => toggleEdit(true)}>Edit</button>
-        <button onClick={() => deleteCallback()}>Delete</button>
-        {isLoading && <Loading>Loading...</Loading>}
-      </Label>
-    </div>
+    <ComponentContainer>
+      <FruitContainer>
+        <Label>
+          <Fruit>{isFruit ? '🍉' : '🥕'}</Fruit>{name}
+        </Label>
+        <ButtonContainer>
+          <Button onClick={() => toggleEdit(true)}>Edit</Button>
+          <Button onClick={() => deleteHandler()}>Delete</Button>
+        </ButtonContainer>
+      </FruitContainer>
+      <LoadingContainer>
+        {loading && <Loading>Loading...</Loading>}
+      </LoadingContainer>
+    </ComponentContainer>
   );
 }
 
 DemoComponent.propTypes = {
   isFruit: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  submitHandler: PropTypes.func.isRequired,
+  deleteHandler: PropTypes.func.isRequired,
+  cancelCreationHandler: PropTypes.func.isRequired,
+  innerIndex: PropTypes.number.isRequired,
+  loading: PropTypes.bool,
+  isCreate: PropTypes.bool,
 };
 
 DemoComponent.defaultProps = {
   isFruit: true,
+  loading: false,
+  isCreate: false,
 };
 
+const FruitContainer = styled.div`
+  width: 25rem;
+  display: flex;
+  padding: 0.6rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+`;
 const Fruit = styled.span`
   padding-right: 1rem;
 `;
 const Label = styled.span`
-  margin: 1rem 1.5rem;
   font-size: 1.3rem;
 `;
 const Radio = styled.input`
 `;
 const Button = styled.button`
+  padding: 0.4rem;
+  border: 1px solid #4D4D4D;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 7px;
+  cursor: pointer;
+  &:hover {
+    background-color: #EDEDED;
+  }
 `;
 const Loading = styled.span`
   margin-left: 2rem;
+`;
+const Input = styled.input`
+  padding: 0.4rem 0.8rem;
+  height: 1rem;
+  border-radius: 7px;
+  border: 1px solid #4D4D4D;
+`;
+const CheckContainer = styled.div`
+  margin-top: 0.3rem;
+  display: flex;
+`;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+`;
+const LoadingContainer = styled.div`
+  width: 5rem;
+`;
+const ButtonContainer = styled.div`
+  width: 7rem;
+  display: flex;
+  justify-content: space-between;
+`;
+const ComponentContainer = styled.div`
+  width: 36rem;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
 `;
