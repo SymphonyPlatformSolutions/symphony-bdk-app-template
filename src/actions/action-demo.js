@@ -4,7 +4,7 @@ import {
   UPDATE_DEMO, UPDATE_DEMO_SUCCESS, UPDATE_DEMO_FAILURE,
   DELETE_DEMO, DELETE_DEMO_SUCCESS, DELETE_DEMO_FAILURE,
   POST_DEMO, POST_DEMO_SUCCESS, POST_DEMO_FAILURE,
-  ADD_DEMO, REMOVE_DEMO,
+  ADD_NEW_DEMO_COMPONENT, REMOVE_NEW_DEMO_COMPONENT,
 } from './action-types';
 /*
   -- DEMO
@@ -61,12 +61,12 @@ export function createDemoContent(content) {
 
 export function addNewComponent() {
   return (dispatch) => {
-    dispatch({ type: ADD_DEMO });
+    dispatch({ type: ADD_NEW_DEMO_COMPONENT });
   };
 }
 
 export function cancelNewComponent() {
   return (dispatch) => {
-    dispatch({ type: REMOVE_DEMO });
+    dispatch({ type: REMOVE_NEW_DEMO_COMPONENT });
   };
 }

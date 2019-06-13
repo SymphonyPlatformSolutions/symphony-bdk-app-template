@@ -39,7 +39,7 @@ export default function DemoComponent({
               })}
             />
             <CheckContainer>
-              <label htmlFor={`fruit_${innerIndex}`}>
+              <InputLabel htmlFor={`fruit_${innerIndex}`}>
                 <Radio
                   checked={fruitChecked}
                   type="radio"
@@ -48,8 +48,8 @@ export default function DemoComponent({
                   onChange={() => setTransientData({ typedName, fruitChecked: true })}
                 />
               Fruit
-              </label>
-              <label htmlFor={`vegetable_${innerIndex}`}>
+              </InputLabel>
+              <InputLabel htmlFor={`vegetable_${innerIndex}`}>
                 <Radio
                   checked={!fruitChecked}
                   type="radio"
@@ -58,11 +58,14 @@ export default function DemoComponent({
                   onChange={() => setTransientData({ typedName, fruitChecked: false })}
                 />
               Vegetable
-              </label>
+              </InputLabel>
             </CheckContainer>
           </InputContainer>
           <ButtonContainer>
-            <Button onClick={() => submitHandler({ name: typedName, isFruit: fruitChecked })}>Submit</Button>
+            <Button
+              onClick={() => submitHandler({ name: typedName, isFruit: fruitChecked })}
+            >Submit
+            </Button>
             <Button onClick={() => {
               if (!isCreate) {
                 setTransientData({ typedName: name, fruitChecked: isFruit });
@@ -85,9 +88,9 @@ export default function DemoComponent({
   return (
     <ComponentContainer>
       <FruitContainer>
-        <Label>
+        <TextLabel>
           <Fruit>{isFruit ? '🍉' : '🥕'}</Fruit>{name}
-        </Label>
+        </TextLabel>
         <ButtonContainer>
           <Button onClick={() => toggleEdit(true)}>Edit</Button>
           <Button onClick={() => deleteHandler()}>Delete</Button>
@@ -127,11 +130,11 @@ const FruitContainer = styled.div`
 const Fruit = styled.span`
   padding-right: 1rem;
 `;
-const Label = styled.span`
+const TextLabel = styled.span`
   font-size: 1.3rem;
 `;
-const Radio = styled.input`
-`;
+const InputLabel = styled.label``;
+const Radio = styled.input``;
 const Button = styled.button`
   padding: 0.4rem;
   border: 1px solid #4D4D4D;

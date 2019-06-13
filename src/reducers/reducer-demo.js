@@ -3,7 +3,7 @@ import {
   UPDATE_DEMO, UPDATE_DEMO_SUCCESS, UPDATE_DEMO_FAILURE,
   DELETE_DEMO, DELETE_DEMO_SUCCESS, DELETE_DEMO_FAILURE,
   POST_DEMO, POST_DEMO_SUCCESS, POST_DEMO_FAILURE,
-  ADD_DEMO, REMOVE_DEMO,
+  ADD_NEW_DEMO_COMPONENT, REMOVE_NEW_DEMO_COMPONENT,
 } from '../actions/action-types';
 
 /*
@@ -19,7 +19,12 @@ import {
     loading:
   }
 */
-const mapElementsToLoadingFalse = arr => arr.map(el => ({ ...el, loading: false }));
+const mapElementsToLoadingFalse = (arr) => {
+  if (!arr || !arr.length) {
+    return [];
+  }
+  return arr.map(el => ({ ...el, loading: false }));
+};
 const overrideLoadingById = (arr, id, newLoading) => arr.map((el) => {
   if (el.id === id) {
     return {
@@ -40,17 +45,19 @@ const updateElementById = (arr, newContent, newLoading) => arr.map((el) => {
 });
 
 const INITIAL_STATE = {
-  loadingList: true,
+  loading: true,
   content: null,
   error: null,
 };
 
 export default function (state = INITIAL_STATE, action) {
+  let newIndex;
+  let content;
   switch (action.type) {
     case GET_DEMO:
       return {
         ...state,
-        loadingList: true,
+        loading: true,
       };
     case UPDATE_DEMO:
     case DELETE_DEMO:
@@ -72,7 +79,7 @@ export default function (state = INITIAL_STATE, action) {
       return {
         ...state,
         loading: false,
-        content: mapElementsToLoadingFalse(action.payload),
+        content: mapElementsToLoadingFalse(action.payload.content),
         error: null,
       };
     case UPDATE_DEMO_SUCCESS:
@@ -86,21 +93,21 @@ export default function (state = INITIAL_STATE, action) {
         content: state.content.filter(el => el.id !== action.payload),
       };
     case POST_DEMO_SUCCESS:
-      const newIndex = state.content.findIndex(el => el.id === null);
-      const content = Array.from(state.content);
+      newIndex = state.content.findIndex(el => el.id === null);
+      content = Array.from(state.content);
       content[newIndex] = action.payload;
       return {
         ...state,
         content,
       };
-    case ADD_DEMO:
+    case ADD_NEW_DEMO_COMPONENT:
       return {
         ...state,
         content: [...state.content, {
           isFruit: true, name: null, id: null, loading: false,
         }],
       };
-    case REMOVE_DEMO:
+    case REMOVE_NEW_DEMO_COMPONENT:
       return {
         ...state,
         content: state.content.filter(el => el.id !== null),

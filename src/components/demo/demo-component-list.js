@@ -35,7 +35,7 @@ export default function DemoComponentList(props) {
           deleteHandler={() => deleteHandler(el.id)}
         />
       ))}
-      <button onClick={() => addEmptyComponentHandler()}>Create</button>
+      <button type="button" onClick={() => addEmptyComponentHandler()}>Create</button>
     </div>
   );
 }
