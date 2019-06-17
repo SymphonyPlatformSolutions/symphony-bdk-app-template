@@ -1,0 +1,93 @@
+.rendered-content-container,
+#main-content-wrapper,
+.content-wrapper,
+.simple_grid_has_one_container,
+.simple_grid_main_container,
+.chat-module,
+.module-content-wrapper,
+.module-content,
+.chatroom-messages-wrap,
+.chatroom-messages,
+.chat-message-list-manager-wrapper,
+.chat-message-list-container,
+.message-list {
+	min-height: inherit;
+	max-height: inherit
+}
+
+.rendered-content-container div:not(.card):not(.flair) {
+	position: inherit !important;
+	height: auto !important
+}
+
+.rendered-content-container div {
+	min-width: 0 !important
+}
+
+.rendered-content-container .message-group-container {
+	padding-top: 0 !important
+}
+
+.rendered-content-container div {
+	--grid: var(--grid-module) !important
+}
+
+.subalias {
+	margin-left: -2px !important
+}
+
+.card.has-body {
+	display: flex !important
+}
+
+.card .content {
+	width: auto;
+	margin-right: 10px !important
+}
+
+.card:hover .content,
+.card:hover .content>div,
+.card:hover .content>div *,
+.card *:hover,
+.card .content:hover,
+.card .content:hover>div,
+.card .content:hover>div * {
+	background: var(--hovercard)
+}
+
+.rendered-content-container .message__metadata {
+	display: flex !important;
+	width: 110px
+}
+
+.condensed .message__metadata {
+	padding-top: 15px !important;
+	flex-direction: row !important
+}
+
+.spacious .message__metadata {
+	flex-direction: row-reverse !important
+}
+
+.time-formats {
+	padding-top: 3px !important;
+	padding-left: 6px !important;
+	padding-right: 6px !important
+}
+
+.message-group__content,
+.message-group {
+	margin-top: 0 !important
+}
+
+.module-scrollable {
+	max-height: 600px
+}
+
+.social.message {
+	padding-top: 10px
+}
+
+.message-list {
+	padding-top: 0 !important
+}

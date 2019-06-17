@@ -18,6 +18,12 @@ First of all, you should install all project dependencies with the following com
 ```
 npm install
 ```
+or
+```
+yarn install
+```
+
+
 
 There are 4 environments set up: *production*, *development*, *mock* and *test*.
 
@@ -30,7 +36,7 @@ Running ```development``` does not build the webpack bundle. Do it by executing:
 ```
 npm start
 ```
-Running ```mock``` does not build the webpack bundle, and starts up a local JSON server, to mock potential API Backend Calls, serving dummy data. You can set it up by running:
+Running ```mock``` does not build the webpack bundle, and starts up a wrapper application that simulates the Symphony environment. Also starts a local JSON server, to mock potential API Backend Calls, serving dummy data. You can set it up by running:
 ```
 npm run start:mock
 ```
