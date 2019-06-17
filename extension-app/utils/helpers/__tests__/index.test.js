@@ -52,6 +52,7 @@ describe('Util functions', () => {
     it('Function "filterAllowedRooms" should filter rooms by user permission', () => {
       const filtered = [
         {
+          id: '0',
           name: 'Room A',
           threadId: 'abc/def//ghi+jkl==',
           memberAddUserEnabled: true,

@@ -1,6 +1,6 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { rawRooms as mockedRooms } from 'reducers/users/__mocks__/users.js';
+import { rawRooms as mockedRooms } from 'reducers/users/__mocks__/users';
 import {
   JWT_AUTH_SUCCESS,
   JWT_AUTH_FAILURE,
@@ -124,6 +124,7 @@ describe('User Actions', () => {
 
       const expectedPayload = [
         {
+          id: '0',
           name: 'Room A',
           threadId: 'abc/def//ghi+jkl==',
           memberAddUserEnabled: true,
