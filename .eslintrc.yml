@@ -18,3 +18,15 @@ rules:
   no-underscore-dangle: off
   import/prefer-default-export: off
   import/no-named-as-default: off
+settings:
+  import/resolver:
+    node:
+      paths:
+      - extension-app
+      - extension-app/components
+      - extension-app/pages
+      - extension-app/assets
+      - extension-app/sass
+      - extension-app/reducers
+      - extension-app/services
+      - extension-app/utils
