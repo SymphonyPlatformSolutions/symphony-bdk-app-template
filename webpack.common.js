@@ -3,25 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 
-let appEntry = '';
-let controllerEntry = '';
+const appEntry = './extension-app/app.js';
+const controllerEntry = './extension-app/controller.js';
+
 let currEnv = '';
 const setApi = (env) => {
-  if (env === 'mock') {
-    controllerEntry = './javascript-mock/controller-mock.js';
-    appEntry = './javascript-mock/app-mock.js';
-    currEnv = 'MOCK';
-  }
-  if (env === 'dev') {
-    controllerEntry = './src/javascript/controller.js';
-    appEntry = './src/javascript/app.js';
-    currEnv = 'DEV';
-  }
-  if (env === 'prod') {
-    controllerEntry = './src/javascript/controller.js';
-    appEntry = './src/javascript/app.js';
-    currEnv = 'PROD';
-  }
+  currEnv = env.toUpperCase();
 };
 
 module.exports = (env) => {
@@ -59,7 +46,7 @@ module.exports = (env) => {
           },
         },
         {
-          test: /\.scss$/,
+          test: /\.(scss|css)$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
         },
       ],
@@ -72,19 +59,22 @@ module.exports = (env) => {
     plugins: [
       new HtmlWebpackPlugin({
         filename: 'controller.html',
-        template: './src/html/controller.html',
+        template: './extension-app/public/controller.html',
         inject: false,
       }),
       new HtmlWebpackPlugin({
         filename: 'app.html',
-        template: './src/html/app.html',
+        template: './extension-app/public/app.html',
         inject: false,
       }),
       new webpack.DefinePlugin({
         'process.env.currEnv': JSON.stringify(currEnv),
       }),
       new CopyWebpackPlugin([
-        { from: 'src/assets', to: 'assets' },
+        { from: 'extension-app/public/assets', to: 'assets' },
+      ]),
+      new CopyWebpackPlugin([
+        { from: 'extension-app/public/sass/fonts', to: 'fonts' },
       ]),
     ],
   };

@@ -48,9 +48,9 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/project 
+          at: ~/project
 
-      - run: 
+      - run:
           name: SonarQube Analysis Dependencies
           command: |
             sudo apt-get install -qq -y gettext
@@ -62,9 +62,9 @@ jobs:
             envsubst < .circleci/templates/sonar-project.properties.tpl > sonar-project.properties
 
             envsubst < .circleci/templates/sonar-scanner.properties.tpl > sonar-scanner-3.3.0.1492-linux/conf/sonar-scanner.properties
-      - run: 
+      - run:
           name: Run SonarQube Analysis
-          command: | 
+          command: |
             chmod +x ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner
 
             ./sonar-scanner-3.3.0.1492-linux/bin/sonar-scanner
@@ -89,12 +89,23 @@ jobs:
 
 workflows:
   version: 2
-  check_package:
+  weakly_code_analysis:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - lint_and_test
       - sonarqube_analysis:
           requires:
             - lint_and_test
+
+  check_package:
+    jobs:
+      - lint_and_test
       - publish:
           type: approval
           requires:

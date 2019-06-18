@@ -6,6 +6,17 @@
   "plugins": [
     "@babel/plugin-transform-runtime",
     "@babel/plugin-proposal-class-properties",
-    "babel-plugin-styled-components"
+      ["module-resolver", {
+      "root": ["./extension-app"],
+      "alias": {
+        "components*": "./components",
+        "pages*": "./pages",
+        "assets*": "./public/assets",
+        "sass*": "./public/sass",
+        "reducers*": "./reducers",
+        "services*": "./services",
+        "utils*": "./utils"
+      }
+    }]
   ]
 }
