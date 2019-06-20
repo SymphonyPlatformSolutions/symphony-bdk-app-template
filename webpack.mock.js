@@ -51,11 +51,15 @@ const config = {
         test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      { test: /\.hbs$/, loader: 'raw-loader' },
     ],
   },
 
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.min.js',
+    },
   },
 
   plugins: [

@@ -7,27 +7,56 @@
   {{/if}}
   >
     <header>
-      {{#if instance }}
-         <div style="margin-bottom: 7px;"><strong>{{instance}} - {{project}}</strong></div>
+      {{#if header.instance }}
+         <div style="margin-bottom: 4px;"><b>{{header.instance}} - {{header.project}}</b></div>
       {{/if}}
-      {{#if genericTitle }}
-         <div style="margin-bottom: 7px;"><strong>{{genericTitle}}</strong></div>
+      {{#if header.genericTitle }}
+         <div style="margin-bottom: 12px;"><b>{{header.genericTitle}}</b></div>
       {{/if}}
-      {{> (headerPartial) content}}
+      {{> (headerPartial) header.details}}
     </header>
     <body>
-      {{> (bodyPartial) content}}
-      {{#if hashes }}
+      {{> (bodyPartial) body.details}}
+      {{#if body.hashes }}
         <hr />
-      {{/if}}      
-      {{#if button }}
-        {{> action-button button}}
       {{/if}}
-      {{#if hashes }}
-        Type: <hash tag="#{{hashes.type}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Action: <hash tag="#{{hashes.action}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Project: <hash tag="#{{hashes.project}}" />
-        <br />
+      {{#if body.buttons }}
+        <div style="margin: 12px 0">
+         {{#each body.buttons}}       
+           {{> action-button this.buttonId}}
+         {{/each}}
+        </div>       
+      {{/if}}
+      {{#if body.tempFakeButtons }}
+        <div style="margin: 12px 0">
+          {{#each body.tempFakeButtons}}
+            <span style="
+              display: inline-block;
+              min-width: 106px;                        
+              color: #006caf;
+              background-color: none;
+              border: 1px solid #006caf;
+              font-size: 10px;
+              padding: 5px 8px;                           
+              border-radius: 22px;    
+              margin-right: 12px;
+              text-align: center; 
+            ">{{this.label}}</span>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if body.hashes }}
+        <div>
+          <span style="margin-right: 20px">
+            Type: <hash tag="#{{body.hashes.type}}" />
+          </span>
+          <span style="margin-right: 20px">
+            Action: <hash tag="#{{body.hashes.action}}" />          
+         </span>
+          <span style="margin-right: 20px">
+            Incident: <hash tag="#{{body.hashes.incident}}" />
+          </span>  
+        </div>
       {{/if}}
     </body>
   </card>

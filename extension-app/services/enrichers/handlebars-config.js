@@ -11,6 +11,9 @@ import linkTextPartial from './templates/text/link.hbs';
 import textColorPartial from './templates/text/text-color.hbs';
 import userTextPartial from './templates/text/user.hbs';
 
+import testHeaderPartial from './templates/base/test-entity-builder/test-header.hbs';
+import testBodyPartial from './templates/base/test-entity-builder/test-body.hbs';
+
 Handlebars.registerPartial('small-icon', smallIconPartial);
 Handlebars.registerPartial('action-button', actionButtonPartial);
 Handlebars.registerPartial('table', tablePartial);
@@ -22,6 +25,9 @@ Handlebars.registerPartial('action', actionTextPartial);
 Handlebars.registerPartial('link', linkTextPartial);
 Handlebars.registerPartial('text', textColorPartial);
 Handlebars.registerPartial('user', userTextPartial);
+
+Handlebars.registerPartial('test-header', testHeaderPartial);
+Handlebars.registerPartial('test-body', testBodyPartial);
 
 const unprettyCardTemplate = Handlebars.compile(basicCard);
 const cardTemplate = obj => pretty(unprettyCardTemplate(obj));

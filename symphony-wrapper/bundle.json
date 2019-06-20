@@ -2,9 +2,9 @@
   "applications": [
     {
       "type": "sandbox",
-      "id": "templateapp",
-      "name": "Template for Extension-App",
-      "blurb": "This is template for app integration, using React Lib!",
+      "id": "pagerduty",
+      "name": "PagerDuty (mock)",
+      "blurb": "PagerDuty integration",
       "publisher": "Symphony",
       "url": "https://localhost:4000/controller.html",
       "domain": "localhost",
