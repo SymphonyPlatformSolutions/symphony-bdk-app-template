@@ -14,41 +14,6 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "jest": {
-    "globals": {
-      "process.env.currEnv": "TEST"
-    },
-    "verbose": true,
-    "testURL": "https://localhost/",
-    "moduleNameMapper": {
-      "\\.(css|scss)$": "identity-obj-proxy"
-    },
-    "setupFilesAfterEnv": [
-      "<rootDir>/extension-app/utils/tests/setup-tests.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 80,
-        "functions": 80,
-        "lines": 80
-      }
-    },
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "clover"
-    ],
-    "collectCoverageFrom": [
-      "extension-app/**/*.js"
-    ],
-    "testResultsProcessor": "jest-sonar-reporter",
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.hbs$": "<rootDir>/extension-app/utils/tests/jest-raw-loader.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/extension-app/utils/tests/jest-static-loader.js"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SymphonyPlatformSolutions/sms-dev-fe-template-app.git"
