@@ -40,25 +40,13 @@
       "clover"
     ],
     "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/reducers/root-reducer.js",
-      "!src/mock-json-server/**",
-      "!src/javascript/**",
-      "!src/dist/**",
-      "!src/store/**",
-      "!src/utils/app-constants.js",
-      "!src/utils/envs-constants.js",
-      "!src/utils/event-labels.js",
-      "!src/utils/glProjectPermissionEnum.js",
-      "!src/utils/setup-tests.js",
-      "!src/utils/setup-url.js",
-      "!src/utils/system-constants.js"
+      "extension-app/**/*.js"
     ],
     "testResultsProcessor": "jest-sonar-reporter",
     "transform": {
       "^.+\\.js$": "babel-jest",
-      "^.+\\.hbs$": "<rootDir>/extension-app/tests/jest-raw-loader.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/extension-app/tests/jest-static-loader.js"
+      "^.+\\.hbs$": "<rootDir>/extension-app/utils/tests/jest-raw-loader.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/extension-app/utils/tests/jest-static-loader.js"
     }
   },
   "repository": {

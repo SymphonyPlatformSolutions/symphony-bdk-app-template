@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestEntityBuilder Should build the enriched message 1`] = `
+"<messageML>
+  <card class=\\"barStyle\\" data-icon-src=\\"https://via.placeholder.com/50\\" data-accent-color=\\"tempo-bg-color--blue\\">
+    <header>
+      <div style=\\"margin-bottom: 12px;\\"><b>My enriched message</b></div>
+      <div>Some other stuff to be said in the title</div>
+    </header>
+
+    <body>
+      <div>Body content inside body</div>
+    </body>
+  </card>
+</messageML>"
+`;

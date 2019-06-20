@@ -45,11 +45,11 @@ module.exports = (env) => {
             presets: ['@babel/react', '@babel/preset-env'],
           },
         },
+        { test: /\.hbs$/, loader: 'raw-loader' },
         {
           test: /\.(scss|css)$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
         },
-        { test: /\.hbs$/, loader: 'raw-loader' },
       ],
     },
 
