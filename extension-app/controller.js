@@ -1,10 +1,12 @@
 /* global SYMPHONY */
 // import { initApp } from 'symphony-app-authentication-fe';
-import Index from 'services/controller/authentication';
+import AuthController from 'services/controller/authentication';
 import { frontendURL, setupURL, setupLinkPrefix } from 'utils/system/setup-url';
 import GeneralEnricher from 'services/enrichers/general-enricher';
-import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from 'utils/system/app-constants';
+import { APP_ID, APP_NAV_BAR_TITLE, APP_TITLE } from 'utils/system/app-constants';
 import { showExtensionApp } from 'services/controller/extension-app';
+
+// Logger.setAppTitle(APP_TITLE);
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
 SYMPHONY.services.register(`${APP_ID}:enricher`);
@@ -20,7 +22,7 @@ const config = {
   baseAuthenticationUrl: AUTH_URL,
 };
 
-const authController = new Index(config);
+const authController = new AuthController(config);
 
 const bootstrap = () => {
   const modulesService = SYMPHONY.services.subscribe('modules');
@@ -34,7 +36,7 @@ const bootstrap = () => {
 
   const navSettings = {
     title: APP_NAV_BAR_TITLE,
-    icon: `${FRONTEND_SERVE_URL}/template/app/assets/${APP_ICON_NAME}`,
+    icon: `${FRONTEND_SERVE_URL}/gitlab/app/assets/app-icon.png`,
   };
   navService.add(`${APP_ID}-nav`, navSettings, `${APP_ID}:controller`);
   uiService.registerExtension('app-settings', APP_ID, `${APP_ID}:controller`, { label: 'Configure' });
@@ -57,4 +59,4 @@ const bootstrap = () => {
 
 authController.init()
   .then(() => bootstrap())
-  .fail(e => console.error(e));
+  .fail(e => console.error('Error setting up Extension App', e.error || e));
