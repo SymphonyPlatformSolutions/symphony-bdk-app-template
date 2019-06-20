@@ -1,9 +1,12 @@
 /* global SYMPHONY */
+import Logger from 'services/logger';
 import GeneralEnricher from '../../extension-app/services/enrichers/general-enricher';
 import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from '../../extension-app/utils/system/app-constants';
 import { setupLinkPrefix, frontendURL } from '../../extension-app/utils/system/setup-url';
 import { showExtensionApp } from '../../extension-app/services/controller/extension-app';
 import '../symphony-mock';
+
+Logger.setAppTitle(APP_NAV_BAR_TITLE);
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
 SYMPHONY.services.register(`${APP_ID}:enricher`);
@@ -48,8 +51,8 @@ SYMPHONY.remote.hello().then(() => {
       },
     });
   }).catch((error) => {
-    console.error('Unable to register the Controller Application', error);
+    Logger.error('Unable to register the Controller Application', error);
   });
 }).catch((error) => {
-  console.error('Unable to register the Controller Application', error);
+  Logger.error('Unable to register the Controller Application', error);
 });

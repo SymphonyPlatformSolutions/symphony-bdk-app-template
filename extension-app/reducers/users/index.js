@@ -1,4 +1,5 @@
 import Api from 'services/api';
+import Logger from 'services/logger';
 import { simplifyRooms } from 'utils/helpers/help-functions';
 import {
   JWT_AUTH_SUCCESS,
@@ -22,6 +23,7 @@ export default function (state = INITIAL_STATE, action) {
     // JWT
     case JWT_AUTH_SUCCESS:
       Api.setJwt(action.jwt);
+      Logger.setJwt(action.payload);
       return {
         ...state,
         jwt: action.payload,

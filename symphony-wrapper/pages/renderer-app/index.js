@@ -20,9 +20,7 @@ const RendererApp = () => {
           presentationML: res.data.presentationML,
         });
         let htmlString = fullHTML.context.outerHTML;
-        console.log(htmlString);
         htmlString = htmlString.replace('class="card collapsed has-body', `id="clickable_${messages.length}" class="card collapsed has-body" onclick="overrideCardCollapse('clickable_${messages.length}')"`);
-        console.log(htmlString);
         outerMessages = [...outerMessages, htmlString];
         changeMessages(outerMessages);
       });
