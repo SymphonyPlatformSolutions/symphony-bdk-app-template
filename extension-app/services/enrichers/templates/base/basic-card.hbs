@@ -1,0 +1,34 @@
+<messageML>
+  <card 
+  class="barStyle"
+  data-icon-src="{{icon}}"
+  {{#if tempoAccent}}
+    data-accent-color="tempo-bg-color--{{tempoAccent}}"
+  {{/if}}
+  >
+    <header>
+      {{#if instance }}
+         <div style="margin-bottom: 7px;"><strong>{{instance}} - {{project}}</strong></div>
+      {{/if}}
+      {{#if genericTitle }}
+         <div style="margin-bottom: 7px;"><strong>{{genericTitle}}</strong></div>
+      {{/if}}
+      {{> (headerPartial) content}}
+    </header>
+    <body>
+      {{> (bodyPartial) content}}
+      {{#if hashes }}
+        <hr />
+      {{/if}}      
+      {{#if button }}
+        {{> action-button button}}
+      {{/if}}
+      {{#if hashes }}
+        Type: <hash tag="#{{hashes.type}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Action: <hash tag="#{{hashes.action}}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Project: <hash tag="#{{hashes.project}}" />
+        <br />
+      {{/if}}
+    </body>
+  </card>
+</messageML>

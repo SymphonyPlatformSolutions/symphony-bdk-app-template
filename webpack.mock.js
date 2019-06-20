@@ -88,7 +88,6 @@ const config = {
     ]),
     new CopyWebpackPlugin([
       { from: 'symphony-wrapper/assets/sass/fonts', to: 'fonts' },
-      { from: 'extension-app/public/sass/fonts', to: 'fonts' },
     ]),
     new CopyWebpackPlugin([
       { from: 'symphony-wrapper/bundle.json', to: '' },

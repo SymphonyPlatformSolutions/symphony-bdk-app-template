@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    {{#each headers}}
+      <td><strong><span style="font-size: 1.1em; padding: 0">{{this}}</span></strong></td>
+    {{/each}}
+  </thead>
+  <tbody>
+    {{#each rows}}
+      <tr>
+        {{#each this}}
+          <td style="padding: 0.2em 0 0 0; font-size: 0.9em;">{{{this}}}</td>
+        {{/each}}
+      </tr>
+    {{else}}
+      <tr>
+        <td>Notification came with unidentifiable changes</td>
+        <td>--</td>
+        <td>--</td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
