@@ -6,3 +6,8 @@
 // Base
 @import 'base/base';
 @import 'base/typography';
+
+.ace_editor {
+  height: calc(100vh - 355px) !important;
+  width: 100% !important;
+}

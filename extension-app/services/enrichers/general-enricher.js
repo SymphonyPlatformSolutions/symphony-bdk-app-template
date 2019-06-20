@@ -1,18 +1,16 @@
 /* global SYMPHONY */
+import IncidentCreationBuilder from './template-builders/incident-creation-builder';
+import { ENRICHER_EVENTS } from './entities';
 
-const ENRICHER_EVENTS = [
-  'com.symphony.ms.devtools.template.test',
-];
 export default class GeneralEnricher {
-  constructor(name, messageEvents, userId) {
+  constructor(name) {
     this.name = name;
-    this.messageEvents = messageEvents;
+    this.messageEvents = Object.keys(ENRICHER_EVENTS).map(key => ENRICHER_EVENTS[key].type);
     this.implements = ['render', 'action'];
-    this.userId = userId;
   }
 
   static getMessages() {
-    return ENRICHER_EVENTS;
+    return Object.keys(ENRICHER_EVENTS).map(key => ENRICHER_EVENTS[key].type);
   }
 
   getName() {
@@ -38,23 +36,11 @@ export default class GeneralEnricher {
     let template;
 
     switch (type) {
-      case 'org.symphony.ms.devtools.myEntity':
-        if (data.event === 'update') {
-          template = 'myTemplate';
-        }
-        break;
-      case 'testingEntity':
-        template = `<messageML>
-          <h1>An enriched message!</h1>
-          <p>What we got from the entity: ${JSON.stringify(data)}</p>
-          <p><b>WOW</b> that's exciting!</p>
-        </messageML>`;
-        break;
-      case 'card':
-        template = '<messageML><h2>Cards</h2><card accent="tempo-bg-color--blue" iconSrc="/assets/favicon.png"><header>Card Header. Always visible.</header><body>Card Body. User must click to view it.</body></card></messageML>';
+      case ENRICHER_EVENTS.INCIDENT_CREATION.type:
+        template = IncidentCreationBuilder.build(data);
         break;
       default:
-        template = `<messageML><p><b>ERROR</b> message not rendered.</p><p>Caught: ${type}</p></messageML>`;
+        template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;
         actionData = {};
         break;
     }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
+import { ENRICHER_EVENTS } from 'services/enrichers/entities';
 import WrapperSidenav from '../../components/wrapper-sidenav';
 import WrapperTopbar from '../../components/wrapper-topbar';
 import WrapperChatWindow from '../../components/wrapper-chat-window';
@@ -62,7 +63,13 @@ const SymphonyWrapper = () => {
         return;
       }
       const template = enricherService.instance.render(entityType, entityJson);
-      rendererRef.contentWindow.postMessage({ call: 'sendValue', value: template }, '*');
+      rendererRef.contentWindow.postMessage({
+        call: 'sendValue',
+        value: {
+          template,
+          entityJson,
+        },
+      }, '*');
     }
   };
 
@@ -80,8 +87,11 @@ const SymphonyWrapper = () => {
           <WrapperChatWindow title="Symphony News">
             <ExtensionAppIframe src="https://localhost:4000/app.html" />
           </WrapperChatWindow>
-          <WrapperChatWindow title="Enricher Test">
-            <ExtensionAppIframe src="https://localhost:4000/renderer-app.html" ref={(ref) => { rendererRef = ref; }} />
+          <WrapperChatWindow title="Enricher Test" hasFooter>
+            <ExtensionAppIframe
+              src="https://localhost:4000/renderer-app.html"
+              ref={(ref) => { rendererRef = ref; }}
+            />
           </WrapperChatWindow>
         </CenterContainerBody>
       </CenterContainer>
