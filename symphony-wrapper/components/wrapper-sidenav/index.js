@@ -217,7 +217,7 @@ SideNavPanels.defaultProps = {
 };
 
 const WrapperSidenav = (props) => {
-  const { toggleEntityDrawer } = props;
+  const { toggleEntityDrawer, toggleDialogDrawer } = props;
   return (
     <SideNav>
       <AvatarWrap>
@@ -241,11 +241,15 @@ const WrapperSidenav = (props) => {
       <DrawerButtonContainer>
         <BlueButton type="button" onClick={toggleEntityDrawer}>Open Entity Drawer</BlueButton>
       </DrawerButtonContainer>
+      <DrawerButtonContainer>
+        <BlueButton type="button" onClick={toggleDialogDrawer}>Open Dialog</BlueButton>
+      </DrawerButtonContainer>
     </SideNav>
   );
 };
 WrapperSidenav.propTypes = {
   toggleEntityDrawer: PropTypes.func.isRequired,
+  toggleDialogDrawer: PropTypes.func.isRequired,
 };
 
 export default WrapperSidenav;

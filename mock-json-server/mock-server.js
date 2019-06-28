@@ -92,6 +92,18 @@ server.post('/demoEndpoint', (req, res) => {
   });
 });
 
+server.post('/application/authenticate', (req, res) => {
+  res.sendStatus(200);
+});
+
+server.post('/application/tokens/validate', (req, res) => {
+  res.sendStatus(200);
+});
+
+server.post('/application/jwt/validate', (req, res) => {
+  res.sendStatus(200);
+});
+
 server.listen(3000, () => {
   console.log('JSON Server is running');
 });
