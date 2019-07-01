@@ -88,9 +88,7 @@ const SymphonyWrapper = () => {
         extensionAppRef.current.contentWindow.SYMPHONY = Object.assign({}, window.SYMPHONY);
       }
     }, 1);
-    extensionAppRef.current.addEventListener('DOMContentLoaded', () => {
-      extensionAppRef.current.contentWindow.SYMPHONY = Object.assign({}, window.SYMPHONY);
-    }, true);
+
     window.addEventListener('openDialog', ({ detail }) => {
       toggleModal(true);
       setModalOptions({
@@ -99,7 +97,6 @@ const SymphonyWrapper = () => {
         width: detail.width,
       });
     });
-    extensionAppRef.current.contentWindow.SYMPHONY = Object.assign({}, window.SYMPHONY);
   }, []);
 
 

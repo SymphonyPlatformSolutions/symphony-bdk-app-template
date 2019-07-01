@@ -78,7 +78,7 @@ function ModalDrawer({ closeHandler, isOpen }) {
 
     if (madeServices) {
       const enricherService = madeServices.find(el => el.name.includes('enricher'));
-      enricherService.instance.action({entity: dialog});
+      enricherService.instance.action({ entity: dialog });
     }
 
     closeHandler();
@@ -95,7 +95,7 @@ function ModalDrawer({ closeHandler, isOpen }) {
           <CloseButton type="button" onClick={closeHandler}>x</CloseButton>
         </TopContainer>
         <h4>Select Dialog to Open</h4>
-        <StyledSelect onChange={({target}) => setDialog(target.value)}>
+        <StyledSelect onChange={({ target }) => setDialog(target.value)}>
           {
              keyMapDialogs.map(
                entry => <option key={entry.key} value={entry.value}>{entry.key}</option>,
