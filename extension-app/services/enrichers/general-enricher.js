@@ -1,19 +1,18 @@
 /* global SYMPHONY */
+import { ENRICHER_EVENTS } from './entities';
+import { MODAL_IDS } from '../../utils/system/app-constants';
 
-const ENRICHER_EVENTS = [
-  'com.symphony.ms.devtools.template.test',
-];
 export default class GeneralEnricher {
-  constructor(name, messageEvents, userId) {
+  constructor(name) {
     this.name = name;
-    this.messageEvents = messageEvents;
+    this.messageEvents = Object.keys(ENRICHER_EVENTS).map(key => ENRICHER_EVENTS[key].type);
     this.implements = ['render', 'action'];
-    this.userId = userId;
   }
 
   static getMessages() {
-    return ENRICHER_EVENTS;
+    return Object.keys(ENRICHER_EVENTS).map(key => ENRICHER_EVENTS[key].type);
   }
+
 
   getName() {
     return this.name;
@@ -38,20 +37,12 @@ export default class GeneralEnricher {
     let template;
 
     switch (type) {
-      case 'org.symphony.ms.devtools.myEntity':
-        if (data.event === 'update') {
-          template = 'myTemplate';
-        }
-        break;
-      case 'testingEntity':
+      case ENRICHER_EVENTS.TESTING.type:
         template = `<messageML>
           <h1>An enriched message!</h1>
           <p>What we got from the entity: ${JSON.stringify(data)}</p>
           <p><b>WOW</b> that's exciting!</p>
         </messageML>`;
-        break;
-      case 'card':
-        template = '<messageML><h2>Cards</h2><card accent="tempo-bg-color--blue" iconSrc="/assets/favicon.png"><header>Card Header. Always visible.</header><body>Card Body. User must click to view it.</body></card></messageML>';
         break;
       default:
         template = `<messageML><p><b>ERROR</b> message not rendered.</p><p>Caught: ${type}</p></messageML>`;
@@ -67,17 +58,22 @@ export default class GeneralEnricher {
 
   action(data) {
     this.dialogsService = SYMPHONY.services.subscribe('dialogs');
-    let fullURL;
+    let fullURL =  `app.html?queryObj=${encodeURIComponent(JSON.stringify({ page: data.entity}))}`;
     let modalType;
 
     switch (data.entity) {
+      case MODAL_IDS.EXAMPLE_MODAL:
+        this.dialogsService.show(modalType, this.name,
+          `<dialog><iframe height="500" width="100%" src="${fullURL}" ></iframe></dialog>`,
+          undefined, {});
+        break;
       default:
         modalType = 'noEntityDialog';
-        fullURL = 'https://google.com';
+        fullURL = 'https://yahoo.com';
+        this.dialogsService.show(modalType, this.name,
+          `<dialog><iframe height="500" width="100%" src="${fullURL}" ></iframe></dialog>`,
+          undefined, {});
     }
-    this.dialogsService.show(modalType, this.name,
-      `<dialog><iframe height="500" width="100%" src="${fullURL}" ></iframe></dialog>`,
-      undefined, {});
   }
 
   static actionFactory(actions, service, entity) {

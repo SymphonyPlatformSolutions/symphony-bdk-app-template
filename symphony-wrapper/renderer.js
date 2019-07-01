@@ -46,7 +46,7 @@ LinksValidator.prototype = {
     },
 
     isValid: function(url) {
-        // remove all blank spaces        
+        // remove all blank spaces
         url = this.trim(url);
 
         // turn it into lowercase to ease verification
@@ -9103,7 +9103,7 @@ module.exports = function(str, substr) {
   substr = makeString(substr);
 
   if (str.length === 0 || substr.length === 0) return 0;
-  
+
   return str.split(substr).length - 1;
 };
 
@@ -9128,7 +9128,7 @@ var makeString = require('./helper/makeString');
 function getIndent(str) {
   var matches = str.match(/^[\s\\t]*/gm);
   var indent = matches[0].length;
-  
+
   for (var i = 1; i < matches.length; i++) {
     indent = Math.min(matches[i].length, indent);
   }
@@ -9493,7 +9493,7 @@ module.exports = function levenshtein(str1, str2) {
   str1 = makeString(str1);
   str2 = makeString(str2);
 
-  // Short cut cases  
+  // Short cut cases
   if (str1 === str2) return 0;
   if (!str1 || !str2) return Math.max(str1.length, str2.length);
 
@@ -9993,29 +9993,29 @@ var makeString = require('./helper/makeString');
 
 module.exports = function wrap(str, options){
   str = makeString(str);
-  
+
   options = options || {};
-  
+
   var width = options.width || 75;
   var seperator = options.seperator || '\n';
   var cut = options.cut || false;
   var preserveSpaces = options.preserveSpaces || false;
   var trailingSpaces = options.trailingSpaces || false;
-  
+
   var result;
-  
+
   if(width <= 0){
     return str;
   }
-  
+
   else if(!cut){
-  
+
     var words = str.split(' ');
     var current_column = 0;
     result = '';
-  
+
     while(words.length > 0){
-      
+
       // if adding a space and the next word would cause this line to be longer than width...
       if(1 + words[0].length + current_column > width){
         //start a new line if this line is not already empty
@@ -10030,44 +10030,44 @@ module.exports = function wrap(str, options){
             while(current_column < width){
               result += ' ';
               current_column++;
-            }            
+            }
           }
           //start new line
           result += seperator;
           current_column = 0;
         }
       }
-  
+
       // if not at the begining of the line, add a space in front of the word
       if(current_column > 0){
         result += ' ';
         current_column++;
       }
-  
+
       // tack on the next word, update current column, a pop words array
       result += words[0];
       current_column += words[0].length;
       words.shift();
-  
+
     }
-  
+
     // fill the rest of the line with spaces if trailingSpaces option is true
     if(trailingSpaces){
       while(current_column < width){
         result += ' ';
         current_column++;
-      }            
+      }
     }
-  
+
     return result;
-  
+
   }
-  
+
   else {
-  
+
     var index = 0;
     result = '';
-  
+
     // walk through each character and add seperators where appropriate
     while(index < str.length){
       if(index % width == 0 && index > 0){
@@ -10076,15 +10076,15 @@ module.exports = function wrap(str, options){
       result += str.charAt(index);
       index++;
     }
-  
+
     // fill the rest of the line with spaces if trailingSpaces option is true
     if(trailingSpaces){
       while(index % width > 0){
         result += ' ';
         index++;
-      }            
+      }
     }
-    
+
     return result;
   }
 };
@@ -21072,8 +21072,7 @@ CardPrimitive.prototype = {
     },
 
     getDefaultCardAccent: function () {
-        var currentTheme = this.themeWatcher.getTheme();
-        return 'card-accent-default--' + currentTheme.name.toLowerCase();
+        return 'card-accent-default--light';
     }
 };
 
@@ -25163,7 +25162,7 @@ hljs.registerLanguage('csp', function(hljs) {
     keywords: {
       keyword: 'base-uri child-src connect-src default-src font-src form-action' +
         ' frame-ancestors frame-src img-src media-src object-src plugin-types' +
-        ' report-uri sandbox script-src style-src', 
+        ' report-uri sandbox script-src style-src',
     },
     contains: [
     {
@@ -26836,7 +26835,7 @@ hljs.registerLanguage('excel', function(hljs) {
     },
     contains: [
       {
-        /* matches a beginning equal sign found in Excel formula examples */ 
+        /* matches a beginning equal sign found in Excel formula examples */
         begin: /^=/,
         end: /[^=]/, returnEnd: true, illegal: /=/, /* only allow single equal sign at front of line */
         relevance: 10
@@ -32795,7 +32794,7 @@ hljs.registerLanguage('powershell', function(hljs) {
   var PS_HELPTAGS = {
     className: 'doctag',
     variants: [
-      /* no paramater help tags */ 
+      /* no paramater help tags */
       { begin: /\.(synopsis|description|example|inputs|outputs|notes|link|component|role|functionality)/ },
       /* one parameter help tags */
       { begin: /\.(parameter|forwardhelptargetname|forwardhelpcategory|remotehelprunspace|externalhelp)\s+\S+/ }
@@ -37526,7 +37525,7 @@ IFrame.prototype = {
         html.attr('src', url);
         html.attr('height', height);
         html.attr('width', '100%');
-        
+
         var style = (node && node['$'] && node['$']['style']) ? node['$']['style'] += maxWidth : maxWidth;
         context.addStyles(html, style);
         context.container.append(html);
@@ -39021,7 +39020,7 @@ Decompiler.prototype = {
 
     parse : function(node) {
         this.primitives = this.registry.getPrimitives();
-        
+
         function parseOne(node) {
             if (!node) {
                 return '';
@@ -39115,7 +39114,7 @@ Compiler.prototype = {
             _.each(node['$'], function(value, key) {
                 value = value.replace(/&/g, '&amp;');
                 value = value.replace(/</g, '&lt;');
-                value = value.replace(/>/g, '&gt;');                
+                value = value.replace(/>/g, '&gt;');
                 attributes.push(key + '="' + value +'"');
             }, this);
         }
@@ -39184,7 +39183,7 @@ Compiler.prototype = {
     },
 
     compile : function(source) {
-        
+
         var preCompileResult = this.preCompile(source);
 
         var attributes = preCompileResult.attributes;
@@ -39225,7 +39224,7 @@ Compiler.prototype = {
             _.each(node['$'], function(value, key) {
                 value = value.replace(/&/g, '&amp;');
                 value = value.replace(/</g, '&lt;');
-                value = value.replace(/>/g, '&gt;');                
+                value = value.replace(/>/g, '&gt;');
                 attributes.push(key + '="' + value +'"');
             }, this);
         }
@@ -39293,7 +39292,7 @@ Decompiler.prototype = {
             _.each(node['$'], function(value, key) {
                 value = value.replace(/&/g, '&amp;');
                 value = value.replace(/</g, '&lt;');
-                value = value.replace(/>/g, '&gt;');                
+                value = value.replace(/>/g, '&gt;');
                 attributes.push(key + '="' + value +'"');
             }, this);
         }
@@ -40299,7 +40298,7 @@ MessageRenderer.prototype = {
     trim: function (message, start, stop) {
 
         try{
-            
+
             var indexCounter = 0;
             var wasStartMarkerFound = false;
             var wasStopMarkerFound = false;
@@ -40349,8 +40348,8 @@ MessageRenderer.prototype = {
 
         /**
          * @description create the start and stop markers
-         * @param {object} node 
-         * @param {number} i 
+         * @param {object} node
+         * @param {number} i
          */
         function mark(node, i) {
             // if we are in a start or stop position,
@@ -40375,13 +40374,13 @@ MessageRenderer.prototype = {
 
         /**
          * @description cut based on the start and stop markers
-         * @param {object} node 
-         * @param {number} i 
+         * @param {object} node
+         * @param {number} i
          */
         function cut(node, i) {
             // looking for the start marker
             if(!wasStartMarkerFound) {
-                
+
                 // check if this character is a start marker
                 if(node.data.charAt(i) === startMarker) {
                     // recover the start character
@@ -40399,14 +40398,14 @@ MessageRenderer.prototype = {
 
                 // clear node if it's the last character
                 if(node.data.length - 1  === i) {
-                    // since we're not cutting and we don't have 
+                    // since we're not cutting and we don't have
                     // a start marker in this node, we can clear it
                     node.data = '';
                 }
             }
             else {
                 // looking for the stop marker
-                if(!wasStopMarkerFound) {                    
+                if(!wasStopMarkerFound) {
                     // here we only update node.data if we find the stop marker, otherwise
                     // we don't touch it, because it means we're in the middle of the range
                     if(node.data.charAt(i) === stopMarker) {
@@ -40424,7 +40423,7 @@ MessageRenderer.prototype = {
                 else {
                     node.data = '';
                 }
-            }            
+            }
         }
 
         return renderedMessage;
@@ -40586,21 +40585,21 @@ list.register();
 
 /**
  * @description function for replacing a char at a certain position
- * @param {string} string 
- * @param {number} index 
- * @param {string} replace 
+ * @param {string} string
+ * @param {number} index
+ * @param {string} replace
  * @returns {string}
  */
-var replaceAt = function (string, index, replace) { 
-    return string.substring(0, index) + replace + string.substring(index + 1); 
+var replaceAt = function (string, index, replace) {
+    return string.substring(0, index) + replace + string.substring(index + 1);
 }
 
 /**
  * @description recursive function for iterating through text nodes;
  * If a callback returns `true`, then we stop looping the charachters
  * of that text node.
- * @param {array} nodes 
- * @param {function} callback 
+ * @param {array} nodes
+ * @param {function} callback
  */
 var iterateTextNodes = function (nodes, callback) {
     // iterate through nodes
@@ -44480,7 +44479,7 @@ hljs.registerLanguage('csp', function(hljs) {
     keywords: {
       keyword: 'base-uri child-src connect-src default-src font-src form-action' +
         ' frame-ancestors frame-src img-src media-src object-src plugin-types' +
-        ' report-uri sandbox script-src style-src', 
+        ' report-uri sandbox script-src style-src',
     },
     contains: [
     {
@@ -46153,7 +46152,7 @@ hljs.registerLanguage('excel', function(hljs) {
     },
     contains: [
       {
-        /* matches a beginning equal sign found in Excel formula examples */ 
+        /* matches a beginning equal sign found in Excel formula examples */
         begin: /^=/,
         end: /[^=]/, returnEnd: true, illegal: /=/, /* only allow single equal sign at front of line */
         relevance: 10
@@ -52112,7 +52111,7 @@ hljs.registerLanguage('powershell', function(hljs) {
   var PS_HELPTAGS = {
     className: 'doctag',
     variants: [
-      /* no paramater help tags */ 
+      /* no paramater help tags */
       { begin: /\.(synopsis|description|example|inputs|outputs|notes|link|component|role|functionality)/ },
       /* one parameter help tags */
       { begin: /\.(parameter|forwardhelptargetname|forwardhelpcategory|remotehelprunspace|externalhelp)\s+\S+/ }

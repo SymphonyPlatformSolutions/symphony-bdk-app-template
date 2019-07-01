@@ -1,3 +1,5 @@
+import Service from './service';
+
 const rawRooms = [{
   name: 'Room A', threadId: 'abc/def//ghi+jkl==', memberAddUserEnabled: true, userIsOwner: true, publicRoom: false,
 }, {
@@ -35,12 +37,20 @@ const SUBSCRIPTION_TYPES = {
   ENTITY: 'entity',
   UI: 'ui',
   APPLICATION_NAV: 'applications-nav',
+  DIALOG: 'dialogs',
+  THEME_WATCHER: 'theme-watcher',
+  THEME: 'themes',
+  ACCOUNT: 'account',
+  EXTENDED_USER_INFO: 'extended-user-info',
 };
 
 const madeServices = [];
 
+window.env = {};
+
 const SYMPHONY_MOCK = {
   services: {
+    makeAnonymousService: (...args) => new Service(),
     madeServices,
     register: (str) => {
       console.info(`Registering service -> ${str}`);
@@ -81,11 +91,63 @@ const SYMPHONY_MOCK = {
             },
           };
         }
+        case SUBSCRIPTION_TYPES.DIALOG: {
+          return {
+            show: (name, controller, htmlString) => {
+              const url = htmlString.match(/src=\"(.*?)\"/)[1]
+              const width = htmlString.match(/width=\"(.*?)\"/)[1];
+              const height = htmlString.match(/height=\"(.*?)\"/)[1];
+              window.dispatchEvent(new CustomEvent('openDialog', {
+                detail: {
+                  url,
+                  width,
+                  height,
+                },
+                bubbles: true,
+                cancelable: true,
+              }));
+              console.warn(`Requesting to open dialog named as -> ${name}`);
+            },
+          };
+        }
 
         case SUBSCRIPTION_TYPES.APPLICATION_NAV: {
           return {
             add: (...args) => {
               console.info(`Registering Entity -> ${args}`);
+            },
+          };
+        }
+
+        case SUBSCRIPTION_TYPES.THEME_WATCHER: {
+          return {
+            getTheme: () => 'light',
+          };
+        }
+
+        case SUBSCRIPTION_TYPES.THEME: {
+          return {
+            getActiveThemeInfo: () => ({
+              contrast: '',
+            }),
+          };
+        }
+
+        case SUBSCRIPTION_TYPES.ACCOUNT: {
+          return {
+            getPodId: () => (''),
+            getDesktopSettings: () => ({
+              activeMode: '',
+              fontSize: 'normal',
+            }),
+          };
+        }
+
+        case SUBSCRIPTION_TYPES.EXTENDED_USER_INFO: {
+          return {
+            getJwt: () => {
+              console.info('Getting mocked jwt');
+              return new Promise(resolve => resolve('mocked-jwt'));
             },
           };
         }
@@ -112,16 +174,19 @@ const SYMPHONY_MOCK = {
     },
   },
   remote: {
-    hello: () => new Promise(Resolve => Resolve({
-      themeV2: {
-        name: 'mock-name',
-        size: '18px',
-      },
-    })),
+    hello: () => {
+      console.log('Calling Symphony Remote Hello');
+      return new Promise(Resolve => Resolve({
+        themeV2: {
+          name: 'mock-name',
+          size: '18px',
+        },
+      }));
+    },
   },
   application: {
     connect: (...args) => {
-      console.info(`Connecting application ${args}`);
+      console.log(`Connecting application ${args}`);
       return new Promise(Resolve => Resolve({
         userReferenceId: 'MockedUser',
       }));
@@ -241,4 +306,4 @@ const SYMPHONY_MOCK = {
   ],
 };
 
-window.SYMPHONY = Object.assign(window.SYMPHONY, SYMPHONY_MOCK);
+window.SYMPHONY = Object.assign({}, window.SYMPHONY, SYMPHONY_MOCK);

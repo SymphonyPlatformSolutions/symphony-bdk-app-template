@@ -55,3 +55,8 @@ export function handleOutline() {
 
   window.addEventListener('keydown', handleFirstTab);
 }
+
+export function sleepFor(sleepDuration) {
+  const now = new Date().getTime();
+  while (new Date().getTime() < now + sleepDuration) { /* do nothing */ }
+}

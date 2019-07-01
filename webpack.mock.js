@@ -6,8 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-const appEntry = './symphony-wrapper/mock/app-mock.js';
-const controllerEntry = './symphony-wrapper/mock/controller-mock.js';
+const appEntry = './extension-app/app.js';
+const controllerEntry = './extension-app/controller.js';
 let wrapperEntry = './symphony-wrapper/wrapper.js';
 let currEnv = 'MOCK';
 const rendererEntry = './symphony-wrapper/renderer-mock.js';
@@ -51,11 +51,15 @@ const config = {
         test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      { test: /\.hbs$/, loader: 'raw-loader' },
     ],
   },
 
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.min.js',
+    },
   },
 
   plugins: [
@@ -76,7 +80,7 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       filename: 'renderer-app.html',
-      template: './symphony-wrapper/mock/renderer-app.html',
+      template: './symphony-wrapper/renderer-app.html',
       inject: false,
     }),
     new webpack.DefinePlugin({
@@ -88,7 +92,6 @@ const config = {
     ]),
     new CopyWebpackPlugin([
       { from: 'symphony-wrapper/assets/sass/fonts', to: 'fonts' },
-      { from: 'extension-app/public/sass/fonts', to: 'fonts' },
     ]),
     new CopyWebpackPlugin([
       { from: 'symphony-wrapper/bundle.json', to: '' },

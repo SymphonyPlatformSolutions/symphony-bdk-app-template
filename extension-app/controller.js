@@ -1,7 +1,7 @@
 /* global SYMPHONY */
 // import { initApp } from 'symphony-app-authentication-fe';
 import Index from 'services/controller/authentication';
-import { frontendURL, setupURL, setupLinkPrefix } from 'utils/system/setup-url';
+import { frontendURL, setupURL } from 'utils/system/setup-url';
 import GeneralEnricher from 'services/enrichers/general-enricher';
 import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from 'utils/system/app-constants';
 import { showExtensionApp } from 'services/controller/extension-app';
@@ -11,7 +11,6 @@ SYMPHONY.services.register(`${APP_ID}:enricher`);
 const controllers = [`${APP_ID}:controller`, `${APP_ID}:enricher`];
 const FRONTEND_SERVE_URL = frontendURL();
 const AUTH_URL = setupURL();
-const LINK_PREFIX = setupLinkPrefix();
 
 const config = {
   appId: APP_ID,
@@ -49,7 +48,7 @@ const bootstrap = () => {
     },
     trigger(uiClass) {
       if (uiClass === 'app-settings') {
-        showExtensionApp(`${FRONTEND_SERVE_URL}${LINK_PREFIX}/app.html?queryObj={"page":"config"}`);
+        showExtensionApp({ page: 'config' });
       }
     },
   });
@@ -57,4 +56,4 @@ const bootstrap = () => {
 
 authController.init()
   .then(() => bootstrap())
-  .fail(e => console.error(e));
+  .catch(e => console.error(e));
