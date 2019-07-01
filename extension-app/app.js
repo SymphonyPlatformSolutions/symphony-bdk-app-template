@@ -6,10 +6,17 @@ import { Provider } from 'react-redux';
 import configureStore from './reducers';
 import { APP_ID, APP_TITLE } from './utils/system/app-constants';
 import Routes from './pages/routes';
-import { handleOutline } from './utils/helpers/help-functions';
+import { handleOutline, sleepFor } from './utils/helpers/help-functions';
 import './public/sass/main.scss';
+import envs from 'utils/system/envs-constants';
+
+const { currEnv } = process.env;
 
 handleOutline(); // Accessibility
+
+if (currEnv === envs.MOCK) {
+  sleepFor(1000);
+}
 
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 

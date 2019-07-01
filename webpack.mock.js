@@ -80,7 +80,7 @@ const config = {
     }),
     new HtmlWebpackPlugin({
       filename: 'renderer-app.html',
-      template: './symphony-wrapper/mock/renderer-app.html',
+      template: './symphony-wrapper/renderer-app.html',
       inject: false,
     }),
     new webpack.DefinePlugin({

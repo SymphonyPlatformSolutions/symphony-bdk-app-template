@@ -90,7 +90,7 @@ function ModalDrawer({ closeHandler, isOpen }) {
         <TopContainer>
           <Title>Open a custom dialog</Title>
           <span>
-            <i>These dialogs need to be <b>defined</b></i>
+            <i>These dialogs need to be <b>defined</b> in the <b>app-constants.js</b> file in your extension-app folder</i>
           </span>
           <CloseButton type="button" onClick={closeHandler}>x</CloseButton>
         </TopContainer>

@@ -7,8 +7,12 @@ const renderer = SYMPHONY.services.subscribe('extensionml-renderer');
 let messagesCounter = 0;
 
 const RendererApp = () => {
-  const containerRef = useRef();
+  const messagesEndRef = useRef();
   const [messages, changeMessages] = useState([]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const messageReceiver = (event) => {
     messagesCounter += 1;
@@ -27,7 +31,6 @@ const RendererApp = () => {
         return [...prevState, htmlString];
       });
       setTimeout(() => {
-        containerRef.current.scroll();
       }, 200);
     }
   };
@@ -35,9 +38,12 @@ const RendererApp = () => {
     window.addEventListener('message', messageReceiver.bind(this), false);
   }, []);
 
+  useEffect(scrollToBottom, [messages]);
+
   return (
-    <div ref={containerRef}>
+    <div>
       {messages.map((el, index) => <WrapperMessageStack key={`wrapperMessageStack_${index}`} htmlContent={el} />)}
+      <div ref={messagesEndRef} />
     </div>
   );
 };
