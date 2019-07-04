@@ -3,8 +3,18 @@
 import Index from 'services/controller/authentication';
 import { frontendURL, setupURL } from 'utils/system/setup-url';
 import GeneralEnricher from 'services/enrichers/general-enricher';
-import { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } from 'utils/system/app-constants';
+import { ENRICHER_EVENTS } from 'services/enrichers/entities';
+import {
+  MODAL_IDS, APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME,
+} from 'utils/system/app-constants';
+
 import { showExtensionApp } from 'services/controller/extension-app';
+
+// These next 4 lines will be removed on production
+/* develblock:start */
+window.ENRICHER_EVENTS = ENRICHER_EVENTS;
+window.MODAL_IDS = MODAL_IDS;
+/* develblock:end */
 
 const controllerService = SYMPHONY.services.register(`${APP_ID}:controller`);
 SYMPHONY.services.register(`${APP_ID}:enricher`);

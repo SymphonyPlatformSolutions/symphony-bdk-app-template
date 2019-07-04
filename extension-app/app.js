@@ -14,9 +14,12 @@ const { currEnv } = process.env;
 
 handleOutline(); // Accessibility
 
+// These next 4 lines will be removed on production
+/* develblock:start */
 if (currEnv === envs.MOCK) {
   sleepFor(1000);
 }
+/* develblock:end */
 
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
 
