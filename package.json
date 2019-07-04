@@ -12,7 +12,8 @@
     "start:mock": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.mock --config webpack.mock.js & nodemon mock-json-server/mock-server.js",
     "start:node-mock": "nodemon mock-json-server/mock-server.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "teste": "sms-mock-client webpack.mock.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "axios-mock-adapter": "^1.16.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "cucumber": "^5.1.0",
+    "esm": "^3.2.25",
     "formik": "^1.5.4",
     "install": "^0.12.2",
     "jest-cucumber": "^2.0.11",
@@ -47,6 +49,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "request": "2.81.0",
+    "sms-dev-mock-client": "../sms-dev-mock-client",
     "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
     "yup": "^0.27.0"
