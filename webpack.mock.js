@@ -15,7 +15,7 @@ const config = {
       'process.env.currEnv': JSON.stringify(currEnv),
     }),
     new CopyWebpackPlugin([
-      { from: './node_modules/sms-dev-mock-client/dist', to: '' },
+      { from: './node_modules/sms-dev-tool-mock-client/dist', to: '' },
     ]),
    ]
 };
@@ -26,7 +26,7 @@ module.exports = merge(commonConfig,config, {
 
   devServer: {
     inline: true,
-    port: 5000,
+    port: 4000,
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
