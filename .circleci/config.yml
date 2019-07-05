@@ -16,7 +16,7 @@ jobs:
            - v1-dependencies-
       - add_ssh_keys:
           fingerprints:
-            - ${MOCK_KEY_FINGERPRINT}
+            - "10:78:fb:6d:64:5e:3c:ce:66:d8:1b:89:b2:d9:ee:77"
       - run:
           name: Dependencies Install
           command: |
