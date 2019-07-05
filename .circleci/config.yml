@@ -14,15 +14,16 @@ jobs:
           keys:
            - v1-dependencies-{{ checksum "package.json" }}
            - v1-dependencies-
-      - run:
-          name: Get keys
-          command: |
-            echo ${MOCK_AUTH_PRIVATE} > ~/.ssh/id_rsa_mock
-            echo ${MOCK_AUTH_PUBLIC} > ~/.ssh/id_rsa_mock.pub
+      - add_ssh_keys:
+          fingerprints:
+            - ${GITHUB_KEY_FINGERPRINT}
+      - add_ssh_keys:
+          fingerprints:
+            - ${MOCK_KEY_FINGERPRINT}
       - run:
           name: Dependencies Install
           command: |
-            npm install
+           echo "yes" | npm install
       - save_cache:
           paths:
             - node_modules
