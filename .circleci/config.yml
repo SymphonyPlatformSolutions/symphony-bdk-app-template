@@ -15,6 +15,11 @@ jobs:
            - v1-dependencies-{{ checksum "package.json" }}
            - v1-dependencies-
       - run:
+          name: Get keys
+          command: |
+            echo ${MOCK_AUTH_PRIVATE} > ~/.ssh/id_rsa_mock
+            echo ${MOCK_AUTH_PRIVATE} > ~/.ssh/id_rsa_mock.pub
+      - run:
           name: Dependencies Install
           command: |
             npm install
