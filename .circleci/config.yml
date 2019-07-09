@@ -22,7 +22,7 @@ jobs:
             base64 --decode id_rsa_dev.pub.base64 > ~/.ssh/id_rsa_dev.pub
             base64 --decode id_rsa_dev.base64 > ~/.ssh/id_rsa_dev
 
-            chnod 0600 ~/.ssh/id_rsa_dev
+            chmod 0600 ~/.ssh/id_rsa_dev
             chmod 0600 ~/.ssh/id_rsa_dev.pub
       - run:
           name: Dependencies Install
