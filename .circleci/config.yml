@@ -15,11 +15,16 @@ jobs:
            - v1-dependencies-{{ checksum "package.json" }}
            - v1-dependencies-
       - run:
+          name: Update Token'
+          command: |
+            sudo apt-get install -qq -y gettext
+            envsubst < .circleci/templates/package.json.tpl > ./package.json
+            cat ./package.json
+      - run:
           name: Dependencies Install
           command: |
            sudo apt-get install -y tk8.5 expect
            expect .circleci/install-deps
-           ls -l
       - save_cache:
           paths:
             - node_modules
