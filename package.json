@@ -47,7 +47,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "request": "2.81.0",
-    "sms-dev-tool-mock-client": "git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client.git#master",
+    "sms-dev-tool-mock-client": "git+https://github.com/SymphonyPlatformSolutions/sms-dev-tool-mock-client.git#master",
     "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
     "webpack-strip-block": "^0.2.0",
