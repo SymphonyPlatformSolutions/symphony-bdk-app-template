@@ -14,16 +14,9 @@ jobs:
           keys:
            - v1-dependencies-{{ checksum "package.json" }}
            - v1-dependencies-
-      - run:
-          name: Get keys
-          command: |
-            echo ${PUBLIC_KEY} > id_rsa_dev.pub.base64
-            echo ${PRIVATE_KEY} > id_rsa_dev.base64
-            base64 --decode id_rsa_dev.pub.base64 > ~/.ssh/id_rsa_dev.pub
-            base64 --decode id_rsa_dev.base64 > ~/.ssh/id_rsa_dev
-
-            chmod 0600 ~/.ssh/id_rsa_dev
-            chmod 0600 ~/.ssh/id_rsa_dev.pub
+      - add_ssh_keys:
+          fingerprints:
+            - "10:78:fb:6d:64:5e:3c:ce:66:d8:1b:89:b2:d9:ee:77"
       - run:
           name: Dependencies Install
           command: |
