@@ -75,10 +75,10 @@ module.exports = (env) => {
         'process.env.currEnv': JSON.stringify(currEnv),
       }),
       new CopyWebpackPlugin([
-        { from: 'extension-app/public/assets', to: 'assets' },
+        { from: './extension-app/public/assets', to: 'assets' },
       ]),
       new CopyWebpackPlugin([
-        { from: 'extension-app/public/sass/fonts', to: 'fonts' },
+        { from: './extension-app/public/sass/fonts', to: 'fonts' },
       ]),
     ],
   };

@@ -17,10 +17,22 @@ module.exports = merge(commonConfig, {
   },
 
   module: {
-    rules: [{
+    rules: [
+      {
       test: /\.scss$/,
       use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-    }, ]
+      },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        exclude: /(node_modules|bower_components|\.spec\.js)/,
+        use: [
+        {
+          loader: 'webpack-strip-block'
+        }
+      ]
+    }
+    ]
   },
 
   plugins: [
