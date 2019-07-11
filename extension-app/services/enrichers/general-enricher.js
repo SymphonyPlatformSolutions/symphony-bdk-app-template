@@ -58,11 +58,11 @@ export default class GeneralEnricher {
 
   action(data) {
     this.dialogsService = SYMPHONY.services.subscribe('dialogs');
-    let fullURL =  `app.html?queryObj=${encodeURIComponent(JSON.stringify({ page: data.entity}))}`;
+    let fullURL = `app.html?queryObj=${encodeURIComponent(JSON.stringify({ page: data.entity }))}`;
     let modalType;
 
     switch (data.entity) {
-      case MODAL_IDS.EXAMPLE_MODAL:
+      case MODAL_IDS.EXAMPLE_MODAL.entity:
         this.dialogsService.show(modalType, this.name,
           `<dialog><iframe height="500" width="100%" src="${fullURL}" ></iframe></dialog>`,
           undefined, {});
