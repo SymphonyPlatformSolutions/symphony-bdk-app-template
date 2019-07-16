@@ -14,11 +14,18 @@ const { currEnv } = process.env;
 
 handleOutline(); // Accessibility
 
-// These next 4 lines will be removed on production
+let MOCK_USER_SERVICE = null;
+
+// These next 6 lines will be removed on production
 /* develblock:start */
 if (currEnv === envs.MOCK) {
   sleepFor(1000);
 }
+
+MOCK_USER_SERVICE = {
+  getJwt: () => new Promise(Resolve => Resolve('NO JWT')),
+};
+
 /* develblock:end */
 
 const appService = SYMPHONY.services.register(`${APP_ID}:app`);
@@ -58,7 +65,7 @@ SYMPHONY.remote.hello().then((data) => {
     ReactDOM.render(
       <Provider store={store}>
         <div>
-          <Routes userId={userId} jwtService={extendedUserInfoService} />
+          <Routes userId={userId} jwtService={MOCK_USER_SERVICE || extendedUserInfoService} />
         </div>
       </Provider>, document.getElementById('root'),
     );

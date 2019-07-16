@@ -10,3 +10,10 @@ export const ENRICHER_EVENTS = {
     },
   },
 };
+
+export const MODAL_IDS = {
+  EXAMPLE_MODAL: {
+    entity: 'example-modal',
+    entityData: {},
+  },
+};

@@ -3,9 +3,9 @@
 import Index from 'services/controller/authentication';
 import { frontendURL, setupURL } from 'utils/system/setup-url';
 import GeneralEnricher from 'services/enrichers/general-enricher';
-import { ENRICHER_EVENTS } from 'services/enrichers/entities';
+import { ENRICHER_EVENTS, MODAL_IDS } from 'services/enrichers/entities';
 import {
-  MODAL_IDS, APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME,
+  APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME,
 } from 'utils/system/app-constants';
 
 import { showExtensionApp } from 'services/controller/extension-app';

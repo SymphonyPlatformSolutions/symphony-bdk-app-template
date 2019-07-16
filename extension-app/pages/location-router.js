@@ -1,5 +1,5 @@
 import React from 'react';
-import { MODAL_IDS } from 'utils/system/app-constants';
+import { MODAL_IDS } from 'services/enrichers/entities';
 import Sample from './sample';
 import SampleModal from './sample-modal';
 

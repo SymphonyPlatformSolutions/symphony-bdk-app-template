@@ -1,6 +1,5 @@
 /* global SYMPHONY */
-import { ENRICHER_EVENTS } from './entities';
-import { MODAL_IDS } from '../../utils/system/app-constants';
+import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
 
 export default class GeneralEnricher {
   constructor(name) {
