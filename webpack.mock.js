@@ -15,6 +15,9 @@ const config = {
       'process.env.currEnv': JSON.stringify(currEnv),
     }),
     new CopyWebpackPlugin([
+      { from: './extension-app/public/bundle.json', to: '' },
+    ]),
+    new CopyWebpackPlugin([
       { from: './node_modules/sms-dev-tool-mock-client/dist', to: '' },
     ]),
    ]

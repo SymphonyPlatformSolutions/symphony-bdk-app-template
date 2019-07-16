@@ -6,7 +6,11 @@ const path = require('path');
 
 module.exports = merge(commonConfig, {
   mode: 'development',
-
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: './extension-app/public/bundle.json', to: '' },
+    ]),
+  ],
   devServer: {
     inline: true,
     contentBase: path.resolve(__dirname, 'dist'),
