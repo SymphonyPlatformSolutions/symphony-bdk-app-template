@@ -5,6 +5,8 @@ module.exports = {
   verbose: true,
   testURL: 'https://localhost/',
   moduleNameMapper: {
+    '~react/(.*)': '<rootDir>/node_modules/$1',
+    'styled-components': '<rootDir>/node_modules/styled-components',
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: [
@@ -12,9 +14,9 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
+      branches: 50,
+      functions: 50,
+      lines: 50,
     },
   },
   coverageReporters: [
@@ -24,18 +26,17 @@ module.exports = {
     'clover',
   ],
   collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/reducers/root-reducer.js',
-    '!src/mock-json-server/**',
-    '!src/javascript/**',
-    '!src/dist/**',
-    '!src/store/**',
-    '!src/utils/app-constants.js',
-    '!src/utils/envs-constants.js',
-    '!src/utils/envs-constants.js',
-    '!src/utils/setup-tests.js',
-    '!src/utils/setup-url.js',
-    '!src/utils/system-constants.js',
+    'extension-app/**/*.js',
+    '!extension-app/app.js',
+    '!extension-app/controller.js',
+    '!extension-app/utils/system/system-constants.js',
+    '!extension-app/utils/tests/jest-raw-loader.js',
+    '!extension-app/utils/tests/jest-static-loader.js',
   ],
   testResultsProcessor: 'jest-sonar-reporter',
+  transform: {
+    '^.+\\.js$': 'babel-jest',
+    '^.+\\.hbs$': '<rootDir>/extension-app/utils/tests/jest-raw-loader.js',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/extension-app/utils/tests/jest-static-loader.js',
+  },
 };

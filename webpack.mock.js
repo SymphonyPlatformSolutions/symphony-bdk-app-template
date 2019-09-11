@@ -2,7 +2,6 @@
 // Disaling LINT for CommonsJS
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js')('MOCK');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -20,7 +19,7 @@ const config = {
     new CopyWebpackPlugin([
       { from: './node_modules/sms-dev-tool-mock-client/dist', to: '' },
     ]),
-   ]
+  ]
 };
 
 module.exports = merge(commonConfig,config, {

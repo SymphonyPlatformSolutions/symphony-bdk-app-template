@@ -11,23 +11,19 @@ const ContainerWrapper = Styled.div`
   margin: 35px 10px;
 }`;
 
-class Sample extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <Header />
-        <div className="page-container">
-          <ContainerWrapper>
-            <RoomsSelectorContainer />
-          </ContainerWrapper>
-        </div>
-        <div>
-          <h1>Fruit Basket</h1>
-          <DemoComponentContainer />
-        </div>
-      </div>
-    );
-  }
-}
+const Sample = () => (
+  <div>
+    <Header />
+    <div className="page-container">
+      <ContainerWrapper>
+        <RoomsSelectorContainer />
+      </ContainerWrapper>
+    </div>
+    <div>
+      <h1>Fruit Basket</h1>
+      <DemoComponentContainer />
+    </div>
+  </div>
+);
 
 export default Sample;

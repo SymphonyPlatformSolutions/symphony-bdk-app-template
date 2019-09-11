@@ -1,5 +1,5 @@
 import React from 'react';
-import { MODAL_IDS } from 'services/enrichers/entities';
+import {MODAL_IDS} from 'services/enrichers/entities';
 import Sample from './sample';
 import SampleModal from './sample-modal';
 
@@ -7,7 +7,7 @@ const INNER_QUERY = 'queryObj';
 
 function getInnerQuery(query) {
   if (!query) {
-    return { page: 'app' };
+    return {page: 'app'};
   }
 
   const part = query.split(`${INNER_QUERY}=`);
@@ -19,15 +19,15 @@ function route() {
   const currentQuery = window.location.href.split('?')[1];
   const queryObj = getInnerQuery(currentQuery);
   const currentPage = queryObj.page || 'app';
+  console.log('current page', currentPage);
   switch (currentPage) {
     case MODAL_IDS.EXAMPLE_MODAL.entity:
       return (<SampleModal />);
+    case 'config':
     case 'app':
-      return (
-        <Sample />
-      );
+      return <Sample />;
     default:
-      return (<p>Oops! Page error.</p>);
+      return <p>Oops! Page error.</p>;
   }
 }
 

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Help Command Builder Should build message 1`] = `
+"<messageML>
+  <card class=\\"barStyle\\" data-icon-src=\\"pagerduty-green-bg-icon.png\\">
+    <header>
+      <div style=\\"margin-bottom: 12px;\\"><b>Help</b></div>
+      <img style=\\"width: 12px; height: 12px; position: relative; top: 1px;\\" src=\\"help-command-icon.svg\\" />
+      See below the commands you can use to interact with the PagerDuty Bot.
+    </header>
+
+    <body>
+      <div>
+        <div style=\\"padding-bottom: 4px;\\"><b style=\\"color: #767676\\">Commands</b></div>
+        <div style=\\"border-left: 2px solid #767676;\\">
+          <div style=\\"padding-left: 4px;\\">
+            <b>acknowledge:</b> used to acknowledge an incident <br /> <b>Syntax:</b> @PagerDutty Bot acknowledge &lt;incident id&gt;<br /><br /> <b>resolve:</b> used to resolve an incident<br /> <b>Syntax:</b> @PagerDutty Bot resolve &lt;incident id&gt;
+          </div>
+        </div>
+      </div>
+    </body>
+  </card>
+</messageML>"
+`;

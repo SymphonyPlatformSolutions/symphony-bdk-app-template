@@ -56,7 +56,31 @@ export function handleOutline() {
   window.addEventListener('keydown', handleFirstTab);
 }
 
-export function sleepFor(sleepDuration) {
-  const now = new Date().getTime();
-  while (new Date().getTime() < now + sleepDuration) { /* do nothing */ }
+export function parseSimilarUrl(url) {
+  if (!url) {
+    return url;
+  }
+  let parsedUrl = url.toLowerCase().replace(/\s/g, '');
+  if (parsedUrl.includes('/www.')) {
+    parsedUrl = parsedUrl.replace('www.', '');
+  }
+  if (parsedUrl.indexOf('https') === 0) {
+    parsedUrl = parsedUrl.replace('https://', '');
+  }
+  if (parsedUrl.indexOf('http') === 0) {
+    parsedUrl = parsedUrl.replace('http://', '');
+  }
+  if (parsedUrl[parsedUrl.length - 1] === '/') {
+    parsedUrl = parsedUrl.slice(0, -1);
+  }
+
+  return parsedUrl;
+}
+
+export function getInstanceFromIncident(url, incidentId) {
+  return url.replace(`/incidents/${incidentId}`, '');
+}
+
+export function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }

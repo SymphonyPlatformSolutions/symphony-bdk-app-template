@@ -21,4 +21,12 @@ function generateDemoInfo() {
   ];
 }
 
-module.exports = { generateDemoInfo };
+function getBotRooms() {
+  return [
+    { name: 'Bot Room A', stream_id: 'streamID01' },
+    { name: 'Bot Room B', stream_id: 'streamID02' },
+    { name: 'Bot Room C', stream_id: 'streamID03' },
+  ];
+}
+
+module.exports = { generateDemoInfo, getBotRooms };

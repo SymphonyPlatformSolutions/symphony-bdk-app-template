@@ -34,7 +34,7 @@ class Index {
   }
 
   makeUrl = (endpoint, useBaseUrl) => (
-    useBaseUrl ? `${this.baseUrl}/${endpoint}` : endpoint
+    useBaseUrl ? `${this.baseUrl}/${endpoint[0] === '/' ? endpoint.slice(1) : endpoint}` : endpoint
   );
 
   makeApiAttributes = params => ({

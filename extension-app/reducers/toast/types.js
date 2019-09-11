@@ -1,0 +1,4 @@
+export const REMOVE_TOAST = 'REMOVE_TOAST';
+// Used for testing
+export const OVERRIDE_TOAST_SUCCESS = 'OVERRIDE_TOAST_SUCCESS';
+export const OVERRIDE_TOAST_ERROR = 'OVERRIDE_TOAST_ERROR';

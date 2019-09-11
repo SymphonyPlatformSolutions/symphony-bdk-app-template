@@ -30,7 +30,7 @@ describe('Extension App Services', () => {
   });
 
   it('Should subscribe to SYMPHONY modules and with override URL', () => {
-    showExtensionApp(TEMPLATE_URL);
+    showExtensionApp(null, TEMPLATE_URL);
     expect(SYMPHONY.services.subscribe).toBeCalledWith('modules');
     expect(showMock).toBeCalledWith(
       APP_ID,
@@ -42,7 +42,7 @@ describe('Extension App Services', () => {
   });
 
   it('Should subscribe to SYMPHONY modules and with two override URLs', () => {
-    showExtensionApp(TEMPLATE_URL, TEMPLATE_URL);
+    showExtensionApp(null, TEMPLATE_URL, TEMPLATE_URL);
     expect(SYMPHONY.services.subscribe).toBeCalledWith('modules');
     expect(showMock).toBeCalledWith(
       APP_ID,

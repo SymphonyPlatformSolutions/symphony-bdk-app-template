@@ -1,5 +1,10 @@
 /* global SYMPHONY */
+import { openModal } from 'services/modal-service';
+import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
+
+const LINK_PREFIX = setupLinkPrefix();
+const FRONTEND_SERVE_URL = frontendURL();
 
 export default class GeneralEnricher {
   constructor(name) {
@@ -11,7 +16,6 @@ export default class GeneralEnricher {
   static getMessages() {
     return Object.keys(ENRICHER_EVENTS).map(key => ENRICHER_EVENTS[key].type);
   }
-
 
   getName() {
     return this.name;
@@ -26,8 +30,6 @@ export default class GeneralEnricher {
     this.messageEvents.forEach((element) => {
       entity.registerRenderer(element, {}, this.name);
     });
-
-    this.dialogsService = SYMPHONY.services.subscribe('dialogs');
   }
 
   render(type, entity) {
@@ -44,7 +46,7 @@ export default class GeneralEnricher {
         </messageML>`;
         break;
       default:
-        template = `<messageML><p><b>ERROR</b> message not rendered.</p><p>Caught: ${type}</p></messageML>`;
+        template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;
         actionData = {};
         break;
     }
@@ -56,22 +58,13 @@ export default class GeneralEnricher {
   }
 
   action(data) {
-    this.dialogsService = SYMPHONY.services.subscribe('dialogs');
-    let fullURL = `app.html?queryObj=${encodeURIComponent(JSON.stringify({ page: data.entity }))}`;
-    let modalType;
-
-    switch (data.entity) {
+    switch (data.type) {
       case MODAL_IDS.EXAMPLE_MODAL.entity:
-        this.dialogsService.show(modalType, this.name,
-          `<dialog><iframe height="500" width="100%" src="${fullURL}" ></iframe></dialog>`,
-          undefined, {});
+        openModal(MODAL_IDS.EXAMPLE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '560px', { page: 'exampleModal' });
         break;
       default:
-        modalType = 'noEntityDialog';
-        fullURL = 'https://yahoo.com';
-        this.dialogsService.show(modalType, this.name,
-          `<dialog><iframe height="500" width="100%" src="${fullURL}" ></iframe></dialog>`,
-          undefined, {});
+        openModal('noEntityDialog', this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '300px', { page: 'error' });
+        break;
     }
   }
 

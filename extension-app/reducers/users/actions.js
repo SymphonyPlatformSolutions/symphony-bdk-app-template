@@ -12,6 +12,7 @@ import {
 } from './types';
 
 export function getJWTFromSymphony(jwtService) {
+  console.log('jwtService', jwtService);
   if (!jwtService) {
     return (dispatch) => {
       dispatch({
@@ -23,6 +24,7 @@ export function getJWTFromSymphony(jwtService) {
 
   return dispatch => jwtService.getJwt()
     .then((jwt) => {
+      console.log('jwt', jwt);
       dispatch({
         type: JWT_AUTH_SUCCESS,
         payload: jwt,
