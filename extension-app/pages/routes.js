@@ -80,7 +80,7 @@ const Routes = (props) => {
           <BrowserRouter>
             <Switch>
               <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
-              <Route exact path={`${LINK_PREFIX}/home`} component={Sample} />
+              <Route exact path={`${LINK_PREFIX}/home/:tab`} component={Sample} />
               <Route component={Default} />
             </Switch>
           </BrowserRouter>
