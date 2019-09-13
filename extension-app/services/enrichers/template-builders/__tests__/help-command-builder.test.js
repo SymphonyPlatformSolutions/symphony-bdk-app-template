@@ -1,7 +1,7 @@
 import HelpCommandBuilder from '../help-command-builder';
 
 const helpCommandData = {
-  commands: '<br /> <b>Example:</b> @Example &lt;comand example&gt;',
+  commands: '<b>Example:</b> @Example &lt;comand example&gt; <br /> ',
 };
 
 describe('Help Command Builder', () => {

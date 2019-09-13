@@ -12,8 +12,7 @@ import { setupLinkPrefix } from 'utils/system/setup-url';
 import { getJWTFromSymphony } from 'reducers/users/actions';
 import ModalRoot from 'components/commons/modal';
 import { ModalProvider } from 'components/commons/modal/modal-context';
-import ToastProvider from 'components/toast-provider';
-import { THEMES, THEME_TYPES, Loader } from 'sms-sdk-toolbox-ui';
+import { THEMES, THEME_TYPES, Loader, ToasterProvider } from 'sms-sdk-toolbox-ui';
 import { PROJECT_THEMES } from '../utils/themes/PROJECT_THEMES';
 import LocationRouter from './location-router';
 import Sample from './sample';
@@ -33,12 +32,12 @@ const ContainerWrapper = Styled.div`
 `;
 
 const Routes = (props) => {
-  const [currentTheme, setTheme] = useState(THEMES[0]);
+  const [currentTheme, setTheme] = useState(PROJECT_THEMES[0]);
 
   const setThemeProps = () => {
     const isDark = window.themeColor
       ? (window.themeColor === THEME_TYPES.DARK) : false;
-    setTheme(isDark ? THEMES[1] : THEMES[0]);
+    setTheme(isDark ? PROJECT_THEMES[1] : PROJECT_THEMES[0]);
     document.body.className = `symphony-external-app ${window.themeColor.toLowerCase()} ${window.themeSize}`;
   };
 
@@ -80,19 +79,21 @@ const Routes = (props) => {
     return (
       <ContainerWrapper>
         <ThemeProvider theme={currentTheme}>
-            {/*<ToastRoot />???*/}
-            {/*<ModalWrapper>*/}
-            <ModalProvider>
-              <ModalRoot />
-                <BrowserRouter>
-                  <Switch>
-                    <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
-                    <Route exact path={`${LINK_PREFIX}/home/:tab`} component={Sample} />
-                    <Route component={Default} />
-                  </Switch>
-                </BrowserRouter>
-            </ModalProvider>
-            {/*</ModalWrapper>*/}
+          <ToasterProvider>
+          {/*<ToastRoot />???*/}
+          {/*<ModalWrapper>*/}
+          <ModalProvider>
+            <ModalRoot />
+              <BrowserRouter>
+                <Switch>
+                  <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
+                  <Route exact path={`${LINK_PREFIX}/home/:tab`} component={Sample} />
+                  <Route component={Default} />
+                </Switch>
+              </BrowserRouter>
+          </ModalProvider>
+          {/*</ModalWrapper>*/}
+          </ToasterProvider>
         </ThemeProvider>
       </ContainerWrapper>
     );

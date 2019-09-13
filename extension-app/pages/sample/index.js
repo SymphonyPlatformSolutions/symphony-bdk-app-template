@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 import { ModalConsumer } from 'components/commons/modal/modal-context';
 import {
@@ -10,8 +9,9 @@ import {
   Separator,
   Tabs,
   Table,
+  ToasterConsumer,
 } from 'sms-sdk-toolbox-ui';
-import SendInviteForm from '../../components/forms/send-invite';
+import SampleModal from '../sample-modal/index';
 
 const LINK_PREFIX = setupLinkPrefix();
 
@@ -23,10 +23,8 @@ const TAB_IDS = {
   modal: 2,
 };
 
-// const [closeModal] = useState(false);
-
 const handleShowCreateInviteModal = (showModal, hideModalCallback) => () => {
-  showModal(SendInviteForm, {
+  showModal(SampleModal, {
     callBack: () => {
       hideModalCallback();
     },
@@ -58,9 +56,13 @@ const Sample = (props) => {
                   Example page using lib
                 </Text>
                 <Separator />
-                <Link to={`${LINK_PREFIX}/home/example2`}>
-                  <Button>Change to second tab</Button>
-                </Link>
+                <ToasterConsumer>
+                  {context => (
+                    <Button onClick={() => context.showToast({ message: 'An absolute success!', type: 'success' })}>
+                      Success
+                    </Button>
+                  )}
+                </ToasterConsumer>
                 <Separator />
                 <Button
                   data-testid="createinvite"

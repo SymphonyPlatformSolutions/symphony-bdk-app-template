@@ -10,7 +10,7 @@ jest.mock('../template-builders/welcome-message-about-room-builder');
 
 describe('GeneralEnricher', () => {
   const NAME = 'name';
-  const MESSAGE_TYPE = '';
+  const MESSAGE_TYPE = 'com.symphony.ms.devtools.testingEntity';
   const USER_ID = 10;
   let modalType;
   const registerRenderer = jest.fn();
@@ -200,7 +200,7 @@ describe('GeneralEnricher', () => {
       HelpCommandBuilder.build.mockImplementation(() => 'mocked return');
       expect(
         enricher.render(
-          '',
+          'com.symphony.ms.devtools.template.helpCommand',
           entity,
         ),
       ).toEqual(shouldReturn);
@@ -210,7 +210,7 @@ describe('GeneralEnricher', () => {
       WelcomeMessageBuilder.build.mockImplementation(() => 'mocked return');
       expect(
         enricher.render(
-          '',
+          'com.symphony.ms.devtools.template.welcomeMessageDirectChat',
           entity,
         ),
       ).toEqual(shouldReturn);
@@ -220,7 +220,7 @@ describe('GeneralEnricher', () => {
       WelcomeMessageBuilder.build.mockImplementation(() => 'mocked return');
       expect(
         enricher.render(
-          '',
+          'com.symphony.ms.devtools.template.welcomeMessageRoom',
           entity,
         ),
       ).toEqual(shouldReturn);
@@ -232,7 +232,7 @@ describe('GeneralEnricher', () => {
       );
       expect(
         enricher.render(
-          '',
+          'com.symphony.ms.devtools.template.welcomeMessageAboutRoom',
           entity,
         ),
       ).toEqual(shouldReturn);

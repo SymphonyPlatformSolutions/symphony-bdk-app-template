@@ -2,6 +2,9 @@
 import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
+import HelpCommandBuilder from './template-builders/help-command-builder';
+import WelcomeMessageBuilder from './template-builders/welcome-message-builder';
+import WelcomeMessageAboutRoomBuilder from './template-builders/welcome-message-about-room-builder';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -44,6 +47,16 @@ export default class GeneralEnricher {
           <p>What we got from the entity: ${JSON.stringify(data)}</p>
           <p><b>WOW</b> that's exciting!</p>
         </messageML>`;
+        break;
+      case ENRICHER_EVENTS.HELP_COMMAND.type:
+        template = HelpCommandBuilder.build(data);
+        break;
+      case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
+      case ENRICHER_EVENTS.WELCOME_MESSAGE_ROOM.type:
+        template = WelcomeMessageBuilder.build();
+        break;
+      case ENRICHER_EVENTS.WELCOME_MESSAGE_ABOUT_ROOM.type:
+        template = WelcomeMessageAboutRoomBuilder.build(data);
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;

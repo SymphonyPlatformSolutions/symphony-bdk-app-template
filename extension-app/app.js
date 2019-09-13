@@ -9,7 +9,6 @@ import { APP_ID, APP_TITLE } from './utils/system/app-constants';
 import Routes from './pages/routes';
 import { handleOutline } from './utils/helpers/help-functions';
 import './public/sass/main.scss';
-import ToastProvider from './components/toast-provider';
 
 Logger.setEnv({
   appTitle: 'Template extension app',
@@ -64,7 +63,6 @@ SYMPHONY.remote.hello().then((data) => {
     const store = configureStore();
     ReactDOM.render(
       <Provider store={store}>
-        <ToastProvider />
         <Routes userId={userId} jwtService={MOCK_USER_SERVICE} />
       </Provider>, document.getElementById('root'),
     );
