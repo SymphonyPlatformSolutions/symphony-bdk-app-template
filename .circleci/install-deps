@@ -1,4 +1,4 @@
 #!/usr/bin/expect
-spawn yarn install
+spawn npm install
 expect "Are you sure you want to continue connecting (yes/no)?"
 send "yes\n"
