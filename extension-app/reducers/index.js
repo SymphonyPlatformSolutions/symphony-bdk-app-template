@@ -4,12 +4,10 @@ import {
 import thunk from 'redux-thunk';
 import toastReducer from './toast';
 import usersReducer from './users';
-import demoReducer from './demo';
 
 const rootReducer = combineReducers({
   toast: toastReducer,
   user: usersReducer,
-  demo: demoReducer,
 });
 
 export default function configureStore(initialState) {
