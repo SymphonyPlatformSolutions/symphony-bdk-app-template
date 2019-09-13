@@ -47,6 +47,7 @@
     "react-dom": "^16.8.6",
     "react-flexbox-grid": "^2.1.2",
     "react-modal": "^3.9.1",
+    "react-phone-number-input": "^2.3.21",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-select": "^3.0.4",

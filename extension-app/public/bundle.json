@@ -8,7 +8,7 @@
       "publisher": "Symphony",
       "url": "https://localhost:4000/controller.html",
       "domain": "localhost",
-      "iconUrl": "https://localhost:4000/assets/app-icon.svg"
+      "iconUrl": "https://localhost:4000/assets/favicon.png"
     }
   ]
 }

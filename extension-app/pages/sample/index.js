@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import {setupLinkPrefix} from 'utils/system/setup-url';
+import { Link } from 'react-router-dom';
+import { setupLinkPrefix } from 'utils/system/setup-url';
+import { ModalConsumer } from 'components/commons/modal/modal-context';
 import {
   Box,
   Text,
@@ -10,51 +11,79 @@ import {
   Tabs,
   Table,
 } from 'sms-sdk-toolbox-ui';
+import SendInviteForm from '../../components/forms/send-invite';
 
 const LINK_PREFIX = setupLinkPrefix();
 
+const { generateDemoInfo } = require('../../../mock-json-server/mock-file');
+
 const TAB_IDS = {
-  example: 0,
-  example2: 1,
+  button: 0,
+  table: 1,
+  modal: 2,
+};
+
+// const [closeModal] = useState(false);
+
+const handleShowCreateInviteModal = (showModal, hideModalCallback) => () => {
+  showModal(SendInviteForm, {
+    callBack: () => {
+      hideModalCallback();
+    },
+    hideModal: () => {
+      hideModalCallback();
+    },
+  });
 };
 
 const Sample = (props) => {
-  const {match: {params: {tab}}} = props;
+  const { match: { params: { tab } } } = props;
 
   const tableColumns = [{
-    name: 'Service',
-    cell: row => <Text data-testid="Notification service" type="primary" size="small">{row.service.name || 'Service name'}</Text>,
+    name: 'Name',
+    cell: row => <Text data-testid="Notification service" type="primary" size="small">{row.name || 'Fruit name'}</Text>,
   }, {
-    name: 'Chat',
-    cell: row => <Text type="primary" size="small">{getRoomName(rooms, row.threadId, row.isRoom)}</Text>,
+    name: 'Fruit',
+    cell: row => <Text type="primary" size="small">{row.isFruit ? 'Fruit' : 'Vegetable'}</Text>,
   }];
 
   return (
-    <Box vertical>
-      <Tabs activeTab={tab ? (TAB_IDS[tab] || 0) : 0}>
-        <div label="Example">
-          <Text style={{ padding: 0, margin: 0, fontSize: '1.2rem' }} type="primary" size="small" title>
-            Example page using lib
-          </Text>
-          <Box style={{ marginTop: '20px' }}>
-            <Separator />
-          </Box>
-          <Link to={`${LINK_PREFIX}/home/example2`}>
-            <Button>Change to second tab</Button>
-          </Link>
-        </div>
-        <div label="Example2">
-          <Box vertical style={{ marginTop: 20 }}>
-            <Table
-              loading={false}
-              emptyMessage="No data on table"
-              data={null}
-              columns={tableColumns}
-            />
-          </Box>
-        </div>
-      </Tabs>
-    </Box>
+    <ModalConsumer>
+      {({ showModal, hideModal }) => (
+        <Box vertical>
+          <Tabs activeTab={tab ? (TAB_IDS[tab] || 0) : 0}>
+            <Box label="Text And Button button">
+              <Box vertical type="primary" style={{ width: '100%' }}>
+                <Text type="primary" size="small">
+                  Example page using lib
+                </Text>
+                <Separator />
+                <Link to={`${LINK_PREFIX}/home/example2`}>
+                  <Button>Change to second tab</Button>
+                </Link>
+                <Separator />
+                <Button
+                  data-testid="createinvite"
+                  onClick={handleShowCreateInviteModal(showModal, hideModal)}
+                >
+                  Open example modal
+                </Button>
+              </Box>
+            </Box>
+            <Box label="Table Example">
+              <Box type="primary" style={{ width: '100%' }}>
+                <Table
+                  loading={false}
+                  emptyMessage="No data on table"
+                  data={generateDemoInfo()}
+                  columns={tableColumns}
+                />
+              </Box>
+            </Box>
+          </Tabs>
+        </Box>
+      )}
+    </ModalConsumer>
   );
 };
 
@@ -63,7 +92,7 @@ Sample.propTypes = {
 };
 
 Sample.defaultProps = {
-  match: {params: {tab: 'example'}},
+  match: { params: { tab: 'button' } },
 };
 
 export default Sample;

@@ -10,7 +10,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 import { getJWTFromSymphony } from 'reducers/users/actions';
+import ModalRoot from 'components/commons/modal';
+import { ModalProvider } from 'components/commons/modal/modal-context';
+import ToastProvider from 'components/toast-provider';
 import { THEMES, THEME_TYPES, Loader } from 'sms-sdk-toolbox-ui';
+import { PROJECT_THEMES } from '../utils/themes/PROJECT_THEMES';
 import LocationRouter from './location-router';
 import Sample from './sample';
 
@@ -66,7 +70,6 @@ const Routes = (props) => {
   }, [window.themeColor, window.themeSize]);
 
   const { jwt } = props;
-  console.log('Routes pls', jwt);
   const Default = () => <Redirect to={`${LINK_PREFIX}/app.html`} />;
 
   if (jwt) {
@@ -77,13 +80,19 @@ const Routes = (props) => {
     return (
       <ContainerWrapper>
         <ThemeProvider theme={currentTheme}>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
-              <Route exact path={`${LINK_PREFIX}/home/:tab`} component={Sample} />
-              <Route component={Default} />
-            </Switch>
-          </BrowserRouter>
+            {/*<ToastRoot />???*/}
+            {/*<ModalWrapper>*/}
+            <ModalProvider>
+              <ModalRoot />
+                <BrowserRouter>
+                  <Switch>
+                    <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
+                    <Route exact path={`${LINK_PREFIX}/home/:tab`} component={Sample} />
+                    <Route component={Default} />
+                  </Switch>
+                </BrowserRouter>
+            </ModalProvider>
+            {/*</ModalWrapper>*/}
         </ThemeProvider>
       </ContainerWrapper>
     );
