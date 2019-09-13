@@ -36,12 +36,12 @@ jobs:
       - run:
           name: Test package
           command: |
-            yarn run test
+            npm run test
 
       - run:
           name: Run Coverage
           command: |
-            yarn run test:coverage || true
+            npm run test:coverage || true
 
       - persist_to_workspace:
           root: ~/project
