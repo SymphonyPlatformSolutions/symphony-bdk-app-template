@@ -112,5 +112,5 @@ server.get('/v1/sym/rooms', (req, res) => {
 });
 
 server.get('/v1/sym/bot-info', (req, res) => {
-  send(() => res.jsonp({ username: 'pagerduty_bot' }));
+  send(() => res.jsonp({ username: 'template_bot' }));
 });

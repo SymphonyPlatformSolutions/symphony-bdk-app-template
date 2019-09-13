@@ -15,7 +15,7 @@ export default class HelpCommandBuilder {
         genericTitle: 'Help',
         details: {
           icon: helpCommandIcon,
-          message: 'See below the commands you can use to interact with the PagerDuty Bot.',
+          message: 'See below the commands you can use to interact with the Template Bot.',
         },
       },
       body: {
