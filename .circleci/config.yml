@@ -32,16 +32,16 @@ jobs:
       # - run:
       #     name: Lint
       #     command: |
-      #       npm run lint
+      #       yarn run lint
       - run:
           name: Test package
           command: |
-            npm run test
+            yarn run test
 
       - run:
           name: Run Coverage
           command: |
-            npm run test:coverage || true
+            yarn run test:coverage || true
 
       - persist_to_workspace:
           root: ~/project
