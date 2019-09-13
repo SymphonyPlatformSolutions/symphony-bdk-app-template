@@ -107,7 +107,7 @@
     "react-testing-library": "^8.0.1",
     "redux-mock-store": "^1.5.3",
     "sass-loader": "^7.1.0",
-    "sms-sdk-toolbox-ui": "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-toolbox-ui#stage",
+    "sms-sdk-toolbox-ui": "https://${CLONE_TOKEN}@github.com:SymphonyPlatformSolutions/sms-sdk-toolbox-ui#stage",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.30.0",
