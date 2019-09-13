@@ -50,7 +50,7 @@ const Sample = (props) => {
       {({ showModal, hideModal }) => (
         <Box vertical>
           <Tabs activeTab={tab ? (TAB_IDS[tab] || 0) : 0}>
-            <Box label="Text And Button button">
+            <Box label="Text And Button">
               <Box vertical type="primary" style={{ width: '100%' }}>
                 <Text type="primary" size="small">
                   Example page using lib
