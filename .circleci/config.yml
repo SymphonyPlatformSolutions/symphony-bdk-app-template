@@ -23,8 +23,7 @@ jobs:
       - run:
           name: Dependencies Install
           command: |
-           sudo apt-get install -y tk8.5 expect
-           expect .circleci/install-deps
+           yarn install
       - save_cache:
           paths:
             - node_modules

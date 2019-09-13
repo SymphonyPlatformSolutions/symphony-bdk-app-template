@@ -4,9 +4,9 @@
   "description": "Generic Template for Applications",
   "main": "index.js",
   "scripts": {
-    "test": "jest --maxWorkers=1",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage --maxWorkers=2",
+    "test": "./node_modules/.bin/jest --maxWorkers=1",
+    "test:watch": "./node_modules/.bin/jest --watch",
+    "test:coverage": "./node_modules/.bin/jest --coverage --maxWorkers=2",
     "build": "webpack --env.prod --progress --config webpack.prod.js",
     "start:dev": "webpack-dev-server --watch --progress --colors --https --env.dev --config webpack.dev.js ",
     "start:mock": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.mock --config webpack.mock.js & nodemon mock-json-server/mock-server.js",
