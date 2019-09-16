@@ -40,11 +40,14 @@ const Sample = (props) => {
 
   const tableColumns = [{
     Header: 'Name',
-    Cell: row => <Text data-testid="Notification service" type="primary" size="small">{row.name || 'Fruit name'}</Text>,
+    Cell: ({original}) => <Text data-testid="Notification service" type="primary" size="small">{original.name || 'Fruit name'}</Text>,
   }, {
     Header: 'Fruit',
-    Cell: row => <Text type="primary" size="small">{row.isFruit ? 'Fruit' : 'Vegetable'}</Text>,
+    Cell:  ({original}) => <Text type="primary" size="small">{original.isFruit ? 'Fruit' : 'Vegetable'}</Text>,
     tooltip: 'This is an tooltip',
+  }, {
+    hasActions: true,
+    width: 50,
   }];
 
   return (
