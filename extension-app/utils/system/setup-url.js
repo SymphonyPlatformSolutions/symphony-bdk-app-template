@@ -13,7 +13,6 @@ const setupURL = () => {
   } else {
     ROOT_URL = `https://${window.location.host}/template`;
   }
-
   return ROOT_URL;
 };
 
@@ -24,7 +23,6 @@ const setupLinkPrefix = () => {
   if (currEnv === envs.PROD) {
     LINK_PREFIX = '/template/app';
   }
-
   return LINK_PREFIX;
 };
 

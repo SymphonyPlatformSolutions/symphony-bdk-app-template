@@ -3,9 +3,13 @@
 import { setupLinkPrefix, frontendURL } from 'utils/system/setup-url';
 import { APP_ID, APP_TITLE, APP_ICON_NAME } from 'utils/system/app-constants';
 
-export function showExtensionApp(overrideUrl, overrideIconUrl = null) {
+export function showExtensionApp(appendQueryObject = null, overrideUrl, overrideIconUrl = null) {
   const modulesService = SYMPHONY.services.subscribe('modules');
-  const configUrl = overrideUrl || `${frontendURL()}${setupLinkPrefix()}/app.html`;
+  let configUrl = overrideUrl || `${frontendURL()}${setupLinkPrefix()}/app.html`;
+  if (appendQueryObject) {
+    configUrl += `?queryObj=${encodeURIComponent(JSON.stringify(appendQueryObject))}`;
+  }
+
   const iconUrl = overrideIconUrl || `${frontendURL()}${setupLinkPrefix()}/assets/${APP_ICON_NAME}`;
 
   modulesService.show(

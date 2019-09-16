@@ -1,17 +1,17 @@
 // This is responsible to create the mock server.
 const jsonServer = require('json-server');
+const { generateDemoInfo, getBotRooms } = require('./mock-file');
 const Axios = require('axios');
 
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
-const { generateDemoInfo } = require('./mock-file');
 
 // Mock delay, for testing loading states. Units are in ms.
 const MOCK_DELAY = 1000;
 
-function send(callback) {
+function send(callback, delay = MOCK_DELAY) {
   if (MOCK_DELAY) {
-    setTimeout(callback, MOCK_DELAY);
+    setTimeout(callback, delay);
   } else {
     callback();
   }
@@ -21,7 +21,10 @@ server.use(middlewares);
 server.use(jsonServer.bodyParser);
 server.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
   next();
 });
 
@@ -29,7 +32,6 @@ server.post('/api/parser', async (req, res) => {
   const payload = await Axios.post('https://renderer-tool.app.symphony.com/api/parser', req.body);
   res.json(payload.data).status(200).end();
 });
-
 
 /*
   -- DEMO
@@ -61,11 +63,6 @@ server.put('/demoEndpoint/:id', (req, res) => {
       res.sendStatus(500);
     });
   }
-});
-
-// server.use(router)
-server.get('/tasks', (req, res) => {
-  res.jsonp(mockFile());
 });
 
 server.delete('/demoEndpoint/:id', (req, res) => {
@@ -106,4 +103,14 @@ server.post('/application/jwt/validate', (req, res) => {
 
 server.listen(3000, () => {
   console.log('JSON Server is running');
+});
+
+// Project specific APIs
+server.get('/v1/sym/rooms', (req, res) => {
+  console.log('Get Bot Rooms!');
+  send(() => res.jsonp(getBotRooms()));
+});
+
+server.get('/v1/sym/bot-info', (req, res) => {
+  send(() => res.jsonp({ username: 'template_bot' }));
 });

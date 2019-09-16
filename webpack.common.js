@@ -57,6 +57,10 @@ module.exports = (env) => {
       extensions: ['.js', '.jsx'],
       alias: {
         handlebars: 'handlebars/dist/handlebars.min.js',
+        // https://github.com/facebook/react/issues/14721#issuecomment-458757426
+        react: path.resolve('./node_modules/react'),
+        'styled-components': path.resolve('./node_modules/styled-components'),
+        'react-data-table-component': path.resolve('./node_modules/react-data-table-component'),
       },
     },
 

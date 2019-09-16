@@ -23,8 +23,7 @@ jobs:
       - run:
           name: Dependencies Install
           command: |
-           sudo apt-get install -y tk8.5 expect
-           expect .circleci/install-deps
+           yarn install
       - save_cache:
           paths:
             - node_modules
@@ -32,16 +31,16 @@ jobs:
       # - run:
       #     name: Lint
       #     command: |
-      #       npm run lint
+      #       yarn run lint
       - run:
           name: Test package
           command: |
-            npm run test
+            yarn test
 
       - run:
           name: Run Coverage
           command: |
-            npm run test:coverage || true
+            yarn test:coverage || true
 
       - persist_to_workspace:
           root: ~/project

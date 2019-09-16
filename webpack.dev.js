@@ -2,6 +2,7 @@
 // Disaling LINT for CommonsJS
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js')('dev');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = merge(commonConfig, {
@@ -11,6 +12,7 @@ module.exports = merge(commonConfig, {
       { from: './extension-app/public/bundle.json', to: '' },
     ]),
   ],
+
   devServer: {
     inline: true,
     contentBase: path.resolve(__dirname, 'dist'),
