@@ -1,40 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Box, Button,
 } from 'sms-sdk-toolbox-ui';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import {
-  StyledModal,
-  StyledForm,
-} from './theme';
+const StyledBox = styled(Box)`
+  padding: 40px;
+`;
 
 const ModalForm = ({
-  hideModal,
-}) => {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(true);
-  });
-
-  const openClassName = open ? 'open' : null;
-
-  const stopCascade = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-  };
-
-  return (
-    <StyledModal className={openClassName}>
-        <Box>
-          <Box horizontal justify="center" style={{ marginTop: '10px' }}>
-            <Button type="primary" fill="outlined" onClick={hideModal}>Cancel</Button>
-          </Box>
-        </Box>
-    </StyledModal>
-  );
-};
+  onRequestClose,
+}) => (
+  <StyledBox>
+    <Box horizontal justify="center" style={{ marginTop: '10px' }}>
+      <Button type="primary" fill="outlined" onClick={onRequestClose}>Cancel</Button>
+    </Box>
+  </StyledBox>
+);
 
 ModalForm.propTypes = {
   hideModal: PropTypes.func.isRequired,

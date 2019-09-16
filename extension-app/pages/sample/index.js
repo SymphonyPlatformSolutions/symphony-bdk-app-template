@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 import { ModalConsumer } from 'components/commons/modal/modal-context';
@@ -23,26 +23,15 @@ const TAB_IDS = {
   modal: 2,
 };
 
-const handleShowModal = (showModal, hideModalCallback) => () => {
-  showModal(ModalForm, {
-    callBack: () => {
-      hideModalCallback();
-    },
-    hideModal: () => {
-      hideModalCallback();
-    },
-  });
-};
-
 const Sample = (props) => {
   const { match: { params: { tab } } } = props;
 
   const tableColumns = [{
     Header: 'Name',
-    Cell: ({original}) => <Text data-testid="Notification service" type="primary" size="small">{original.name || 'Fruit name'}</Text>,
+    Cell: ({ original }) => <Text data-testid="Notification service" type="primary" size="small">{original.name || 'Fruit name'}</Text>,
   }, {
     Header: 'Fruit',
-    Cell:  ({original}) => <Text type="primary" size="small">{original.isFruit ? 'Fruit' : 'Vegetable'}</Text>,
+    Cell: ({ original }) => <Text type="primary" size="small">{original.isFruit ? 'Fruit' : 'Vegetable'}</Text>,
     tooltip: 'This is an tooltip',
   }, {
     hasActions: true,
@@ -51,7 +40,7 @@ const Sample = (props) => {
 
   return (
     <ModalConsumer>
-      {({ showModal, hideModal }) => (
+      {({ showModal }) => (
         <Box vertical>
           <Tabs activeTab={tab ? (TAB_IDS[tab] || 0) : 0}>
             <Box label="Text And Button">
@@ -70,7 +59,7 @@ const Sample = (props) => {
                 <Separator />
                 <Button
                   data-testid="createinvite"
-                  onClick={handleShowModal(showModal, hideModal)}
+                  onClick={() => showModal(ModalForm)}
                 >
                   Open example modal
                 </Button>

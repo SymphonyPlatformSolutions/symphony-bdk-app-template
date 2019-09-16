@@ -12,7 +12,9 @@ import { setupLinkPrefix } from 'utils/system/setup-url';
 import { getJWTFromSymphony } from 'reducers/users/actions';
 import ModalRoot from 'components/commons/modal';
 import { ModalProvider } from 'components/commons/modal/modal-context';
-import { THEMES, THEME_TYPES, Loader, ToasterProvider } from 'sms-sdk-toolbox-ui';
+import {
+ THEMES, THEME_TYPES, Loader, ToasterProvider 
+} from 'sms-sdk-toolbox-ui';
 import { PROJECT_THEMES } from '../utils/themes/PROJECT_THEMES';
 import LocationRouter from './location-router';
 import Sample from './sample';
