@@ -5,6 +5,10 @@ export default class MockApiGenerator {
 
   setJwt() {}
 
+  setJwt(jwt) {
+    this.jwt = jwt;
+  }
+
   get(endpoint, params) {
     const foundEndpoint = this.endpoints.find((el) => {
       if (el.address === endpoint && el.request.toUpperCase() === 'GET') {

@@ -12,7 +12,6 @@ import {
 } from './types';
 
 export function getJWTFromSymphony(jwtService) {
-  console.log('jwtService', jwtService);
   if (!jwtService) {
     return (dispatch) => {
       dispatch({

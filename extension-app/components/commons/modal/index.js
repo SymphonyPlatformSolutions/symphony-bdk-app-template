@@ -35,7 +35,7 @@ export const Modal = styled.div`
   position: absolute;
   top: 30%;
   left: 50%;
-  opacity: 1;
+  opacity: 0;
   transform: translate(-50%,-30%);
   transition: opacity 1s cubic-bezier(.25,.8,.25,1);
   &.open {
@@ -43,8 +43,7 @@ export const Modal = styled.div`
   }
 `;
 
-const ModalRoot = ({theme, ...rest}) => {
-  console.log(theme, rest);
+const ModalRoot = ({ theme }) => {
   return (
     <ModalConsumer>
       {({ component: Component, props, hideModal }) => (Component

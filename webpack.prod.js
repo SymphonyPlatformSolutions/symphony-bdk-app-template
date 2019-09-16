@@ -11,6 +11,7 @@ const PATH = path.resolve(`${__dirname}/dist/`, '');
 
 module.exports = merge(commonConfig, {
   mode: 'production',
+  devtool: 'source-map',
 
   output: {
     path: PATH,

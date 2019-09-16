@@ -80,10 +80,8 @@ const Routes = (props) => {
       <ContainerWrapper>
         <ThemeProvider theme={currentTheme}>
           <ToasterProvider>
-          {/*<ToastRoot />???*/}
-          {/*<ModalWrapper>*/}
-          <ModalProvider>
-            <ModalRoot />
+            <ModalProvider>
+              <ModalRoot />
               <BrowserRouter>
                 <Switch>
                   <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
@@ -91,8 +89,7 @@ const Routes = (props) => {
                   <Route component={Default} />
                 </Switch>
               </BrowserRouter>
-          </ModalProvider>
-          {/*</ModalWrapper>*/}
+            </ModalProvider>
           </ToasterProvider>
         </ThemeProvider>
       </ContainerWrapper>

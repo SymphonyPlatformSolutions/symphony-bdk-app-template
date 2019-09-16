@@ -19,7 +19,6 @@ function route() {
   const currentQuery = window.location.href.split('?')[1];
   const queryObj = getInnerQuery(currentQuery);
   const currentPage = queryObj.page || 'app';
-  console.log('current page', currentPage);
   switch (currentPage) {
     case MODAL_IDS.EXAMPLE_MODAL.entity:
       return (<SampleModal />);

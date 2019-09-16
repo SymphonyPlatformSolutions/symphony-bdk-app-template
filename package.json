@@ -10,7 +10,6 @@
     "build": "webpack --env.prod --progress --config webpack.prod.js",
     "start:dev": "webpack-dev-server --watch --progress --colors --https --env.dev --config webpack.dev.js ",
     "start:mock": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.mock --config webpack.mock.js & nodemon mock-json-server/mock-server.js",
-    "start:mock-ext": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.mock-ext --config webpack.mock-ext.js & nodemon mock-json-server/mock-server.js",
     "start:node-mock": "nodemon mock-json-server/mock-server.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

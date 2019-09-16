@@ -11,7 +11,6 @@ import {
 } from 'utils/system/app-constants';
 import Api from 'services/api';
 import { showExtensionApp } from 'services/controller/extension-app';
-import { openModal } from 'services/modal-service';
 import { parseStreamIdToBackend } from 'utils/helpers/help-functions';
 
 // These next 4 lines will be removed on production
@@ -85,7 +84,6 @@ const bootstrap = () => {
       const parsedThreadId = parseStreamIdToBackend(data.threadId);
     },
     trigger(uiClass, id, payload, data) {
-      console.log('Id here', id);
       switch (id) {
         default:
           break;

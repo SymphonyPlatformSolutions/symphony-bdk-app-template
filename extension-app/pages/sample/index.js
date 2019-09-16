@@ -12,6 +12,7 @@ import {
   ToasterConsumer,
 } from 'sms-sdk-toolbox-ui';
 import SampleModal from '../sample-modal/index';
+import ModalForm from '../../components/forms/modal-form';
 
 const LINK_PREFIX = setupLinkPrefix();
 
@@ -23,8 +24,8 @@ const TAB_IDS = {
   modal: 2,
 };
 
-const handleShowCreateInviteModal = (showModal, hideModalCallback) => () => {
-  showModal(SampleModal, {
+const handleShowModal = (showModal, hideModalCallback) => () => {
+  showModal(ModalForm, {
     callBack: () => {
       hideModalCallback();
     },
@@ -38,11 +39,12 @@ const Sample = (props) => {
   const { match: { params: { tab } } } = props;
 
   const tableColumns = [{
-    name: 'Name',
-    cell: row => <Text data-testid="Notification service" type="primary" size="small">{row.name || 'Fruit name'}</Text>,
+    Header: 'Name',
+    Cell: row => <Text data-testid="Notification service" type="primary" size="small">{row.name || 'Fruit name'}</Text>,
   }, {
-    name: 'Fruit',
-    cell: row => <Text type="primary" size="small">{row.isFruit ? 'Fruit' : 'Vegetable'}</Text>,
+    Header: 'Fruit',
+    Cell: row => <Text type="primary" size="small">{row.isFruit ? 'Fruit' : 'Vegetable'}</Text>,
+    tooltip: 'This is an tooltip',
   }];
 
   return (
@@ -66,7 +68,7 @@ const Sample = (props) => {
                 <Separator />
                 <Button
                   data-testid="createinvite"
-                  onClick={handleShowCreateInviteModal(showModal, hideModal)}
+                  // onClick={handleShowModal(showModal, hideModal)}
                 >
                   Open example modal
                 </Button>
