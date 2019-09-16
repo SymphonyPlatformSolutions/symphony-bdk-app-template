@@ -27,13 +27,11 @@ const ModalForm = ({
 
   return (
     <StyledModal className={openClassName}>
-      <StyledForm onSubmit={stopCascade} title="Modal Form" onKey>
         <Box>
           <Box horizontal justify="center" style={{ marginTop: '10px' }}>
             <Button type="primary" fill="outlined" onClick={hideModal}>Cancel</Button>
           </Box>
         </Box>
-      </StyledForm>
     </StyledModal>
   );
 };
@@ -41,3 +39,5 @@ const ModalForm = ({
 ModalForm.propTypes = {
   hideModal: PropTypes.func.isRequired,
 };
+
+export default ModalForm;

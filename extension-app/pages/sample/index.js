@@ -11,7 +11,6 @@ import {
   Table,
   ToasterConsumer,
 } from 'sms-sdk-toolbox-ui';
-import SampleModal from '../sample-modal/index';
 import ModalForm from '../../components/forms/modal-form';
 
 const LINK_PREFIX = setupLinkPrefix();
@@ -71,7 +70,7 @@ const Sample = (props) => {
                 <Separator />
                 <Button
                   data-testid="createinvite"
-                  // onClick={handleShowModal(showModal, hideModal)}
+                  onClick={handleShowModal(showModal, hideModal)}
                 >
                   Open example modal
                 </Button>
