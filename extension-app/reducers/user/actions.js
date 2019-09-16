@@ -1,5 +1,7 @@
-import { getUserRooms, getUserContacts } from 'services/user';
+import { getUserRooms } from 'services/user';
 import { filterAllowedRooms } from 'utils/helpers/help-functions';
+import Logger from 'services/logger';
+import Api from 'services/api';
 import {
   JWT_AUTH_SUCCESS,
   JWT_AUTH_FAILURE,
@@ -7,8 +9,9 @@ import {
   GET_ALL_USER_ROOMS_FAILURE,
   GET_ALLOWED_USER_ROOMS_SUCCESS,
   GET_ALLOWED_USER_ROOMS_FAILURE,
-  GET_USER_CONTACTS,
-  GET_USER_CONTACTS_ERROR,
+  GET_BOT_ROOMS,
+  GET_BOT_ROOMS_SUCCESS,
+  GET_BOT_ROOMS_FAILURE,
 } from './types';
 
 export function getJWTFromSymphony(jwtService) {
@@ -58,13 +61,22 @@ export function getAllowedUserRooms() {
     }));
 }
 
-export function fetchUserContacts(roomId) {
-  return dispatch => getUserContacts(roomId).then(contacts => dispatch({
-    type: GET_USER_CONTACTS,
-    payload: contacts,
-  }))
-    .catch(error => dispatch({
-      type: GET_USER_CONTACTS_ERROR,
-      payload: error,
-    }));
+export function getBotRooms() {
+  const endpoint = 'v1/rooms';
+
+  return (dispatch) => {
+    dispatch({ type: GET_BOT_ROOMS });
+
+    return Api.get(endpoint).then(response => dispatch({
+      type: GET_BOT_ROOMS_SUCCESS,
+      payload: response.data ? response.data : [],
+    })).catch((error) => {
+      Logger.critical(`Failure during GET ${endpoint} call`, error);
+
+      return dispatch({
+        type: GET_BOT_ROOMS_FAILURE,
+        payload: error.response.status,
+      });
+    });
+  };
 }

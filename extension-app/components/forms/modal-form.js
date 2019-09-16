@@ -20,7 +20,7 @@ const ModalForm = ({
 );
 
 ModalForm.propTypes = {
-  hideModal: PropTypes.func.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
 };
 
 export default ModalForm;

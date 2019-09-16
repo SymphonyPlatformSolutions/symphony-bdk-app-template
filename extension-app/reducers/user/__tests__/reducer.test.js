@@ -1,5 +1,5 @@
-import { filterAllowedRooms, simplifyRooms } from 'utils/helpers/help-functions.js';
-import { rawRooms as mockedRooms } from 'reducers/users/__mocks__/users';
+import { filterAllowedRooms, simplifyRooms } from 'utils/helpers/help-functions';
+import Api from 'services/api';
 import {
   JWT_AUTH_SUCCESS,
   JWT_AUTH_FAILURE,
@@ -7,19 +7,55 @@ import {
   GET_ALL_USER_ROOMS_FAILURE,
   GET_ALLOWED_USER_ROOMS_SUCCESS,
   GET_ALLOWED_USER_ROOMS_FAILURE,
+  GET_BOT_ROOMS,
+  GET_BOT_ROOMS_SUCCESS,
+  GET_BOT_ROOMS_FAILURE,
 } from '../types';
 import Reducer from '../index';
+
+jest.mock('services/api', () => ({ setJwt: jest.fn() }));
+
+const rawRooms = [
+  {
+    id: '0',
+    name: 'Room A',
+    threadId: 'abc/def//ghi+jkl==',
+    memberAddUserEnabled: true,
+    userIsOwner: true,
+    publicRoom: false,
+  },
+  {
+    id: '1',
+    name: 'Room B',
+    threadId: 'abc/def//ghi+123==',
+    memberAddUserEnabled: false,
+    userIsOwner: false,
+    publicRoom: false,
+  },
+  {
+    id: '2',
+    name: 'Room C',
+    threadId: 'abc/def//ghi+456==',
+    memberAddUserEnabled: true,
+    userIsOwner: false,
+    publicRoom: true,
+  },
+];
 
 const initialState = {
   allUserRooms: null,
   allowedUserRooms: null,
   jwt: 'loading',
+  botRooms: {
+    loading: false,
+    rooms: null,
+  },
 };
 
 let rooms;
 
 beforeEach(() => {
-  rooms = mockedRooms.map(room => ({ ...room }));
+  rooms = rawRooms.map(room => ({ ...room }));
 });
 
 describe('The reducer of user rooms', () => {
@@ -43,6 +79,7 @@ describe('The reducer of user rooms', () => {
     };
 
     expect(Reducer(initialState, action)).toEqual(state);
+    expect(Api.setJwt).toHaveBeenCalledWith('abcdefgh');
   });
 
   it('Should handle JWT_AUTH_FAILURE', () => {
@@ -103,5 +140,57 @@ describe('The reducer of user rooms', () => {
     };
 
     expect(Reducer(initialState, action)).toEqual(initialState);
+  });
+
+  it('Should handle GET_BOT_ROOMS', () => {
+    const action = {
+      type: GET_BOT_ROOMS,
+    };
+
+    const state = {
+      ...initialState,
+      botRooms: {
+        ...initialState.botRooms,
+        rooms: [],
+        loading: true,
+      },
+    };
+
+    expect(Reducer(initialState, action)).toEqual(state);
+  });
+
+  it('Should handle GET_BOT_ROOMS_SUCCESS', () => {
+    const action = {
+      type: GET_BOT_ROOMS_SUCCESS,
+      payload: [{ name: 'Room A', stream_id: 'abc' }],
+    };
+
+    const state = {
+      ...initialState,
+      botRooms: {
+        ...initialState.botRooms,
+        rooms: [{ name: 'Room A', threadId: 'abc' }],
+        loading: false,
+      },
+    };
+
+    expect(Reducer(initialState, action)).toEqual(state);
+  });
+
+  it('Should handle GET_BOT_ROOMS_FAILURE', () => {
+    const action = {
+      type: GET_BOT_ROOMS_FAILURE,
+    };
+
+    const state = {
+      ...initialState,
+      botRooms: {
+        ...initialState.botRooms,
+        rooms: [],
+        loading: false,
+      },
+    };
+
+    expect(Reducer(initialState, action)).toEqual(state);
   });
 });

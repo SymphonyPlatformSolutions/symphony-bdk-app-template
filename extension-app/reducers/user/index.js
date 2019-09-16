@@ -8,11 +8,16 @@ import {
   GET_ALL_USER_ROOMS_FAILURE,
   GET_ALLOWED_USER_ROOMS_SUCCESS,
   GET_ALLOWED_USER_ROOMS_FAILURE,
-  GET_USER_CONTACTS,
-  GET_USER_CONTACTS_ERROR,
+  GET_BOT_ROOMS,
+  GET_BOT_ROOMS_SUCCESS,
+  GET_BOT_ROOMS_FAILURE,
 } from './types';
 
 const INITIAL_STATE = {
+  botRooms: {
+    rooms: null,
+    loading: false,
+  },
   allUserRooms: null,
   allowedUserRooms: null,
   jwt: 'loading',
@@ -23,7 +28,7 @@ export default function (state = INITIAL_STATE, action) {
     // JWT
     case JWT_AUTH_SUCCESS:
       Api.setJwt(action.payload);
-      // Logger.setJwt(action.payload);
+      Logger.setJwt(action.payload);
       return {
         ...state,
         jwt: action.payload,
@@ -54,15 +59,35 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         allowedUserRooms: null,
       };
-    case GET_USER_CONTACTS:
+    case GET_BOT_ROOMS:
       return {
         ...state,
-        contacts: action.payload,
+        botRooms: {
+          ...state.botRooms,
+          rooms: [],
+          loading: true,
+        },
       };
-    case GET_USER_CONTACTS_ERROR:
+    case GET_BOT_ROOMS_SUCCESS:
       return {
         ...state,
-        contacts: [],
+        botRooms: {
+          ...state.botRooms,
+          rooms: action.payload.map(room => ({
+            name: room.name,
+            threadId: room.stream_id,
+          })),
+          loading: false,
+        },
+      };
+    case GET_BOT_ROOMS_FAILURE:
+      return {
+        ...state,
+        botRooms: {
+          ...state.botRooms,
+          rooms: [],
+          loading: false,
+        },
       };
     default:
       return state;
