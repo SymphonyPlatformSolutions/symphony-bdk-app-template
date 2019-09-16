@@ -46,23 +46,27 @@ const Sample = (props) => {
             <Box label="Text And Button">
               <Box vertical type="primary" style={{ width: '100%' }}>
                 <Text type="primary" size="small">
-                  Example page using lib
+                  Example page using the sms-sdk-toolbox-ui and sms-sdk-mock-client
                 </Text>
                 <Separator />
                 <ToasterConsumer>
                   {context => (
-                    <Button onClick={() => context.showToast({ message: 'An absolute success!', type: 'success' })}>
-                      Success
-                    </Button>
+                    <Box style={{ width: '200px' }}>
+                      <Button onClick={() => context.showToast({ message: 'An absolute success!', type: 'success' })}>
+                      Toast Success
+                      </Button>
+                    </Box>
                   )}
                 </ToasterConsumer>
                 <Separator />
-                <Button
-                  data-testid="createinvite"
-                  onClick={() => showModal(ModalForm)}
-                >
-                  Open example modal
-                </Button>
+                <Box style={{ width: '200px' }}>
+                  <Button
+                    data-testid="createinvite"
+                    onClick={() => showModal(ModalForm)}
+                  >
+                    Open example modal
+                  </Button>
+                </Box>
               </Box>
             </Box>
             <Box label="Table Example">
