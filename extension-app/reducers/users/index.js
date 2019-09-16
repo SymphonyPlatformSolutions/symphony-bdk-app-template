@@ -1,5 +1,5 @@
 import Api from 'services/api';
-import Logger from 'sms-sdk-toolbox-ui';
+import Logger from 'services/logger';
 import { simplifyRooms } from 'utils/helpers/help-functions';
 import {
   JWT_AUTH_SUCCESS,
@@ -8,16 +8,11 @@ import {
   GET_ALL_USER_ROOMS_FAILURE,
   GET_ALLOWED_USER_ROOMS_SUCCESS,
   GET_ALLOWED_USER_ROOMS_FAILURE,
-  GET_BOT_ROOMS,
-  GET_BOT_ROOMS_SUCCESS,
-  GET_BOT_ROOMS_FAILURE,
+  GET_USER_CONTACTS,
+  GET_USER_CONTACTS_ERROR,
 } from './types';
 
 const INITIAL_STATE = {
-  botRooms: {
-    rooms: null,
-    loading: false,
-  },
   allUserRooms: null,
   allowedUserRooms: null,
   jwt: 'loading',
@@ -59,35 +54,15 @@ export default function (state = INITIAL_STATE, action) {
         ...state,
         allowedUserRooms: null,
       };
-    case GET_BOT_ROOMS:
+    case GET_USER_CONTACTS:
       return {
         ...state,
-        botRooms: {
-          ...state.botRooms,
-          rooms: [],
-          loading: true,
-        },
+        contacts: action.payload,
       };
-    case GET_BOT_ROOMS_SUCCESS:
+    case GET_USER_CONTACTS_ERROR:
       return {
         ...state,
-        botRooms: {
-          ...state.botRooms,
-          rooms: action.payload.map(room => ({
-            name: room.name,
-            threadId: room.stream_id,
-          })),
-          loading: false,
-        },
-      };
-    case GET_BOT_ROOMS_FAILURE:
-      return {
-        ...state,
-        botRooms: {
-          ...state.botRooms,
-          rooms: [],
-          loading: false,
-        },
+        contacts: [],
       };
     default:
       return state;
