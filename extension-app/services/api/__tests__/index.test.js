@@ -1,7 +1,8 @@
+import Api from '..';
 import axios from 'axios';
-import Api from 'services/api';
 
 jest.mock('axios');
+jest.mock('utils/system/setup-url', () => ({ setupURL: jest.fn() }));
 
 const BASE_URL = 'http://www.baseurl.com';
 const ENDPOINT = 'v1/users';
@@ -47,16 +48,6 @@ describe('Api service', () => {
     });
   });
 
-  it('Should handle "setJwt"', () => {
-    Api.setJwt('jwt');
-    expect(Api.jwt).toEqual('jwt');
-    expect(Api.headers).toEqual({ Authorization: 'Bearer jwt' });
-  });
-
-  it('Should handle "getJwt"', () => {
-    Api.setJwt('jwt');
-    expect(Api.getJwt('jwt')).toEqual('jwt');
-  });
 
   it('Should handle "setCustomHeaders"', () => {
     Api.setCustomHeaders({ key: 'value' });

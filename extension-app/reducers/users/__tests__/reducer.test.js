@@ -1,4 +1,4 @@
-import { filterAllowedRooms, simplifyRooms } from 'utils/helpers/help-functions.js';
+import { filterAllowedRooms, simplifyRooms } from 'utils/helpers/help-functions';
 import { rawRooms as mockedRooms } from 'reducers/users/__mocks__/users';
 import {
   JWT_AUTH_SUCCESS,
@@ -9,6 +9,8 @@ import {
   GET_ALLOWED_USER_ROOMS_FAILURE,
 } from '../types';
 import Reducer from '../index';
+
+jest.mock('services/api', () => ({ setJwt: jest.fn() }));
 
 const initialState = {
   allUserRooms: null,

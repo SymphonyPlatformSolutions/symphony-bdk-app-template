@@ -1,5 +1,7 @@
 import { getUserRooms } from '../index';
 
+jest.mock('services/api', () => ({ setJwt: jest.fn() }));
+
 describe('Get User Rooms', () => {
   it('Should handle Symphony service of getRooms() with success', (done) => {
     global.SYMPHONY = {
