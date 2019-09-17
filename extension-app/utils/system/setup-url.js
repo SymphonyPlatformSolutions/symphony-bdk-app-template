@@ -1,3 +1,4 @@
+/* global APP_CONFIG */
 import envs from './envs-constants';
 
 const setupURL = () => {
@@ -11,7 +12,7 @@ const setupURL = () => {
     // BE from another PC
     ROOT_URL = 'Enter a Valid URL';
   } else {
-    ROOT_URL = `https://${window.location.host}/template`;
+    ROOT_URL = APP_CONFIG.API_ROOT_URL;
   }
   return ROOT_URL;
 };
@@ -21,7 +22,8 @@ const setupLinkPrefix = () => {
   let LINK_PREFIX = '';
 
   if (currEnv === envs.PROD) {
-    LINK_PREFIX = '/template/app';
+    // eslint-disable-next-line prefer-destructuring
+    LINK_PREFIX = APP_CONFIG.LINK_PREFIX;
   }
   return LINK_PREFIX;
 };
@@ -32,7 +34,7 @@ const frontendURL = () => {
   if (currEnv !== envs.PROD) {
     return 'https://localhost:4000';
   }
-  return `https://${window.location.host}`;
+  return APP_CONFIG.APP_ROOT_URL;
 };
 
 export { setupURL, setupLinkPrefix, frontendURL };

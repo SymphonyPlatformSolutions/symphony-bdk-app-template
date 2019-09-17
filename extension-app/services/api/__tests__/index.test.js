@@ -1,7 +1,8 @@
+import Api from '..';
 import axios from 'axios';
-import Api from 'services/api';
 
 jest.mock('axios');
+jest.mock('utils/system/setup-url', () => ({ setupURL: jest.fn() }));
 
 const BASE_URL = 'http://www.baseurl.com';
 const ENDPOINT = 'v1/users';
