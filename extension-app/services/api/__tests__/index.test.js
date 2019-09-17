@@ -48,6 +48,16 @@ describe('Api service', () => {
     });
   });
 
+  it('Should handle "setJwt"', () => {
+    Api.setJwt('jwt');
+    expect(Api.jwt).toEqual('jwt');
+    expect(Api.headers).toEqual({ Authorization: 'Bearer jwt' });
+  });
+
+  it('Should handle "getJwt"', () => {
+    Api.setJwt('jwt');
+    expect(Api.getJwt('jwt')).toEqual('jwt');
+  });
 
   it('Should handle "setCustomHeaders"', () => {
     Api.setCustomHeaders({ key: 'value' });
