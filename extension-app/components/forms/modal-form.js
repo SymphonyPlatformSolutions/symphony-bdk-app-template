@@ -10,7 +10,7 @@ const StyledBox = styled(Box)`
 `;
 
 const ModalForm = ({
-  onRequestClose,
+  hideModal,
 }) => (
   <StyledBox>
     <Box vertical justify="center" style={{ marginTop: '10px' }}>
@@ -22,13 +22,13 @@ const ModalForm = ({
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididun
         </Text>
       </Box>
-      <Button type="primary" fill="outlined" onClick={onRequestClose}>Cancel</Button>
+      <Button type="primary" fill="outlined" onClick={hideModal}>Cancel</Button>
     </Box>
   </StyledBox>
 );
 
 ModalForm.propTypes = {
-  onRequestClose: PropTypes.func.isRequired,
+  hideModal: PropTypes.func.isRequired,
 };
 
 export default ModalForm;

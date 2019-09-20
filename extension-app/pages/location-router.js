@@ -1,5 +1,5 @@
 import React from 'react';
-import {MODAL_IDS} from 'services/enrichers/entities';
+import { MODAL_IDS } from 'services/enrichers/entities';
 import Sample from './sample';
 import ModalForm from '../components/forms/modal-form';
 
@@ -7,7 +7,7 @@ const INNER_QUERY = 'queryObj';
 
 function getInnerQuery(query) {
   if (!query) {
-    return {page: 'app'};
+    return { page: 'app' };
   }
 
   const part = query.split(`${INNER_QUERY}=`);
