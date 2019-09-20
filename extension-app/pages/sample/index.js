@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { setupLinkPrefix } from 'utils/system/setup-url';
-import { ModalConsumer } from 'components/commons/modal/modal-context';
 import {
   Box,
   Text,
@@ -10,6 +9,7 @@ import {
   Tabs,
   Table,
   ToasterConsumer,
+  ModalConsumer
 } from 'sms-sdk-toolbox-ui';
 import ModalForm from '../../components/forms/modal-form';
 
@@ -64,7 +64,7 @@ const Sample = (props) => {
                     data-testid="createinvite"
                     onClick={() => showModal(ModalForm)}
                   >
-                    Open example modal
+                    Open modal
                   </Button>
                 </Box>
               </Box>
