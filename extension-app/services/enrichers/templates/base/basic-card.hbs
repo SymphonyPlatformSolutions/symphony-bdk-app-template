@@ -7,61 +7,11 @@
   {{/if}}
   >
     <header>
-      {{#if header.service }}
-         <div style="margin-bottom: 4px;"><b>Service name: {{header.service}} - Incident id: {{header.incidentId}}</b></div>
-      {{/if}}
-      {{#if header.genericTitle }}
-         <div style="margin-bottom: 12px;"><b>{{header.genericTitle}}</b></div>
-      {{/if}}
       {{> (headerPartial) header.details}}
     </header>
     {{#if body }}
       <body>
         {{> (bodyPartial) body.details}}
-        {{#if body.hashes }}
-          <hr />
-        {{/if}}
-        {{#if body.buttons }}
-          <div style="margin: 12px 0">
-          {{#each body.buttons}}       
-            {{> action-button this.buttonId}}
-          {{/each}}
-          </div>       
-        {{/if}}
-        {{#if body.tempFakeButtons }}
-          <div style="margin: 12px 0">
-            {{#each body.tempFakeButtons}}
-              <span style="
-                display: inline-block;
-                min-width: 106px;                        
-                color: #006caf;
-                background-color: none;
-                border: 1px solid #006caf;
-                font-size: 10px;
-                padding: 5px 8px;                           
-                border-radius: 22px;    
-                margin-right: 12px;
-                text-align: center; 
-              ">{{this.label}}</span>
-            {{/each}}
-          </div>
-        {{/if}}
-      {{#if body.buttons }}
-          {{#each body.buttons}}
-            {{> action-button this }}
-          {{/each}}
-        <p style="padding: 7px;"> </p>
-      {{/if}}
-      {{#if body.hashes }}
-        <div>
-          <span style="margin-right: 20px">
-            Type: <hash tag="#{{body.hashes.type}}" />
-          </span>
-            <span style="margin-right: 20px">
-              Incident: <hash tag="#{{body.hashes.incident}}" />
-            </span>  
-          </div>
-        {{/if}}
       </body>
     {{/if}}
   </card>

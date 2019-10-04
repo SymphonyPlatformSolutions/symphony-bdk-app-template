@@ -2,9 +2,7 @@
 import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
-import HelpCommandBuilder from './template-builders/help-command-builder';
-import WelcomeMessageBuilder from './template-builders/welcome-message-builder';
-import WelcomeMessageAboutRoomBuilder from './template-builders/welcome-message-about-room-builder';
+import MyEntityBuilder from './template-builders/my-entity-builder';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -36,8 +34,14 @@ export default class GeneralEnricher {
   }
 
   render(type, entity) {
-    const data = typeof entity.id === 'object' ? entity.id : JSON.parse(entity.id);
-    let actionData = {};
+    let data = {};
+    if (entity.id) {
+      data = typeof entity.id === 'object' ? entity.id : JSON.parse(entity.id);
+    } else if (entity.payload) {
+      data = typeof entity.payload === 'object' ? entity.payload : JSON.parse(entity.payload);
+    }
+
+    const actionData = {};
     let template;
 
     switch (type) {
@@ -48,19 +52,11 @@ export default class GeneralEnricher {
           <p><b>WOW</b> that's exciting!</p>
         </messageML>`;
         break;
-      case ENRICHER_EVENTS.HELP_COMMAND.type:
-        template = HelpCommandBuilder.build(data);
-        break;
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_ROOM.type:
-        template = WelcomeMessageBuilder.build();
-        break;
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_ABOUT_ROOM.type:
-        template = WelcomeMessageAboutRoomBuilder.build(data);
+      case ENRICHER_EVENTS.MY_ENTITY.type:
+        template = MyEntityBuilder.build(data);
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;
-        actionData = {};
         break;
     }
 
