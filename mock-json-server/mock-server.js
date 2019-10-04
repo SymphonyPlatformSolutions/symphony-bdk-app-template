@@ -1,7 +1,9 @@
 // This is responsible to create the mock server.
 const jsonServer = require('json-server');
-const { generateDemoInfo, getBotRooms } = require('./mock-file');
 const Axios = require('axios');
+const {
+  generateDemoInfo, getBotRooms, mockInstances, initMockNotifications,
+} = require('./mock-file');
 
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
@@ -39,56 +41,6 @@ server.post('/api/parser', async (req, res) => {
   mock content.
   It can - and should - be deleted when developing your own integration.
 */
-const fruit = generateDemoInfo();
-server.get('/demoEndpoint', (req, res) => {
-  send(() => {
-    res.jsonp({ content: fruit });
-  });
-});
-
-server.put('/demoEndpoint/:id', (req, res) => {
-  const editId = parseInt(req.params.id, 10);
-  const editIndex = fruit.findIndex(el => el.id === editId);
-
-  if (editIndex >= 0 && editIndex < fruit.length) {
-    fruit[editIndex] = {
-      ...fruit[editIndex],
-      ...req.body,
-    };
-    send(() => {
-      res.sendStatus(200);
-    });
-  } else {
-    send(() => {
-      res.sendStatus(500);
-    });
-  }
-});
-
-server.delete('/demoEndpoint/:id', (req, res) => {
-  const editId = parseInt(req.params.id, 10);
-  const editIndex = fruit.findIndex(el => el.id === editId);
-
-  if (editIndex >= 0 && editIndex < fruit.length) {
-    fruit.splice(editIndex, 1);
-    send(() => {
-      res.sendStatus(200);
-    });
-  } else {
-    send(() => {
-      res.sendStatus(500);
-    });
-  }
-});
-
-server.post('/demoEndpoint', (req, res) => {
-  const newId = fruit.reduce((acc, el) => (el.id > acc ? el.id : acc), -1) + 1;
-  fruit.push({ ...req.body, id: newId });
-  send(() => {
-    res.jsonp(newId);
-  });
-});
-
 server.post('/application/authenticate', (req, res) => {
   res.sendStatus(200);
 });
@@ -105,12 +57,34 @@ server.listen(3000, () => {
   console.log('JSON Server is running');
 });
 
-// Project specific APIs
-server.get('/v1/sym/rooms', (req, res) => {
-  console.log('Get Bot Rooms!');
-  send(() => res.jsonp(getBotRooms()));
+// --- Instances
+server.get('/v1/instances', (req, res) => {
+  send(() => res.jsonp(mockInstances));
 });
 
-server.get('/v1/sym/bot-info', (req, res) => {
-  send(() => res.jsonp({ username: 'template_bot' }));
+// --- Notifications
+const mockNotifications = initMockNotifications;
+server.get('/v1/notifications', (req, res) => {
+  send(() => res.jsonp(mockNotifications));
+});
+
+server.post('/v1/notifications', (req, res) => {
+  const newId = `${mockNotifications.length + 1}`;
+  mockNotifications.push({
+    instance_id: req.body.instanceId,
+    name: req.body.name,
+    is_editable: true,
+    id: newId,
+  });
+  send(() => res.jsonp(newId));
+});
+
+server.delete('/v1/notifications/:id', (req, res) => {
+  const indexOfDelete = mockNotifications.findIndex(el => el.id === req.params.id);
+  if (indexOfDelete < 0) {
+    send(() => res.sendStatus(404));
+  }
+  mockNotifications.slice(mockNotifications.findIndex(el => el.id === req.params.id), 1);
+  console.log(mockNotifications);
+  send(() => res.sendStatus(200));
 });
