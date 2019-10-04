@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { ToasterConsumer } from 'sms-sdk-toolbox-ui';
 import { connect } from 'react-redux';
 
@@ -29,9 +30,13 @@ const ToastConnector = (props) => {
 };
 
 ToastConnector.propTypes = {
+  type: PropTypes.string,
+  message: PropTypes.string,
 };
 
 ToastConnector.defaultProps = {
+  type: null,
+  message: null,
 };
 
 const mapDispatchToProps = () => ({});

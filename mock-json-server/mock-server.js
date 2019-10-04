@@ -71,12 +71,26 @@ server.get('/v1/notifications', (req, res) => {
 server.post('/v1/notifications', (req, res) => {
   const newId = `${mockNotifications.length + 1}`;
   mockNotifications.push({
-    instance_id: req.body.instanceId,
+    instance_id: req.body.instance_id,
     name: req.body.name,
     is_editable: true,
     id: newId,
   });
   send(() => res.jsonp(newId));
+});
+
+server.put('/v1/notifications/:id', (req, res) => {
+  const editIndex = mockNotifications.findIndex(el => el.id === req.params.id);
+  if (editIndex < 0) {
+    send(() => res.sendStatus(404));
+  } else {
+    mockNotifications[editIndex] = {
+      ...mockNotifications[editIndex],
+      name: req.body.name,
+      instance_id: req.body.instance_id,
+    };
+    send(() => res.sendStatus(200));
+  }
 });
 
 server.delete('/v1/notifications/:id', (req, res) => {

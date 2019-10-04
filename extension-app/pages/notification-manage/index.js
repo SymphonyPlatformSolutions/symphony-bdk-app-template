@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   Box,
   Text,
@@ -7,7 +8,7 @@ import {
   ModalConsumer,
   DangerConfirmationModal,
 } from 'sms-sdk-toolbox-ui';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 
 const LINK_PREFIX = setupLinkPrefix();
@@ -53,12 +54,20 @@ const NotificationManagePage = (props) => {
     notifications, instances, deleteLoading, deleteHandler,
   } = props;
   const [triggerOpenModal, setTriggerOpenModal] = useState(null);
+  const [editNotificationRedirect, setEditNotificationRedirect] = useState(null);
 
   const parsedNotifications = notifications.map(el => ({
     ...el,
     instance: instances.find(i => el.instanceId === i.id).name,
     actionsMenu: el.isEditable
       ? [
+        {
+          label: 'Edit',
+          callback: () => {
+            setEditNotificationRedirect(el);
+          },
+          type: 'primary',
+        },
         {
           label: 'Delete',
           callback: () => {
@@ -70,6 +79,16 @@ const NotificationManagePage = (props) => {
       : undefined,
   }));
 
+  if (editNotificationRedirect) {
+    return (
+      <Redirect
+        to={{
+          pathname: `${LINK_PREFIX}/createNotification`,
+          state: { notification: editNotificationRedirect },
+        }}
+      />
+    );
+  }
 
   return (
     <ModalConsumer>
@@ -108,6 +127,19 @@ const NotificationManagePage = (props) => {
       }}
     </ModalConsumer>
   );
+};
+
+NotificationManagePage.propTypes = {
+  notifications: PropTypes.array,
+  instances: PropTypes.array,
+  deleteLoading: PropTypes.bool,
+  deleteHandler: PropTypes.func.isRequired,
+};
+
+NotificationManagePage.defaultProps = {
+  notifications: null,
+  instances: null,
+  deleteLoading: false,
 };
 
 export default NotificationManagePage;

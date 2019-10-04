@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Box, Tabs, HelpPageBuilder } from 'sms-sdk-toolbox-ui';
 import NotificationPageContainer from 'pages/notification-manage/container';
@@ -79,7 +80,7 @@ const MainPage = (props) => {
   return (
     <Box space={20}>
       <Box horizontal space={60} style={{ maxWidth: '50rem' }}>
-        <Tabs activeTab={chosenTab || 0}>
+        <Tabs activeTab={chosenTab}>
           <div label="Instances">
             <InstanceManagePage instances={instances} />
           </div>
@@ -93,6 +94,16 @@ const MainPage = (props) => {
       </Box>
     </Box>
   );
+};
+
+MainPage.propTypes = {
+  instances: PropTypes.array,
+  chosenTab: PropTypes.number,
+};
+
+MainPage.defaultProps = {
+  instances: null,
+  chosenTab: 0,
 };
 
 export default MainPage;
