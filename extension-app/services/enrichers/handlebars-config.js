@@ -12,6 +12,8 @@ import textColorPartial from './templates/text/text-color.hbs';
 import userTextPartial from './templates/text/user.hbs';
 import myEntityBody from './templates/base/my-entity/my-entity-body.hbs';
 import myEntityHeader from './templates/base/my-entity/my-entity-header.hbs';
+import currencyQuoteBody from './templates/base/currency-quote/currency-quote-body.hbs';
+import currencyQuoteHeader from './templates/base/currency-quote/currency-quote-header.hbs';
 
 Handlebars.registerPartial('small-icon', smallIconPartial);
 Handlebars.registerPartial('action-button', actionButtonPartial);
@@ -27,6 +29,9 @@ Handlebars.registerPartial('user', userTextPartial);
 
 Handlebars.registerPartial('my-entity-body', myEntityBody);
 Handlebars.registerPartial('my-entity-header', myEntityHeader);
+
+Handlebars.registerPartial('currency-quote-body', currencyQuoteBody);
+Handlebars.registerPartial('currency-quote-header', currencyQuoteHeader);
 
 const unprettyCardTemplate = Handlebars.compile(basicCard);
 const cardTemplate = obj => pretty(unprettyCardTemplate(obj));

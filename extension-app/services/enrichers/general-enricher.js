@@ -3,6 +3,7 @@ import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
 import MyEntityBuilder from './template-builders/my-entity-builder';
+import CurrencyQuoteBuilder from './template-builders/currency-quote-builder';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -54,6 +55,9 @@ export default class GeneralEnricher {
         break;
       case ENRICHER_EVENTS.MY_ENTITY.type:
         template = MyEntityBuilder.build(data);
+        break;
+      case ENRICHER_EVENTS.CURRENCY_QUOTE.type:
+        template = CurrencyQuoteBuilder.build(data);
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;

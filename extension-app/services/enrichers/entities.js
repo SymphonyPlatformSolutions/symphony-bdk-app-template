@@ -9,6 +9,20 @@ export const ENRICHER_EVENTS = {
     type: 'MyEntity',
     json: {},
   },
+  CURRENCY_QUOTE: {
+    type: 'currencyQuote',
+    json: {
+      from: {
+        currency: 'USD',
+        value: 1,
+      },
+      to: {
+        currency: 'BRL',
+        value: 4.10,
+      },
+      exchangeRate: 0.243902439,
+    },
+  },
 };
 
 export const MODAL_IDS = {
