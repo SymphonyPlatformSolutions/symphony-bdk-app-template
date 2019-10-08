@@ -42,7 +42,7 @@ export default class GeneralEnricher {
       data = typeof entity.payload === 'object' ? entity.payload : JSON.parse(entity.payload);
     }
 
-    const actionData = {};
+    let actionData = {};
     let template;
 
     switch (type) {
@@ -57,6 +57,13 @@ export default class GeneralEnricher {
         template = MyEntityBuilder.build(data);
         break;
       case ENRICHER_EVENTS.CURRENCY_QUOTE.type:
+        actionData = GeneralEnricher.actionFactory([{
+          id: 'Buy',
+          service: this.name,
+          type: MODAL_IDS.CURRENCY_QUOTE_MODAL.type,
+          entityData: data,
+          label: 'Buy',
+        }], this.name, MODAL_IDS.CURRENCY_QUOTE_MODAL.entity);
         template = CurrencyQuoteBuilder.build(data);
         break;
       default:
@@ -74,6 +81,9 @@ export default class GeneralEnricher {
     switch (data.type) {
       case MODAL_IDS.EXAMPLE_MODAL.entity:
         openModal(MODAL_IDS.EXAMPLE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '560px', { page: 'exampleModal' });
+        break;
+        case MODAL_IDS.CURRENCY_QUOTE_MODAL.entity:
+        openModal(MODAL_IDS.CURRENCY_QUOTE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '560px', { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity });
         break;
       default:
         openModal('noEntityDialog', this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '300px', { page: 'error' });

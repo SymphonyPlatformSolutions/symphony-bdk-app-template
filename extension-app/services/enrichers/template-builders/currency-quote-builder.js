@@ -10,12 +10,15 @@ export default class MyCurrencyQuoteBuilder {
       bodyPartial: () => 'currency-quote-body',
       header: { details: {} },
       body: {
+        buttons: [
+          { buttonId: 'Buy' },
+        ],
         details: {
           payload: data,
           fakeCard: {
             accent: actionColors.myEntity,
             headerColor: actionColors.myEntity,
-            header: 'Payload Received',
+            header: 'Actions',
           },
         },
       },

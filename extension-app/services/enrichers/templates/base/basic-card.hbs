@@ -12,6 +12,14 @@
     {{#if body }}
       <body>
         {{> (bodyPartial) body.details}}
+        <div style="margin-top: 8px">
+          {{#if body.buttons }}
+            {{#each body.buttons}}
+              {{> action-button this }}
+            {{/each}}
+            <p style="padding: 7px;"> </p>
+          {{/if}}
+        </div>
       </body>
     {{/if}}
   </card>

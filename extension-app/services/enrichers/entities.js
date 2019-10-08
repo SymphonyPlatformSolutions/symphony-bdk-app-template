@@ -10,7 +10,7 @@ export const ENRICHER_EVENTS = {
     json: {},
   },
   CURRENCY_QUOTE: {
-    type: 'currencyQuote',
+    type: 'com.symphony.ms.devtools.currencyQuote',
     json: {
       from: {
         currency: 'USD',
@@ -28,6 +28,11 @@ export const ENRICHER_EVENTS = {
 export const MODAL_IDS = {
   EXAMPLE_MODAL: {
     entity: 'example-modal',
+    entityData: {},
+  },
+  CURRENCY_QUOTE_MODAL: {
+    type: 'createIncident',
+    entity: 'com.symphony.ms.devtools.currency-quote-modal',
     entityData: {},
   },
 };
