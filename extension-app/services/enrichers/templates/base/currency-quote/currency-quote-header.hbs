@@ -1,4 +1,4 @@
-<p>Exchange Rate US Dollar VS BR Real</p>
+<p>Exchange rate: {{payload.from_name}} to {{payload.to_name}}</p>
 <div style="display: flex; align-items: center; margin-top: 10px;">
     <div style="background-color: #CDDAF1;
         display: flex;
@@ -10,7 +10,7 @@
       margin-bottom: 2px;
       margin-right: 10px;
       ">1</p>
-      <b style="color: #4f4f4f96;">USD</b>
+      <b style="color: #4f4f4f96;">{{payload.from}}</b>
     </div>
     <div style="background: #EDB1FA;
         display: flex;
@@ -22,6 +22,6 @@
        margin-bottom: 2px;
        margin-right: 10px;
         ">4,10</p>
-      <b style="color: #4f4f4f96;">BRL</b>
+      <b style="color: #4f4f4f96;">{{payload.to}}</b>
     </div>
 </div>

@@ -82,8 +82,8 @@ export default class GeneralEnricher {
       case MODAL_IDS.EXAMPLE_MODAL.entity:
         openModal(MODAL_IDS.EXAMPLE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '560px', { page: 'exampleModal' });
         break;
-        case MODAL_IDS.CURRENCY_QUOTE_MODAL.entity:
-        openModal(MODAL_IDS.CURRENCY_QUOTE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '560px', { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity });
+        case MODAL_IDS.CURRENCY_QUOTE_MODAL.type:
+        openModal(MODAL_IDS.CURRENCY_QUOTE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '260px', { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity });
         break;
       default:
         openModal('noEntityDialog', this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '300px', { page: 'error' });

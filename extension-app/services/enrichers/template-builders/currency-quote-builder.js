@@ -8,7 +8,11 @@ export default class MyCurrencyQuoteBuilder {
       icon: 'https://localhost:4000/assets/favicon.png',
       headerPartial: () => 'currency-quote-header',
       bodyPartial: () => 'currency-quote-body',
-      header: { details: {} },
+      header: {
+        details: {
+          payload: data,
+        },
+      },
       body: {
         buttons: [
           { buttonId: 'Buy' },
