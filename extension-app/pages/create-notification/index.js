@@ -14,28 +14,36 @@ import { setupLinkPrefix } from 'utils/system/setup-url';
 const LINK_PREFIX = setupLinkPrefix();
 
 const CreateNotificationPage = (props) => {
-  const { instances, createHandler, loading } = props;
-  const [chosenInstance, setChosenInstance] = useState(null);
-  const [notificationName, setNotificationName] = useState(null);
+  const {
+    instances, submitHandler, loading, editingNotification,
+  } = props;
 
+  const [chosenInstance, setChosenInstance] = useState(
+    editingNotification ? editingNotification.instanceId : null,
+  );
+  const [notificationName, setNotificationName] = useState(
+    editingNotification ? editingNotification.name : null,
+  );
   const parsedInstances = instances.map(el => ({
     value: el.id,
     label: el.name,
   }));
 
   const disableSubmit = !chosenInstance || !notificationName;
-
   return (
     <Box style={{ maxWidth: '30rem', marginTop: '60px' }}>
       <Text isTitle type="primary">
-        Create Notification
+        {editingNotification
+          ? `Edit notification "${editingNotification.name}"`
+          : 'Create'}{' '}
+        Notification
       </Text>
       <FormBox>
         <FormGroup>
           <Dropdown
             label="Choose Instance"
-            value={chosenInstance}
-            onChange={setChosenInstance}
+            chosenValue={chosenInstance}
+            onChange={e => setChosenInstance(e.value)}
             options={parsedInstances}
           />
         </FormGroup>
@@ -54,11 +62,19 @@ const CreateNotificationPage = (props) => {
         <Button
           loading={loading}
           disabled={disableSubmit}
-          onClick={() => createHandler({
-            instanceId: chosenInstance.value,
-            name: notificationName,
-          })}
-        >Create
+          onClick={() => (editingNotification
+            ? submitHandler({
+              ...editingNotification,
+              instanceId: chosenInstance,
+              name: notificationName,
+            })
+            : submitHandler({
+              instanceId: chosenInstance,
+              name: notificationName,
+            }))
+          }
+        >
+          {editingNotification ? 'Update' : 'Create'}
         </Button>
       </Box>
     </Box>

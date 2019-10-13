@@ -2,12 +2,15 @@ import {
   GET_NOTIFICATIONS,
   GET_NOTIFICATIONS_SUCCESS,
   GET_NOTIFICATIONS_FAILURE,
-  POST_NOTIFICATIONS,
-  POST_NOTIFICATIONS_SUCCESS,
-  POST_NOTIFICATIONS_FAILURE,
+  POST_NOTIFICATION,
+  POST_NOTIFICATION_SUCCESS,
+  POST_NOTIFICATION_FAILURE,
   DELETE_NOTIFICATIONS,
   DELETE_NOTIFICATIONS_SUCCESS,
   DELETE_NOTIFICATIONS_FAILURE,
+  PUT_NOTIFICATION,
+  PUT_NOTIFICATION_SUCCESS,
+  PUT_NOTIFICATION_FAILURE,
 } from './types';
 
 const INITIAL_STATE = {
@@ -19,8 +22,9 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_NOTIFICATIONS:
-    case POST_NOTIFICATIONS:
+    case POST_NOTIFICATION:
     case DELETE_NOTIFICATIONS:
+    case PUT_NOTIFICATION:
       return {
         ...state,
         loading: true,
@@ -38,13 +42,29 @@ export default function (state = INITIAL_STATE, action) {
         loading: false,
         error: null,
       };
-    case POST_NOTIFICATIONS_SUCCESS:
+    case POST_NOTIFICATION_SUCCESS:
       return {
         ...state,
         notifications: [
           ...state.notifications,
           action.payload,
         ],
+        loading: false,
+        error: null,
+      };
+    case PUT_NOTIFICATION_SUCCESS:
+      return {
+        ...state,
+        notifications: state.notifications.map((el) => {
+          if (el.id === action.payload.id) {
+            return {
+              ...el,
+              name: action.payload.name,
+              instanceId: action.payload.instanceId,
+            };
+          }
+          return el;
+        }),
         loading: false,
         error: null,
       };
@@ -56,8 +76,9 @@ export default function (state = INITIAL_STATE, action) {
         error: null,
       };
     case GET_NOTIFICATIONS_FAILURE:
-    case POST_NOTIFICATIONS_FAILURE:
+    case POST_NOTIFICATION_FAILURE:
     case DELETE_NOTIFICATIONS_FAILURE:
+    case PUT_NOTIFICATION_FAILURE:
       return {
         ...state,
         loading: false,

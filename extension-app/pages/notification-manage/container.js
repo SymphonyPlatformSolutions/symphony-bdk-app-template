@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -30,8 +31,6 @@ const NotificationPageContainer = (props) => {
     );
   }
 
-  console.log('GOT NOTIFICATIONS', notifications);
-
   return (
     <NotificationManagePage
       notifications={notifications}
@@ -42,10 +41,18 @@ const NotificationPageContainer = (props) => {
   );
 };
 
-NotificationPageContainer.propTypes = {};
+NotificationPageContainer.propTypes = {
+  loading: PropTypes.bool,
+  instances: PropTypes.array,
+  notifications: PropTypes.array,
+  actions: PropTypes.object.isRequired,
+};
 
-NotificationPageContainer.defaultProps = {};
-
+NotificationPageContainer.defaultProps = {
+  loading: false,
+  instances: null,
+  notifications: null,
+};
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
     { getNotifications, deleteNotification },

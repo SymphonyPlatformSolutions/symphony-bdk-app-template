@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Text, Table } from 'sms-sdk-toolbox-ui';
 
 const columns = [
@@ -25,6 +26,14 @@ const InstanceManagePage = (props) => {
       <Table columns={columns} data={instances} />
     </Box>
   );
+};
+
+InstanceManagePage.propTypes = {
+  instances: PropTypes.array,
+};
+
+InstanceManagePage.defaultProps = {
+  instances: null,
 };
 
 export default InstanceManagePage;

@@ -45,6 +45,7 @@ const Routes = (props) => {
 
   useEffect(() => {
     const { actions, jwtService } = props;
+    console.log('getJWT');
     actions.getJWTFromSymphony(jwtService);
   }, []);
 
@@ -88,9 +89,11 @@ const Routes = (props) => {
                   <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
                   <Route exact path={`${LINK_PREFIX}/home/:tab`} component={MainPageContainer} />
                   <Route exact path={`${LINK_PREFIX}/createNotification`} component={CreateNotificationContainer} />
+                  <Route exact path={`${LINK_PREFIX}/editNotification`} component={CreateNotificationContainer} />
                   <Route component={Default} />
                 </Switch>
               </BrowserRouter>
+              <ToastConnector />
             </ModalProvider>
           </ToasterProvider>
         </ThemeProvider>

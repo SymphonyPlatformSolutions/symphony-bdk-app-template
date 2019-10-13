@@ -3,10 +3,12 @@ import {
 } from '../instances/types';
 import {
   GET_NOTIFICATIONS_FAILURE,
-  POST_NOTIFICATIONS_FAILURE,
+  POST_NOTIFICATION_FAILURE,
   DELETE_NOTIFICATIONS_FAILURE,
-  POST_NOTIFICATIONS_SUCCESS,
+  POST_NOTIFICATION_SUCCESS,
   DELETE_NOTIFICATIONS_SUCCESS,
+  PUT_NOTIFICATION_SUCCESS,
+  PUT_NOTIFICATION_FAILURE,
 } from '../notifications/types';
 
 const INITIAL_STATE = {
@@ -37,14 +39,14 @@ export default function (state = INITIAL_STATE, action) {
         error: action.payload,
         type: 'error',
       };
-    case POST_NOTIFICATIONS_FAILURE:
+    case POST_NOTIFICATION_FAILURE:
       return {
         ...state,
         message: 'Error creating notification',
         error: action.payload,
         type: 'error',
       };
-    case POST_NOTIFICATIONS_SUCCESS:
+    case POST_NOTIFICATION_SUCCESS:
       return {
         ...state,
         message: 'Notification created successfully',
@@ -57,6 +59,20 @@ export default function (state = INITIAL_STATE, action) {
         message: 'Notification deleted successfully',
         error: null,
         type: 'success',
+      };
+    case PUT_NOTIFICATION_SUCCESS:
+      return {
+        ...state,
+        message: 'Notification updated successfully',
+        error: null,
+        type: 'success',
+      };
+    case PUT_NOTIFICATION_FAILURE:
+      return {
+        ...state,
+        message: 'Error updating notification',
+        error: action.payload,
+        type: 'error',
       };
     default:
       return state;

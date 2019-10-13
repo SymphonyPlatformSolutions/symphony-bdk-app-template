@@ -2,7 +2,7 @@
   "applications": [
     {
       "type": "sandbox",
-      "id": "template",
+      "id": "templateapp",
       "name": "Template",
       "blurb": "This is template integration app, using React Lib!",
       "publisher": "Symphony",

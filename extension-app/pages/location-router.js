@@ -1,5 +1,7 @@
 import React from 'react';
 import MainPageContainer from './main-page/container';
+import CurrencyQuoteModal from '../modals/currency-quote';
+import { MODAL_IDS } from '../services/enrichers/entities';
 
 const INNER_QUERY = 'queryObj';
 
@@ -21,6 +23,8 @@ function route() {
     case 'config':
     case 'app':
       return <MainPageContainer />;
+    case MODAL_IDS.CURRENCY_QUOTE_MODAL.entity:
+      return <CurrencyQuoteModal />;
     default:
       return <p>Oops! Page error.</p>;
   }

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { ToasterConsumer } from 'sms-sdk-toolbox-ui';
 import { connect } from 'react-redux';
 
@@ -7,38 +8,35 @@ const ToastConnector = (props) => {
     type, message,
   } = props;
 
+  const [hasMessage, setHasMessage] = useState(false);
+
+  useEffect(() => {
+    if (message && type) {
+      setHasMessage(true);
+    }
+  }, [message, type]);
+
   return (
     <ToasterConsumer>
       {(context) => {
-        if (message) {
-          console.log('NO?');
-          context.showToast({
-            message, type,
-          });
+        if (hasMessage) {
+          context.showToast({ message, type });
+          setHasMessage(false);
         }
         return null;
       }}
     </ToasterConsumer>
   );
-
-
-  // return (
-  //   <ToasterConsumer>
-  //     {context => (
-  //       <button onClick={() => context.showToast({
-  //         message: 'hup', type: 'success',
-  //       })}
-  //       >Come on
-  //       </button>
-  //     )}
-  //   </ToasterConsumer>
-  // );
 };
 
 ToastConnector.propTypes = {
+  type: PropTypes.string,
+  message: PropTypes.string,
 };
 
 ToastConnector.defaultProps = {
+  type: null,
+  message: null,
 };
 
 const mapDispatchToProps = () => ({});
