@@ -1,7 +1,5 @@
 import React from 'react';
-import { MODAL_IDS } from 'services/enrichers/entities';
-import Sample from './sample';
-import ModalForm from '../components/forms/modal-form';
+import MainPageContainer from './main-page/container';
 
 const INNER_QUERY = 'queryObj';
 
@@ -20,11 +18,9 @@ function route() {
   const queryObj = getInnerQuery(currentQuery);
   const currentPage = queryObj.page || 'app';
   switch (currentPage) {
-    case MODAL_IDS.EXAMPLE_MODAL.entity:
-      return (<ModalForm />);
     case 'config':
     case 'app':
-      return <Sample />;
+      return <MainPageContainer />;
     default:
       return <p>Oops! Page error.</p>;
   }

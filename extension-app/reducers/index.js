@@ -3,9 +3,15 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import usersReducer from './users';
+import notifications from './notifications';
+import instances from './instances';
+import toast from './toast';
 
 const rootReducer = combineReducers({
   user: usersReducer,
+  instances,
+  notifications,
+  toast,
 });
 
 export default function configureStore(initialState) {
