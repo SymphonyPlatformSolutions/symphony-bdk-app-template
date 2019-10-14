@@ -5,29 +5,30 @@ export const ENRICHER_EVENTS = {
       commands: '<b>Example:</b> @Example &lt;comand example&gt; <br /> ',
     },
   },
-  HELP_COMMAND: {
-    type: 'com.symphony.ms.devtools.template.helpCommand',
+  MY_ENTITY: {
+    type: 'MyEntity',
+    json: {},
+  },
+  CURRENCY_QUOTE: {
+    type: 'com.symphony.ms.devtools.currencyQuote',
     json: {
-      commands: '<b>Example:</b> @Example &lt;comand example&gt; <br /> ',
+      from: 'USD',
+      from_name: 'United States Dollar',
+      to: 'EUR',
+      to_name: 'Euro',
+      rate: 0.9124,
     },
-  },
-  WELCOME_MESSAGE_DIRECT_CHAT: {
-    type: 'com.symphony.ms.devtools.template.welcomeMessageDirectChat',
-    json: null,
-  },
-  WELCOME_MESSAGE_ROOM: {
-    type: 'com.symphony.ms.devtools.template.welcomeMessageRoom',
-    json: null,
-  },
-  WELCOME_MESSAGE_ABOUT_ROOM: {
-    type: 'com.symphony.ms.devtools.template.welcomeMessageAboutRoom',
-    json: { room_name: 'All Technicians' },
   },
 };
 
 export const MODAL_IDS = {
   EXAMPLE_MODAL: {
     entity: 'example-modal',
+    entityData: {},
+  },
+  CURRENCY_QUOTE_MODAL: {
+    type: 'currency-quote',
+    entity: 'com.symphony.ms.devtools.currency-quote-modal',
     entityData: {},
   },
 };

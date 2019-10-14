@@ -11,11 +11,13 @@ import { bindActionCreators } from 'redux';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 import { getJWTFromSymphony } from 'reducers/users/actions';
 import {
-  THEMES, THEME_TYPES, Loader, ToasterProvider, ModalProvider, ModalRoot,
+  THEME_TYPES, Loader, ToasterProvider, ModalProvider, ModalRoot,
 } from 'sms-sdk-toolbox-ui';
+import ToastConnector from 'components/toast-connector';
 import { PROJECT_THEMES } from '../utils/themes/PROJECT_THEMES';
 import LocationRouter from './location-router';
-import Sample from './sample';
+import MainPageContainer from './main-page/container';
+import CreateNotificationContainer from './create-notification/container';
 
 const LINK_PREFIX = setupLinkPrefix();
 
@@ -85,10 +87,13 @@ const Routes = (props) => {
               <BrowserRouter>
                 <Switch>
                   <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
-                  <Route exact path={`${LINK_PREFIX}/home/:tab`} component={Sample} />
+                  <Route exact path={`${LINK_PREFIX}/home/:tab`} component={MainPageContainer} />
+                  <Route exact path={`${LINK_PREFIX}/createNotification`} component={CreateNotificationContainer} />
+                  <Route exact path={`${LINK_PREFIX}/editNotification`} component={CreateNotificationContainer} />
                   <Route component={Default} />
                 </Switch>
               </BrowserRouter>
+              <ToastConnector />
             </ModalProvider>
           </ToasterProvider>
         </ThemeProvider>

@@ -2,9 +2,8 @@
 import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
-import HelpCommandBuilder from './template-builders/help-command-builder';
-import WelcomeMessageBuilder from './template-builders/welcome-message-builder';
-import WelcomeMessageAboutRoomBuilder from './template-builders/welcome-message-about-room-builder';
+import MyEntityBuilder from './template-builders/my-entity-builder';
+import CurrencyQuoteBuilder from './template-builders/currency-quote-builder';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -36,7 +35,13 @@ export default class GeneralEnricher {
   }
 
   render(type, entity) {
-    const data = typeof entity.id === 'object' ? entity.id : JSON.parse(entity.id);
+    let data = {};
+    if (entity.id) {
+      data = typeof entity.id === 'object' ? entity.id : JSON.parse(entity.id);
+    } else if (entity.payload) {
+      data = typeof entity.payload === 'object' ? entity.payload : JSON.parse(entity.payload);
+    }
+
     let actionData = {};
     let template;
 
@@ -48,19 +53,21 @@ export default class GeneralEnricher {
           <p><b>WOW</b> that's exciting!</p>
         </messageML>`;
         break;
-      case ENRICHER_EVENTS.HELP_COMMAND.type:
-        template = HelpCommandBuilder.build(data);
+      case ENRICHER_EVENTS.MY_ENTITY.type:
+        template = MyEntityBuilder.build(data);
         break;
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_ROOM.type:
-        template = WelcomeMessageBuilder.build();
-        break;
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_ABOUT_ROOM.type:
-        template = WelcomeMessageAboutRoomBuilder.build(data);
+      case ENRICHER_EVENTS.CURRENCY_QUOTE.type:
+        actionData = GeneralEnricher.actionFactory([{
+          id: 'Buy',
+          service: this.name,
+          type: MODAL_IDS.CURRENCY_QUOTE_MODAL.type,
+          entityData: data,
+          label: 'Buy',
+        }], this.name, MODAL_IDS.CURRENCY_QUOTE_MODAL.entity);
+        template = CurrencyQuoteBuilder.build(data);
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;
-        actionData = {};
         break;
     }
 
@@ -74,6 +81,9 @@ export default class GeneralEnricher {
     switch (data.type) {
       case MODAL_IDS.EXAMPLE_MODAL.entity:
         openModal(MODAL_IDS.EXAMPLE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '560px', { page: 'exampleModal' });
+        break;
+        case MODAL_IDS.CURRENCY_QUOTE_MODAL.type:
+        openModal(MODAL_IDS.CURRENCY_QUOTE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '260px', { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity });
         break;
       default:
         openModal('noEntityDialog', this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '300px', { page: 'error' });
