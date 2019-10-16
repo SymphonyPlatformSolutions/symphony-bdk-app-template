@@ -7,12 +7,12 @@ import {
   THEME_TYPES, Logger,
 } from 'sms-sdk-toolbox-ui';
 import configureStore from './reducers';
-import { APP_ID, APP_TITLE } from './utils/system/app-constants';
 import Routes from './pages/routes';
 import { handleOutline } from './utils/helpers/help-functions';
 import './public/sass/main.scss';
 import '../node_modules/sms-sdk-toolbox-ui/dist/index.css';
 
+const { APP_ID, APP_TITLE } = window.APP_CONFIG;
 
 Logger.setEnv({
   appTitle: 'Template extension app',

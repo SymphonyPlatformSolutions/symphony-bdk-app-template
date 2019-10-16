@@ -5,8 +5,14 @@ This project contains:
 
 
 - React, to render the components
-- JSON-Server, to create a mock-server
-- Initialized Jest with Enzyme, for unit testing
+- [sms-sdk-toolbox-ui](https://github.com/SymphonyPlatformSolutions/sms-sdk-toolbox-ui) Market Solutions Component library, for fast development and prototyping
+- [sms-dev-tool-mock-client](https://github.com/SymphonyPlatformSolutions/sms-dev-tool-mock-client) Mock Client, a Symphony mock client that has all functionality used by an extension app inside a real symphony client,
+used for offline development and zero dependency to infrastructure.
+
+- [JSON-Server](https://www.npmjs.com/package/json-server) node server, to quickly mock api's *includes authentication mocking*
+- Initialized Jest with [Enzyme](https://airbnb.io/enzyme/) for unit testing and
+[jest-cucumber](https://www.npmjs.com/package/jest-cucumber) +
+[react-testing-library](https://testing-library.com/docs/react-testing-library/intro), for BDD testing, samples of these methods included
 
 ## Prerequisites
 
@@ -24,7 +30,7 @@ This is done by the app.js and controller.js files, that are called by the main 
 
 Should you want to extend Symphony's services (the [UI service](https://developers.symphony.com/extension/docs/ui-service), for example, when adding custom buttons to chatrooms), the implementation should be done in the ```controller.js``` file.
 
-Your App should be given an ID, Title, Navbar Title and Icon. These should be set in the ```extension-app/utils/system/app-constants.js``` file, and will be perpetuated throughout the rest of the Application.
+Your App should be given an ID, Title, Navbar Title and Icon. These should be set in the ```e#####$###tension-app/utils/system/app-constants.js``` file, and will be perpetuated throughout the rest of the Application.
 
 ### Enrichers
 
@@ -44,11 +50,13 @@ yarn
 
 > If you don't have ```yarn``` installed, you can do so by running ```npm install -g yarn```.
 
-After your *node_modules* has been updated, you can run the project in different ways by running the following commands:
+After your *node_modules* has been either created or updated, you can run the project in different ways by running the following commands:
 
-- ```yarn test```: runs unit tests and BDD tests. These have been set up initially with jest (powered by enzyme) and cucumber.
+- ```yarn test```: runs unit tests and BDD tests. These have been set up initially with jest (powered by enzyme/react testing library) and cucumber.
 - ```yarn build```: encapsulates the whole project in a minified series of files, that are available under the *dist* folder. This is reserved for production building.
-- ```yarn start:mock```: compiles project and exposes main files under port ```:4000```. Additionally, it sets up your mock JSON server on port ```:3000```. Since the template app has the Symphony Mock Client as a dependency, directly accessing port 4000 (by going to https://localhost:4000 on your browser) will open the Mock Client shell alongside your Extension App.
+- ```yarn start:mock```: compiles project and exposes main files under port ```:4000```. Additionally, it sets up your mock JSON server on port ```:3000```.
+Since the template app has the Symphony Mock Client as a dependency, directly accessing port 4000
+(by going to https://localhost:4000 on your browser) will open the Mock Client shell alongside your Extension App.
 > Note: The Mock Client however does not get in the way of externalizing your files. You can still access the Extension App directly in the POD by importing it through the URL (done by adding the ```?bundle=https://localhost:4000/bundle.json``` query parameter after your POD's URL). You can read more on this by accessing [Symphony's official documentation](https://developers.symphony.com/symphony-developer/docs/creating-an-extension-application#section-load-your-application).
 - ```yarn start:mock-ext```: 
 

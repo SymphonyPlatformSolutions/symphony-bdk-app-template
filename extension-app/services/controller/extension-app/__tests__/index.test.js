@@ -1,8 +1,9 @@
 /* global SYMPHONY */
-
-import { APP_ID, APP_TITLE, APP_ICON_NAME } from 'utils/system/app-constants';
+import '../../../../public/config';
 import { setupLinkPrefix, frontendURL } from 'utils/system/setup-url';
 import { showExtensionApp } from 'services/controller/extension-app';
+
+const { APP_ID, APP_TITLE, APP_ICON_NAME } = window.APP_CONFIG;
 
 
 describe('Extension App Services', () => {

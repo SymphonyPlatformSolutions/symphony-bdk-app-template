@@ -10,6 +10,12 @@ import actionTextPartial from './templates/text/action.hbs';
 import linkTextPartial from './templates/text/link.hbs';
 import textColorPartial from './templates/text/text-color.hbs';
 import userTextPartial from './templates/text/user.hbs';
+
+import helpCommandHeader from './templates/base/help-command/help-command-header.hbs';
+import helpCommandBody from './templates/base/help-command/help-command-body.hbs';
+import welcomeMessageHeader from './templates/base/welcome-message/welcome-message-header.hbs';
+import welcomeMessageAboutRoomHeader from './templates/base/welcome-message-about-room/welcome-message-about-room-header.hbs';
+
 import myEntityBody from './templates/base/my-entity/my-entity-body.hbs';
 import myEntityHeader from './templates/base/my-entity/my-entity-header.hbs';
 import currencyQuoteBody from './templates/base/currency-quote/currency-quote-body.hbs';
@@ -26,6 +32,12 @@ Handlebars.registerPartial('action', actionTextPartial);
 Handlebars.registerPartial('link', linkTextPartial);
 Handlebars.registerPartial('text', textColorPartial);
 Handlebars.registerPartial('user', userTextPartial);
+
+Handlebars.registerPartial('help-command-header', helpCommandHeader);
+Handlebars.registerPartial('help-command-body', helpCommandBody);
+Handlebars.registerPartial('welcome-message-header', welcomeMessageHeader);
+Handlebars.registerPartial('welcome-message-about-room-header', welcomeMessageAboutRoomHeader);
+
 
 Handlebars.registerPartial('my-entity-body', myEntityBody);
 Handlebars.registerPartial('my-entity-header', myEntityHeader);

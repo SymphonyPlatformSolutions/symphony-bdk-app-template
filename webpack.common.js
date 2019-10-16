@@ -85,7 +85,7 @@ module.exports = (env) => {
         { from: './extension-app/public/sass/fonts', to: 'fonts' },
       ]),
       new CopyWebpackPlugin([
-        { from: './extension-app/public/config/config.js' },
+        { from: './extension-app/public/config.js', to: '' },
       ]),
     ],
   };

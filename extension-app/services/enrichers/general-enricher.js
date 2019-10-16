@@ -4,6 +4,9 @@ import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
 import MyEntityBuilder from './template-builders/my-entity-builder';
 import CurrencyQuoteBuilder from './template-builders/currency-quote-builder';
+import HelpCommandBuilder from './template-builders/help-command-builder';
+import WelcomeMessageBuilder from './template-builders/welcome-message-builder';
+import WelcomeMessageAboutRoomBuilder from './template-builders/welcome-message-about-room-builder';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -46,6 +49,16 @@ export default class GeneralEnricher {
     let template;
 
     switch (type) {
+      case ENRICHER_EVENTS.HELP_COMMAND.type:
+        template = HelpCommandBuilder.build(data);
+        break;
+      case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
+      case ENRICHER_EVENTS.WELCOME_MESSAGE_ROOM.type:
+        template = WelcomeMessageBuilder.build();
+        break;
+      case ENRICHER_EVENTS.WELCOME_MESSAGE_ABOUT_ROOM.type:
+        template = WelcomeMessageAboutRoomBuilder.build(data);
+        break;
       case ENRICHER_EVENTS.TESTING.type:
         template = `<messageML>
           <h1>An enriched message!</h1>
@@ -82,7 +95,7 @@ export default class GeneralEnricher {
       case MODAL_IDS.EXAMPLE_MODAL.entity:
         openModal(MODAL_IDS.EXAMPLE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '560px', { page: 'exampleModal' });
         break;
-        case MODAL_IDS.CURRENCY_QUOTE_MODAL.type:
+      case MODAL_IDS.CURRENCY_QUOTE_MODAL.type:
         openModal(MODAL_IDS.CURRENCY_QUOTE_MODAL.entity, this.name, `${FRONTEND_SERVE_URL}${LINK_PREFIX}`, '260px', { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity });
         break;
       default:
