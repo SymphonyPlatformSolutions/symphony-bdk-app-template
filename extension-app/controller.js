@@ -4,15 +4,11 @@ import Index from 'services/controller/authentication';
 import { frontendURL, setupURL, setupLinkPrefix } from 'utils/system/setup-url';
 import GeneralEnricher from 'services/enrichers/general-enricher';
 import { ENRICHER_EVENTS, MODAL_IDS } from 'services/enrichers/entities';
-import {
-  APP_ID,
-  APP_NAV_BAR_TITLE,
-  APP_ICON_NAME,
-} from 'utils/system/app-constants';
 import Api from 'services/api';
 import { showExtensionApp } from 'services/controller/extension-app';
 import { parseStreamIdToBackend } from 'utils/helpers/help-functions';
 
+const { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } = window.APP_CONFIG;
 // These next 4 lines will be removed on production
 /* develblock:start */
 window.ENRICHER_EVENTS = ENRICHER_EVENTS;

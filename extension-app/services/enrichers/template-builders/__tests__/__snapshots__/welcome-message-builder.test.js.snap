@@ -4,13 +4,12 @@ exports[`Welcome Message Builder Should build message 1`] = `
 "<messageML>
   <card class=\\"barStyle\\" data-icon-src=\\"\\">
     <header>
-      <div style=\\"margin-bottom: 12px;\\"><b>Hello!</b></div>
       I'm the Template Bot. I'll help you to keep updated about what happens on your services on Template. Here's how to start interacting with me following the commands below:
       <br />
       <br />
       <div>
-        <div style=\\"padding-bottom: 4px;\\"><b style=\\"color: #767676\\">Commands</b></div>
-        <div style=\\"border-left: 2px solid #767676;\\">
+        <div style=\\"padding-bottom: 4px;\\"><b style=\\"color: \\">Commands</b></div>
+        <div style=\\"border-left: 2px solid ;\\">
           <div style=\\"padding-left: 4px;\\">
             <strong>Help:</strong> used to help you with the commands available to interact with the Template Bot
             <br />

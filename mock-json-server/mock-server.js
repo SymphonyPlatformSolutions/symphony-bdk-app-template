@@ -36,11 +36,21 @@ server.post('/api/parser', async (req, res) => {
 });
 
 /*
-  -- DEMO
-  Demo endpoint, serving a very simple body payload, to show an example of how to externalize
+  -- Application sample
+  Sample endpoint, serving a very simple body payload, to show an example of how to externalize
   mock content.
   It can - and should - be deleted when developing your own integration.
 */
+// Project specific APIs
+server.get('/v1/sym/rooms', (req, res) => {
+  console.log('Get Bot Rooms!');
+  send(() => res.jsonp(getBotRooms()));
+});
+
+server.get('/v1/sym/bot-info', (req, res) => {
+  send(() => res.jsonp({ username: 'pagerduty_bot' }));
+});
+
 server.post('/application/authenticate', (req, res) => {
   res.sendStatus(200);
 });

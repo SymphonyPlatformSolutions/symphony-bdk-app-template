@@ -4,7 +4,6 @@ exports[`Help Command Builder Should build message 1`] = `
 "<messageML>
   <card class=\\"barStyle\\" data-icon-src=\\"\\">
     <header>
-      <div style=\\"margin-bottom: 12px;\\"><b>Help</b></div>
       <img style=\\"width: 12px; height: 12px; position: relative; top: 1px;\\" src=\\"help-command-icon.svg\\" />
       See below the commands you can use to interact with the Template Bot.
     </header>
@@ -17,6 +16,8 @@ exports[`Help Command Builder Should build message 1`] = `
             <b>Example:</b> @Example &lt;comand example&gt; <br />
           </div>
         </div>
+      </div>
+      <div style=\\"margin-top: 8px\\">
       </div>
     </body>
   </card>

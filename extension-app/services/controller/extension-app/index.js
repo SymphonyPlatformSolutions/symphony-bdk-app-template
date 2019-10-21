@@ -1,7 +1,7 @@
 /* global SYMPHONY */
 
 import { setupLinkPrefix, frontendURL } from 'utils/system/setup-url';
-import { APP_ID, APP_TITLE, APP_ICON_NAME } from 'utils/system/app-constants';
+const { APP_ID, APP_TITLE, APP_ICON_NAME } = window.APP_CONFIG;
 
 export function showExtensionApp(appendQueryObject = null, overrideUrl, overrideIconUrl = null) {
   const modulesService = SYMPHONY.services.subscribe('modules');
