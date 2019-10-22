@@ -1,21 +1,39 @@
 /* global SYMPHONY */
 import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
+import { SmsRenderer } from 'sms-sdk-renderer-node';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
 import MyEntityBuilder from './template-builders/my-entity-builder';
 import CurrencyQuoteBuilder from './template-builders/currency-quote-builder';
 import HelpCommandBuilder from './template-builders/help-command-builder';
 import WelcomeMessageBuilder from './template-builders/welcome-message-builder';
 import WelcomeMessageAboutRoomBuilder from './template-builders/welcome-message-about-room-builder';
+import AlertTest from './templates/base/alert-test-body.hbs';
+import LinkTemplate from './templates/text/link.hbs';
+import MyTemplate from './templates/base/custom-template.hbs';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
+
+const CUSTOM_TEMPLATE_NAMES = {
+  MY_TEMPLATE: 'my-template',
+};
+
+const partials = {
+  'alert-test': AlertTest,
+  link: LinkTemplate,
+};
+
+const customTemplates = {
+  [CUSTOM_TEMPLATE_NAMES.MY_TEMPLATE]: MyTemplate,
+};
 
 export default class GeneralEnricher {
   constructor(name) {
     this.name = name;
     this.messageEvents = Object.keys(ENRICHER_EVENTS).map(key => ENRICHER_EVENTS[key].type);
     this.implements = ['render', 'action'];
+    SmsRenderer.register(partials, customTemplates);
   }
 
   static getMessages() {
@@ -60,6 +78,13 @@ export default class GeneralEnricher {
         template = WelcomeMessageAboutRoomBuilder.build(data);
         break;
       case ENRICHER_EVENTS.TESTING.type:
+        template = SmsRenderer.renderInApp({ title: 'My alert', content: 'My content', overrideBody: () => 'alert-test' }, SmsRenderer.smsTypes.ALERT);
+        // template = SmsRenderer.renderInApp({
+        //   link: {
+        //     url: 'https://google.com',
+        //     content: 'Click here for google!',
+        //   },
+        // }, CUSTOM_TEMPLATE_NAMES.MY_TEMPLATE);
         template = `<messageML>
           <h1>An enriched message!</h1>
           <p>What we got from the entity: ${JSON.stringify(data)}</p>
