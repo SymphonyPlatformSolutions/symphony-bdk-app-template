@@ -1,3 +1,9 @@
-<div>My custom template! With my very own link partial (that was also registered!) <br />
-  {{> link message.link }}
-</div>
+{{#> alert}}
+  {{#*inline "overrideBody"}}
+      Own entity to showcase link partial: {{> link message.link}}
+      <br />
+      {{#if message.extraContent}}
+        {{message.extraContent}}
+      {{/if}}
+  {{/inline}}
+{{/alert}}
