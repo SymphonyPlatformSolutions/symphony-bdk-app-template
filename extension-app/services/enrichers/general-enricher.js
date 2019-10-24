@@ -72,7 +72,7 @@ export default class GeneralEnricher {
 
     switch (type) {
       case ENRICHER_EVENTS.HELP_COMMAND.type:
-        template = SmsRenderer.renderInApp(
+        template = SmsRenderer.renderAppMessage(
           {
             title: 'Bot Commands',
             description:
@@ -83,7 +83,7 @@ export default class GeneralEnricher {
         break;
       case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
       case ENRICHER_EVENTS.WELCOME_MESSAGE_ROOM.type:
-        template = SmsRenderer.renderInApp(
+        template = SmsRenderer.renderAppMessage(
           {
             title: 'Welcome!',
             description:
@@ -93,7 +93,7 @@ export default class GeneralEnricher {
         );
         break;
       case ENRICHER_EVENTS.TESTING.type:
-        template = SmsRenderer.renderInApp(
+        template = SmsRenderer.renderAppMessage(
           {
             title: 'My custom entity editor',
             link: {
@@ -119,7 +119,7 @@ export default class GeneralEnricher {
           this.name,
           MODAL_IDS.CURRENCY_QUOTE_MODAL.entity,
         );
-        template = SmsRenderer.renderInApp(
+        template = SmsRenderer.renderAppMessage(
           {
             header: data,
             buttons: [{ buttonId: 'Buy' }],
