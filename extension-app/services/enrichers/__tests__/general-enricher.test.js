@@ -1,12 +1,5 @@
 /* global SYMPHONY */
 import GeneralEnricher from '../general-enricher';
-import HelpCommandBuilder from '../template-builders/help-command-builder';
-import WelcomeMessageBuilder from '../template-builders/welcome-message-builder';
-import WelcomeMessageAboutRoomBuilder from '../template-builders/welcome-message-about-room-builder';
-
-jest.mock('../template-builders/help-command-builder');
-jest.mock('../template-builders/welcome-message-builder');
-jest.mock('../template-builders/welcome-message-about-room-builder');
 
 describe('GeneralEnricher', () => {
   const NAME = 'name';
@@ -184,58 +177,5 @@ describe('GeneralEnricher', () => {
     };
 
     expect(enricher.render('', entity)).toEqual(shouldReturn);
-  });
-
-  describe('Builders', () => {
-    const mockedEntityData = { data: 'My data' };
-    const entity = {
-      id: JSON.stringify(mockedEntityData),
-    };
-    const shouldReturn = {
-      data: {},
-      template: 'mocked return',
-    };
-
-    it('should render the Help Command message', () => {
-      HelpCommandBuilder.build.mockImplementation(() => 'mocked return');
-      expect(
-        enricher.render(
-          'com.symphony.ms.devtools.template.helpCommand',
-          entity,
-        ),
-      ).toEqual(shouldReturn);
-    });
-
-    it('should render the Welcome Message (direct chat)', () => {
-      WelcomeMessageBuilder.build.mockImplementation(() => 'mocked return');
-      expect(
-        enricher.render(
-          'com.symphony.ms.devtools.template.welcomeMessageDirectChat',
-          entity,
-        ),
-      ).toEqual(shouldReturn);
-    });
-
-    it('should render the Welcome Message (room)', () => {
-      WelcomeMessageBuilder.build.mockImplementation(() => 'mocked return');
-      expect(
-        enricher.render(
-          'com.symphony.ms.devtools.template.welcomeMessageRoom',
-          entity,
-        ),
-      ).toEqual(shouldReturn);
-    });
-
-    it('should render the Welcome Message about room', () => {
-      WelcomeMessageAboutRoomBuilder.build.mockImplementation(
-        () => 'mocked return',
-      );
-      expect(
-        enricher.render(
-          'com.symphony.ms.devtools.template.welcomeMessageAboutRoom',
-          entity,
-        ),
-      ).toEqual(shouldReturn);
-    });
   });
 });
