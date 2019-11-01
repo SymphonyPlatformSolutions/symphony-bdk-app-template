@@ -1,4 +1,5 @@
 import React from 'react';
+import ExampleModal from 'modals/example-modal';
 import MainPageContainer from './main-page/container';
 import CurrencyQuoteModal from '../modals/currency-quote';
 import { MODAL_IDS } from '../services/enrichers/entities';
@@ -23,6 +24,8 @@ function route() {
     case 'config':
     case 'app':
       return <MainPageContainer />;
+    case MODAL_IDS.EXAMPLE_MODAL.entity:
+      return <ExampleModal data={queryObj.data.entityData} />;
     case MODAL_IDS.CURRENCY_QUOTE_MODAL.entity:
       return <CurrencyQuoteModal />;
     default:

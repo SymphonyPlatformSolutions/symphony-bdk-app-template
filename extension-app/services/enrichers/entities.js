@@ -9,14 +9,10 @@ export const ENRICHER_EVENTS = {
     type: 'com.symphony.ms.devtools.template.welcomeMessageDirectChat',
     json: null,
   },
-  WELCOME_MESSAGE_ROOM: {
-    type: 'com.symphony.ms.devtools.template.welcomeMessageRoom',
-    json: null,
-  },
-  TESTING: {
+  EXTENDED_CARD: {
     type: 'com.symphony.ms.devtools.testingEntity',
     json: {
-      extraContent: 'Anything else that I\'d like here!',
+      extraContent: 'Any other content that\'s in the entities.js file',
     },
   },
   CURRENCY_QUOTE: {
@@ -34,11 +30,12 @@ export const ENRICHER_EVENTS = {
 export const MODAL_IDS = {
   EXAMPLE_MODAL: {
     entity: 'example-modal',
+    type: 'com.symphony.ms.devtools.example-modal',
     entityData: {},
   },
   CURRENCY_QUOTE_MODAL: {
-    type: 'currency-quote',
-    entity: 'com.symphony.ms.devtools.currency-quote-modal',
+    entity: 'currency-quote',
+    type: 'com.symphony.ms.devtools.currency-quote-modal',
     entityData: {},
   },
 };
