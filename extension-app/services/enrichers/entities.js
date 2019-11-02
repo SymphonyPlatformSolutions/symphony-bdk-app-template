@@ -2,21 +2,23 @@ export const ENRICHER_EVENTS = {
   HELP_COMMAND: {
     type: 'com.symphony.ms.devtools.template.helpCommand',
     json: {
-      commands: '<b>Example:</b> @Example &lt;comand example&gt; <br /> ',
+      commands: 'Example: @Example command example',
     },
   },
   WELCOME_MESSAGE_DIRECT_CHAT: {
     type: 'com.symphony.ms.devtools.template.welcomeMessageDirectChat',
-    json: null,
+    json: {
+      message: 'Thank you for using the template app!',
+    },
   },
-  WELCOME_MESSAGE_ROOM: {
-    type: 'com.symphony.ms.devtools.template.welcomeMessageRoom',
-    json: null,
-  },
-  TESTING: {
+  EXTENDED_CARD: {
     type: 'com.symphony.ms.devtools.testingEntity',
     json: {
-      extraContent: 'Anything else that I\'d like here!',
+      extraContent: 'Any other content that\'s in the entities.js file',
+      link: {
+        url: 'https://google.com',
+        content: 'Click here for google!',
+      },
     },
   },
   CURRENCY_QUOTE: {
@@ -34,11 +36,12 @@ export const ENRICHER_EVENTS = {
 export const MODAL_IDS = {
   EXAMPLE_MODAL: {
     entity: 'example-modal',
+    type: 'com.symphony.ms.devtools.example-modal',
     entityData: {},
   },
   CURRENCY_QUOTE_MODAL: {
-    type: 'currency-quote',
-    entity: 'com.symphony.ms.devtools.currency-quote-modal',
+    entity: 'currency-quote',
+    type: 'com.symphony.ms.devtools.currency-quote-modal',
     entityData: {},
   },
 };

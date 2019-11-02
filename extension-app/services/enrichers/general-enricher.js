@@ -75,31 +75,25 @@ export default class GeneralEnricher {
         template = SmsRenderer.renderAppMessage(
           {
             title: 'Bot Commands',
-            description:
-              'You can use the bot for the following commands: issue, note and page',
+            description: data.commands,
           },
           SmsRenderer.smsTypes.INFORMATION,
         );
         break;
       case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_ROOM.type:
         template = SmsRenderer.renderAppMessage(
           {
             title: 'Welcome!',
-            description:
-            'Thank you for using the template app!',
+            description: data.message,
           },
           SmsRenderer.smsTypes.INFORMATION,
         );
         break;
-      case ENRICHER_EVENTS.TESTING.type:
+      case ENRICHER_EVENTS.EXTENDED_CARD.type:
         template = SmsRenderer.renderAppMessage(
           {
             title: 'My custom entity editor',
-            link: {
-              url: 'https://google.com',
-              content: 'Click here for google!',
-            },
+            link: data.link,
             extraContent: data.extraContent,
           },
           CUSTOM_TEMPLATE_NAMES.MY_TEMPLATE,
@@ -140,13 +134,13 @@ export default class GeneralEnricher {
 
   action(data) {
     switch (data.type) {
-      case MODAL_IDS.EXAMPLE_MODAL.entity:
+      case MODAL_IDS.EXAMPLE_MODAL.type:
         openModal(
           MODAL_IDS.EXAMPLE_MODAL.entity,
           this.name,
           `${FRONTEND_SERVE_URL}${LINK_PREFIX}`,
           '560px',
-          { page: 'exampleModal' },
+          { page: MODAL_IDS.EXAMPLE_MODAL.entity, data },
         );
         break;
       case MODAL_IDS.CURRENCY_QUOTE_MODAL.type:
@@ -155,7 +149,7 @@ export default class GeneralEnricher {
           this.name,
           `${FRONTEND_SERVE_URL}${LINK_PREFIX}`,
           '260px',
-          { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity },
+          { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity, data },
         );
         break;
       default:

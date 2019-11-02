@@ -14,7 +14,7 @@ const CurrencyQuoteModal = () => {
   const [value, setValue] = useState(null);
   const inputError = value === null || value >= 1 ? null : 'error';
   return (
-    <Box horizontal type="primary" align="center" style={{height: '100%'}}>
+    <Box horizontal type="primary" align="center" style={{ height: '100%' }}>
       <Box>
         <Text isTitle>How much would you like to buy?</Text>
       </Box>
@@ -31,10 +31,10 @@ const CurrencyQuoteModal = () => {
         </FormGroup>
         <Box horizontal align="end">
           <Button>
-          <Box horizontal space={10}>
+            <Box horizontal space={10}>
             Buy
-            <StyledExchangedIcon size={16} />
-          </Box>
+              <StyledExchangedIcon size={16} />
+            </Box>
           </Button>
         </Box>
       </FormBox>

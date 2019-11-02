@@ -7,6 +7,7 @@ import { ENRICHER_EVENTS, MODAL_IDS } from 'services/enrichers/entities';
 import Api from 'services/api';
 import { showExtensionApp } from 'services/controller/extension-app';
 import { parseStreamIdToBackend } from 'utils/helpers/help-functions';
+import { openModal } from 'services/modal-service';
 
 const { APP_ID, APP_NAV_BAR_TITLE, APP_ICON_NAME } = window.APP_CONFIG;
 // These next 4 lines will be removed on production
@@ -68,6 +69,18 @@ const bootstrap = () => {
     label: 'Configure',
   });
 
+  // UI extensions, for buttons EXAMPLE
+  uiService.registerExtension(
+    'single-user-im',
+    'buy-im',
+    controllers[0],
+    {
+      label: 'Example In Chat button',
+      icon: `${FRONTEND_SERVE_URL}${LINK_PREFIX}/assets/${APP_ICON_NAME}`,
+      data: {},
+    },
+  );
+
   controllerService.implement({
     select(id) {
       if (id === `${APP_ID}-nav`) {
@@ -78,9 +91,24 @@ const bootstrap = () => {
     },
     filter(type, id, data) {
       const parsedThreadId = parseStreamIdToBackend(data.threadId);
+      switch (id) {
+        case 'buy-im':
+          return data.user.username === window.botUsername;
+        default:
+          return false;
+      }
     },
     trigger(uiClass, id, payload, data) {
       switch (id) {
+        case 'buy-im':
+          openModal(
+            MODAL_IDS.CURRENCY_QUOTE_MODAL.entity,
+            controllers[0],
+            `${FRONTEND_SERVE_URL}${LINK_PREFIX}`,
+            '260px',
+            { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity },
+          );
+          break;
         default:
           break;
       }
