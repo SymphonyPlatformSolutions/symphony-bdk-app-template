@@ -74,7 +74,7 @@ Object.defineProperties(APP_CONFIG,
       writable: false,
     },
     APP_ICON_NAME: {
-      value: 'favicon.svg',
+      value: 'favicon.png',
       writable: false,
     },
   });

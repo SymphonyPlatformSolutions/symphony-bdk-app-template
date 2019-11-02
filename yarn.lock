@@ -11505,7 +11505,7 @@ pnp-webpack-plugin@1.4.3:
   dependencies:
     ts-pnp "^1.1.2"
 
-polished@^3.3.1, polished@^3.4.1:
+polished@^3.3.1, polished@^3.4.1, polished@^3.4.2:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/polished/-/polished-3.4.2.tgz#b4780dad81d64df55615fbfc77acb52fd17d88cd"
   integrity sha512-9Rch6iMZckABr6EFCLPZsxodeBpXMo9H4fRlfR/9VjMEyy5xpo1/WgXlJGgSjPyVhEZNycbW7UmYMNyWS5MI0g==
@@ -12725,9 +12725,9 @@ react-create-ref@^1.0.1:
   integrity sha512-pryn9uefKa5HPfmgf1Gl93+hwN2rqXeipLSdnq6Q9M7Pd00sx617GyOtluqVoQ0XlvvYJ8Bw/uTorXvH+fgUGQ==
 
 react-data-table-component@^3.3.1:
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/react-data-table-component/-/react-data-table-component-3.6.2.tgz#081f474255d1178cb2a8d27deec8e6e07fdcc524"
-  integrity sha512-pgsjLnJHhCGv9ChiXKa1rtAz3h+W+Av44gtN7zYGrWf0m21R2xg7Ufxrr751SDoe2CjhYozo2oO3VQLxJn8Ynw==
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/react-data-table-component/-/react-data-table-component-3.7.0.tgz#a57ebd7a4715f80e81abdc5b7fdf5451768c66d2"
+  integrity sha512-zda0FbZxredi+urohFYo19af8ByBMYOYPKVsfktLXg3ZVqk96iRzw85YLj1ytTrfpVf9175E+Gu3DBs+ra3Eaw==
   dependencies:
     lodash "^4.17.15"
     memoize-one "^5.1.1"
@@ -12998,7 +12998,7 @@ react-router@5.1.2:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-select@^3.0.4:
+react-select@^3.0.4, react-select@^3.0.8:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/react-select/-/react-select-3.0.8.tgz#06ff764e29db843bcec439ef13e196865242e0c1"
   integrity sha512-v9LpOhckLlRmXN5A6/mGGEft4FMrfaBFTGAnuPHcUgVId7Je42kTq9y0Z+Ye5z8/j0XDT3zUqza8gaRaI1PZIg==
@@ -14461,8 +14461,8 @@ slice-ansi@^2.1.0:
     is-fullwidth-code-point "^2.0.0"
 
 "sms-dev-tool-mock-client@git+ssh://git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client#master":
-  version "1.0.14"
-  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client#f8f33cb620d2289bcb35fc978b7a0e33daecc9b2"
+  version "1.0.15"
+  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client#f42c14d613c1f29de5eb5eaea7b4a6654939b880"
   dependencies:
     asciify-image "^0.1.5"
     axios "^0.18.0"
@@ -14470,6 +14470,7 @@ slice-ansi@^2.1.0:
     babel-plugin-module-resolver "^3.2.0"
     file-loader "^4.0.0"
     node-sass "^4.12.0"
+    polished "^3.4.2"
     prismjs "^1.16.0"
     prop-types "^15.7.2"
     react "^16.8.6"
@@ -14478,6 +14479,7 @@ slice-ansi@^2.1.0:
     react-flexbox-grid "^2.1.2"
     react-redux "^7.0.3"
     react-router-dom "^5.0.0"
+    react-select "^3.0.8"
     redux "^4.0.1"
     redux-thunk "^2.3.0"
     request "2.81.0"

@@ -2,17 +2,23 @@ export const ENRICHER_EVENTS = {
   HELP_COMMAND: {
     type: 'com.symphony.ms.devtools.template.helpCommand',
     json: {
-      commands: '<b>Example:</b> @Example &lt;comand example&gt; <br /> ',
+      commands: 'Example: @Example command example',
     },
   },
   WELCOME_MESSAGE_DIRECT_CHAT: {
     type: 'com.symphony.ms.devtools.template.welcomeMessageDirectChat',
-    json: null,
+    json: {
+      message: 'Thank you for using the template app!',
+    },
   },
   EXTENDED_CARD: {
     type: 'com.symphony.ms.devtools.testingEntity',
     json: {
       extraContent: 'Any other content that\'s in the entities.js file',
+      link: {
+        url: 'https://google.com',
+        content: 'Click here for google!',
+      },
     },
   },
   CURRENCY_QUOTE: {

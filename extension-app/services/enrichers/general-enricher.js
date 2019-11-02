@@ -75,8 +75,7 @@ export default class GeneralEnricher {
         template = SmsRenderer.renderAppMessage(
           {
             title: 'Bot Commands',
-            description:
-              'You can use the bot for the following commands: issue, note and page',
+            description: data.commands,
           },
           SmsRenderer.smsTypes.INFORMATION,
         );
@@ -85,8 +84,7 @@ export default class GeneralEnricher {
         template = SmsRenderer.renderAppMessage(
           {
             title: 'Welcome!',
-            description:
-            'Thank you for using the template app!',
+            description: data.message,
           },
           SmsRenderer.smsTypes.INFORMATION,
         );
@@ -95,10 +93,7 @@ export default class GeneralEnricher {
         template = SmsRenderer.renderAppMessage(
           {
             title: 'My custom entity editor',
-            link: {
-              url: 'https://google.com',
-              content: 'Click here for google!',
-            },
+            link: data.link,
             extraContent: data.extraContent,
           },
           CUSTOM_TEMPLATE_NAMES.MY_TEMPLATE,
