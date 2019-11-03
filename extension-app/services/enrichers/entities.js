@@ -1,14 +1,52 @@
 export const ENRICHER_EVENTS = {
-  HELP_COMMAND: {
-    type: 'com.symphony.ms.devtools.template.helpCommand',
-    json: {
-      commands: 'Example: @Example command example',
-    },
-  },
   WELCOME_MESSAGE_DIRECT_CHAT: {
     type: 'com.symphony.ms.devtools.template.welcomeMessageDirectChat',
     json: {
-      message: 'Thank you for using the template app!',
+      message: 'Thank <b>you</b> for using the template app!',
+    },
+  },
+  HELP_COMMAND: {
+    type: 'com.symphony.ms.devtools.template.helpCommand',
+    json: {
+      title: 'Bot Commands',
+      content: [
+        '<b>@bot</b> /help - will display a help message',
+        '<b>@bot</b> /buy GOGL34 - In order to buy you need to pass the stock identifier',
+        '<b>@bot</b> /sell TSLA34 - In order to sell you need to pass the stock identifier',
+      ],
+    },
+  },
+  NOTIFICATION: {
+    type: 'com.symphony.ms.devtools.notification',
+    json: {
+      alert: false,
+      title: 'Something Interesting occurred!',
+      content: {
+        header: 'this is an notification sample expand to learn more',
+        body: 'it exemplifies the capabilities we have using the sdk',
+      },
+      showStatusBar: true,
+      comment: {
+        body: 'so interesting!',
+      },
+      description: 'this is a brief description',
+      assignee: {
+        displayName: 'John Doe',
+      },
+      type: {
+        name: 'sample',
+      },
+      status: {
+        name: 'Awesome',
+      },
+      priority: {
+        name: 'normal',
+      },
+      labels: [
+        { text: 'Example' },
+        { text: 'SDK' },
+        { text: 'MS' },
+      ],
     },
   },
   EXTENDED_CARD: {
