@@ -27,16 +27,14 @@
             <b style="color: #4f4f4f96;">{{message.header.to}}</b>
           </div>
       </div>
-  {{/inline}}
-  {{#*inline "overrideBody"}}
-    <div style="margin-top: 8px;">
-      <div style="color: #6a707c;">
-        <p>Offer available for a time period only</p>
+      <div style="margin-top: 8px;">
+          <div style="color: #6a707c;">
+            <p>Offer available for a time period only</p>
+          </div>
+          {{#each message.buttons}}
+            {{> action-button this }}
+          {{/each}}
       </div>
-      {{#each message.buttons}}
-        {{> action-button this }}
-      {{/each}}
-    </div>
   {{/inline}}
 {{/simple}}
 

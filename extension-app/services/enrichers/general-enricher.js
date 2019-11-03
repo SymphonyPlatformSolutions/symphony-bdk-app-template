@@ -71,13 +71,31 @@ export default class GeneralEnricher {
     let template;
 
     switch (type) {
+      case ENRICHER_EVENTS.NOTIFICATION.type:
+        template = SmsRenderer.renderAppMessage(
+          {
+            alert: data.alert,
+            title: data.title,
+            content: data.content,
+            showStatusBar: data.showStatusBar,
+            comment: data.comment,
+            description: data.description,
+            assignee: data.assignee,
+            type: data.type,
+            status: data.status,
+            priority: data.priority,
+            labels: data.labels,
+          },
+          SmsRenderer.smsTypes.NOTIFICATION,
+        );
+        break;
       case ENRICHER_EVENTS.HELP_COMMAND.type:
         template = SmsRenderer.renderAppMessage(
           {
-            title: 'Bot Commands',
-            description: data.commands,
+            title: data.title,
+            content: data.content,
           },
-          SmsRenderer.smsTypes.INFORMATION,
+          SmsRenderer.smsTypes.LIST,
         );
         break;
       case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
