@@ -14461,8 +14461,8 @@ slice-ansi@^2.1.0:
     is-fullwidth-code-point "^2.0.0"
 
 "sms-dev-tool-mock-client@git+ssh://git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client#master":
-  version "1.0.15"
-  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client#f42c14d613c1f29de5eb5eaea7b4a6654939b880"
+  version "1.0.16"
+  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client#f0e821624e67697ac8bb88e91050a75040b26276"
   dependencies:
     asciify-image "^0.1.5"
     axios "^0.18.0"
