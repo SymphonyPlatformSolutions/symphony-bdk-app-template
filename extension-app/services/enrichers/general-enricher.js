@@ -2,6 +2,7 @@
 import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { SmsRenderer } from 'sms-sdk-renderer-node';
+import { CURRENCY_LOOKUP } from 'utils/helpers/currency-lookup';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
 import AlertTest from './templates/base/alert-test-body.hbs';
 import LinkTemplate from './templates/text/link.hbs';
@@ -72,7 +73,8 @@ export default class GeneralEnricher {
 
     let actionData = {};
     let template;
-
+    let from;
+    let to;
     switch (type) {
       case ENRICHER_EVENTS.NOTIFICATION.type:
         template = SmsRenderer.renderAppMessage(
@@ -134,19 +136,26 @@ export default class GeneralEnricher {
           this.name,
           MODAL_IDS.CURRENCY_QUOTE_MODAL.entity,
         );
+
+        from = data.from.toUpperCase();
+        to = data.to.toUpperCase();
+
         template = SmsRenderer.renderAppMessage(
           {
             header: {
               ...data,
-              from_flag: FLAG_CODES[data.from_flag],
-              to_flag: FLAG_CODES[data.to_flag],
+              from,
+              from_flag: FLAG_CODES[CURRENCY_LOOKUP[from].flag],
+              from_name: CURRENCY_LOOKUP[from].name,
+              to,
+              to_flag: FLAG_CODES[CURRENCY_LOOKUP[to].flag],
+              to_name: CURRENCY_LOOKUP[to].name,
             },
             buttons: [{ buttonId: 'Buy' }],
           },
           CUSTOM_TEMPLATE_NAMES.CURRENCY_QUOTE,
         );
 
-        console.log(template);
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;

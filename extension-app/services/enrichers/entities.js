@@ -69,11 +69,7 @@ export const ENRICHER_EVENTS = {
     type: 'com.symphony.ms.currencyQuote',
     json: {
       from: 'USD',
-      from_flag: 'us',
-      from_name: 'United States Dollar',
       to: 'EUR',
-      to_flag: 'eu',
-      to_name: 'Euro',
       rate: 0.9124,
     },
   },
