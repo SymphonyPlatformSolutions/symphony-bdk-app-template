@@ -8,6 +8,8 @@ import LinkTemplate from './templates/text/link.hbs';
 import MyTemplate from './templates/base/custom-template.hbs';
 import CurrencyQuote from './templates/base/currency-quote.hbs';
 import ActionButton from './templates/components/action-button.hbs';
+import FlagTemplate from './templates/components/flag.hbs';
+import { FLAG_CODES } from './templates/components/flag-position';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -21,6 +23,7 @@ const partials = {
   'alert-test': AlertTest,
   link: LinkTemplate,
   'action-button': ActionButton,
+  flag: FlagTemplate,
 };
 
 const customTemplates = {
@@ -133,11 +136,17 @@ export default class GeneralEnricher {
         );
         template = SmsRenderer.renderAppMessage(
           {
-            header: data,
+            header: {
+              ...data,
+              from_flag: FLAG_CODES[data.from_flag],
+              to_flag: FLAG_CODES[data.to_flag],
+            },
             buttons: [{ buttonId: 'Buy' }],
           },
           CUSTOM_TEMPLATE_NAMES.CURRENCY_QUOTE,
         );
+
+        console.log(template);
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;
