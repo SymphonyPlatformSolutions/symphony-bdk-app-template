@@ -42,7 +42,7 @@ function getBotRooms() {
 
 const mockInstances = [{
   name: 'Main instance',
-  url: 'https://maininstance.com',
+  url: 'https://main.instance.com',
   id: '1',
 }, {
   name: 'Premised instance',

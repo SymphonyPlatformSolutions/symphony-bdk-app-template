@@ -1,30 +1,39 @@
-{{#> simple}}
+{{#> information}}
   {{#*inline "overrideHeader"}}
     <p>Exchange rate: {{message.header.from_name}} to {{message.header.to_name}}</p>
       <div style="display: flex; align-items: center; margin-top: 10px;">
           <div style="background-color: #CDDAF1;
+              padding: 7px 0;
               display: flex;
               align-items: center;
               justify-content: center;
-              width: 175px;">
-            <img style="margin-right:10px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAY0lEQVRYw+2WOwoAIAxDc/9ZL+aFIoiDcy3ETwrBzT4TK4IklIIBDHAEAFAY1dgiqhWg1sbImgYQaT4A9uoFB+R3ICuCex3wFGQ6IHsJqasJsHOKFAfkAI7AETgCf8sN8DNABy9eueIDsN0kAAAAAElFTkSuQmCC"/>
+              width: 175px;
+              ">
+            {{#> flag message.header.from_flag}}
+            {{/flag}}
             <p style="
-            margin-bottom: 2px;
-            margin-right: 10px;
+            color: black;
+            margin: 1px 10px;
+            background-color: transparent;
             ">1</p>
-            <b style="color: #4f4f4f96;">{{message.header.from}}</b>
+            <b style="color: #4f4f4f96;
+            background-color: transparent;">{{message.header.from}}</b>
           </div>
           <div style="background: #EDB1FA;
+              padding: 7px 0;
               display: flex;
               align-items: center;
               justify-content: center;
               width: 175px;">
-            <img style="margin-right:10px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADp0lEQVRYw+2WXWyTZRTH38IgsHYbuLGxdrSjHXZlyEYnH5kBOwjZ5AJvJcIgJC6BDrrOumZiAmoIeqFdO1bX1KgJMxMZYZDgKl9bGYVMBI033uuiV16BYGTj53neDpFtEZQpfuzipO/b5zn/538+/ud5NUB7lKZNEZgi8I8goEWe5lHYv5RAa7Vumw65+LZvJkNiz3e6fv3/LyTgQQuto6RjJUc/yYWr4vrFqMlzT+9jLJI1tUffO6kEWtcyLexhV1cJ1wbFZUDjXKSYjhcreUfsbLgYzmv8KGu+LgfTw2mfhycQTkddGZdDenP0aC/HLTzj3oItJ4DF2KybLTtA7bI6BmNF+p6+RA7L33WnsxH2/EkCobVktq1h7xEb1wemwecayUg+C007KZjeSLH8OuZ4cebtxjnPh1VIlOb7SCkSVyQbAwZeE1+jYCisBycwGvW698q5csoEFzVGJOW3BmfREtjDc1tjbHshwpZNETas2U+ZxY89y0vJnAadRE1FHdf6M7id0nTfq6eNrH9/aZpEuPo+BGRTXvtTHDxm5tYFWRKQn+TwYQH6uqecPW8eY3dLHG9LjAOhbg593Efb4RO80d5Nred1io07Mc9u4rTqictpX4UxLFhRwcxvr7onG/cQMEjkmztL+UZkpZj/PJAG0EGky6N+N5bZQWyZO7CbvHoJVNRVi19mR0OMyJHjvHqwC1fRXt6qd+s+d/wVlsIc6p9JnZxhGO2LcQS2dTr5rn/GeAJSU9Xt5sxmFs9vZImlibJCP2VmPy55V5G75jVS740SOtpHb3wjI5fGE/hesLd/6JyYwJ0SFESriPUUMvKbEqh0notYcZlf4UlHkCVy8OPSfJX2Zv1dNd+i3F04shuo8bQylFzNcOpuCVQ/xI/PpzD6OyW424TV+qYaaZwvzxjTTSgA15MZIrWtOPKCrHK24CpopHxBgAprQH92FfhY5tjHsyvr+SFh4PbFdNRfnclkwwdPPGATjpGhqW01+7ut3BBJqTKkOix65I7coJTCT6nIT0WvslCxcB8VtiDJ9rQMb4rPge4FZAnGH5PhBJJcJUPlfCJbHzKXOopYv7QOa1aAIlMQi6lZ5PcSte7tpKJWfc+FT7OpeuhBNGYUZ8h4bfrIwY3PxCVp4FTITptvudgKEm/bGek3cFPWAoftzIhM1iieIBvO2ApOyMUz9jI6mZiLS9buF/WkXcdKz0qySlpKvn/Ddfxf/iKa+iqeIvC/JvALIU6pauoiKeoAAAAASUVORK5CYII="/>
+            {{#> flag message.header.to_flag}}
+            {{/flag}}
             <p style="
-            margin-bottom: 2px;
-            margin-right: 10px;
-              ">4,10</p>
-            <b style="color: #4f4f4f96;">{{message.header.to}}</b>
+            color: black;
+            margin: 1px 10px;
+            background-color: transparent;
+              ">{{message.header.rate}}</p>
+            <b style="color: #4f4f4f96;
+            background-color: transparent;">{{message.header.to}}</b>
           </div>
       </div>
       <div style="margin-top: 8px;">
@@ -36,5 +45,5 @@
           {{/each}}
       </div>
   {{/inline}}
-{{/simple}}
+{{/information}}
 

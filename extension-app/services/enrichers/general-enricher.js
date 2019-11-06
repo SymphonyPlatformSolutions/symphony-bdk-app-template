@@ -2,12 +2,15 @@
 import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { SmsRenderer } from 'sms-sdk-renderer-node';
+import { CURRENCY_LOOKUP } from 'utils/helpers/currency-lookup';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
 import AlertTest from './templates/base/alert-test-body.hbs';
 import LinkTemplate from './templates/text/link.hbs';
 import MyTemplate from './templates/base/custom-template.hbs';
 import CurrencyQuote from './templates/base/currency-quote.hbs';
 import ActionButton from './templates/components/action-button.hbs';
+import FlagTemplate from './templates/components/flag.hbs';
+import { FLAG_CODES } from './templates/components/flag-position';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -21,6 +24,7 @@ const partials = {
   'alert-test': AlertTest,
   link: LinkTemplate,
   'action-button': ActionButton,
+  flag: FlagTemplate,
 };
 
 const customTemplates = {
@@ -69,7 +73,8 @@ export default class GeneralEnricher {
 
     let actionData = {};
     let template;
-
+    let from;
+    let to;
     switch (type) {
       case ENRICHER_EVENTS.NOTIFICATION.type:
         template = SmsRenderer.renderAppMessage(
@@ -131,13 +136,27 @@ export default class GeneralEnricher {
           this.name,
           MODAL_IDS.CURRENCY_QUOTE_MODAL.entity,
         );
+
+        from = data.from.toUpperCase();
+        to = data.to.toUpperCase();
+
         template = SmsRenderer.renderAppMessage(
           {
-            header: data,
+            header: {
+              ...data,
+              from,
+              from_flag: FLAG_CODES[CURRENCY_LOOKUP[from].flag],
+              from_name: CURRENCY_LOOKUP[from].name,
+              to,
+              to_flag: FLAG_CODES[CURRENCY_LOOKUP[to].flag],
+              to_name: CURRENCY_LOOKUP[to].name,
+              rate: data.rate,
+            },
             buttons: [{ buttonId: 'Buy' }],
           },
           CUSTOM_TEMPLATE_NAMES.CURRENCY_QUOTE,
         );
+
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;
