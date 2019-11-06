@@ -150,6 +150,7 @@ export default class GeneralEnricher {
               to,
               to_flag: FLAG_CODES[CURRENCY_LOOKUP[to].flag],
               to_name: CURRENCY_LOOKUP[to].name,
+              rate: data.rate,
             },
             buttons: [{ buttonId: 'Buy' }],
           },
