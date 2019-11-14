@@ -6,7 +6,7 @@ import { ExchangeAlt } from 'styled-icons/fa-solid';
 import styled from 'styled-components';
 
 const StyledExchangedIcon = styled(ExchangeAlt)`
-  font-size: 16
+  font-size: 16;
   margin-left: 10px;
 `;
 
@@ -24,15 +24,15 @@ const CurrencyQuoteModal = () => {
             type="number"
             value={value}
             onChange={e => setValue(e.target.value)}
-            label="Ammount"
-            errorMessage="The ammount must be greater than one"
+            label="Amount"
+            errorMessage="The amount must be greater than one"
             inputState={inputError}
           />
         </FormGroup>
         <Box horizontal align="end">
           <Button>
             <Box horizontal space={10}>
-            Buy
+              <Text style={{ fontWeight: 'inherit', color: 'inherit' }}>Buy</Text>
               <StyledExchangedIcon size={16} />
             </Box>
           </Button>
