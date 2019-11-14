@@ -22,7 +22,7 @@ const InstanceManagePage = (props) => {
 
   return (
     <Box style={{ width: '100%' }}>
-      <Text isTitle type="primary">Manage Instances</Text>
+      <Text isTitle>Manage Instances</Text>
       <Table columns={columns} data={instances} />
     </Box>
   );

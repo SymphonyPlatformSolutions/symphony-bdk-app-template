@@ -22,7 +22,7 @@ const MainPageContainer = (props) => {
   }, []);
 
   if (loading) {
-    return <Box horizontal><Loader type="v2" /></Box>;
+    return <Box horizontal><Loader /></Box>;
   }
 
   return (<MainPage instances={instances} chosenTab={chosenTab} />);

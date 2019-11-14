@@ -13,13 +13,13 @@ import { BookBookmark, Bookmark } from 'styled-icons/boxicons-regular';
 const StyledBookBookmarkIcon = styled(BookBookmark)`
   width: 32px;
   height: 32px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary_500};
 `;
 
 const StyledBookmarkIcon = styled(Bookmark)`
   width: 32px;
   height: 32px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary_500};
 `;
 
 const PAGE_DATA_TWO_LEVELS = {

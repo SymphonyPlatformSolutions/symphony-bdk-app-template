@@ -8370,9 +8370,9 @@ hoek@2.x.x:
   integrity sha1-ILt0A9POo5jpHcRxCo/xuCdKJe0=
 
 hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
-  integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#101685d3aff3b23ea213163f6e8e12f4f111e19f"
+  integrity sha512-wbg3bpgA/ZqWrZuMOeJi8+SKMhr7X9TesL/rXMjTzh0p0JUBo3II8DHboYbuIXWRlttrUFxwcu/5kygrCw8fJw==
   dependencies:
     react-is "^16.7.0"
 
@@ -11255,7 +11255,7 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
-microbundle@0.11.0:
+microbundle@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/microbundle/-/microbundle-0.11.0.tgz#266bcf4210192698c23fe3bf3581ab81d31a14d0"
   integrity sha512-Lt2f8OhC2y2uKyJ5zA8lEEiDsIAbk6yllBuoAWLIdYVIXYqOdN9mO3DI7VW7x/fw87gdnCLIJdVtpP6kaI99LA==
@@ -15886,11 +15886,11 @@ slice-ansi@^2.1.0:
     handlebars "^4.1.2"
     handlebars-helpers "^0.10.0"
 
-"sms-sdk-toolbox-ui@git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-toolbox-ui.git#feature/dropdown-material":
-  version "1.0.0"
-  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-toolbox-ui.git#d05386f26e9f109dc82bf0ee8522c7eeef287ea1"
+"sms-sdk-toolbox-ui@git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-toolbox-ui.git#nightly":
+  version "1.0.20"
+  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-toolbox-ui.git#3731c52b7171f7f0c96482df2c1ba346955a90ee"
   dependencies:
-    microbundle "0.11.0"
+    microbundle "^0.11.0"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

@@ -26,7 +26,7 @@ const NotificationPageContainer = (props) => {
   if (firstLoading) {
     return (
       <Box horizontal>
-        <Loader type="v2" />
+        <Loader />
       </Box>
     );
   }

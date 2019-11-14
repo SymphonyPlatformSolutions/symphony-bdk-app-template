@@ -55,7 +55,6 @@ const NotificationManagePage = (props) => {
   } = props;
   const [triggerOpenModal, setTriggerOpenModal] = useState(null);
   const [editNotificationRedirect, setEditNotificationRedirect] = useState(null);
-
   const parsedNotifications = notifications.map(el => ({
     ...el,
     instance: instances.find(i => el.instanceId === i.id).name,
@@ -66,14 +65,14 @@ const NotificationManagePage = (props) => {
           callback: () => {
             setEditNotificationRedirect(el);
           },
-          type: 'primary',
+          type: 'info',
         },
         {
           label: 'Delete',
           callback: () => {
             setTriggerOpenModal(el.id);
           },
-          type: 'danger',
+          type: 'error',
         },
       ]
       : undefined,
@@ -104,7 +103,6 @@ const NotificationManagePage = (props) => {
           );
           setTriggerOpenModal(null);
         }
-
         return (
           <Box style={{ width: '100%' }}>
             <Text isTitle type="primary">
@@ -115,13 +113,11 @@ const NotificationManagePage = (props) => {
                 <Button>Create Notification</Button>
               </Link>
             </div>
-            <Box horizontal>
-              <Table
-                loading={deleteLoading}
-                columns={columns}
-                data={parsedNotifications}
-              />
-            </Box>
+            <Table
+              loading={deleteLoading}
+              columns={columns}
+              data={parsedNotifications}
+            />
           </Box>
         );
       }}

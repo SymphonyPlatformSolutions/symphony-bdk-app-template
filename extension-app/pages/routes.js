@@ -45,7 +45,6 @@ const Routes = (props) => {
 
   useEffect(() => {
     const { actions, jwtService } = props;
-    console.log('getJWT');
     actions.getJWTFromSymphony(jwtService);
   }, []);
 
@@ -75,7 +74,7 @@ const Routes = (props) => {
 
   if (jwt) {
     if (jwt === 'loading') {
-      return (<LoadContainer><Loader type="v2" /></LoadContainer>);
+      return (<LoadContainer><Loader /></LoadContainer>);
     }
 
     return (
