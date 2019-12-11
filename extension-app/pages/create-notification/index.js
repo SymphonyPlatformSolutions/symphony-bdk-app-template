@@ -4,7 +4,8 @@ import {
   FormBox,
   Text,
   FormGroup,
-  Dropdown,
+  DecisionDropdown,
+  Label,
   InputField,
   Button,
 } from 'sms-sdk-toolbox-ui';
@@ -17,9 +18,17 @@ const CreateNotificationPage = (props) => {
   const {
     instances, submitHandler, loading, editingNotification,
   } = props;
+  const getInstanceFromId = () => {
+    const foundInstance = instances.find(el => el.id === editingNotification.instanceId);
+    if (!foundInstance) { return null; }
+    return {
+      label: foundInstance.name,
+      value: foundInstance.id,
+    };
+  };
 
   const [chosenInstance, setChosenInstance] = useState(
-    editingNotification ? editingNotification.instanceId : null,
+    editingNotification ? getInstanceFromId() : null,
   );
   const [notificationName, setNotificationName] = useState(
     editingNotification ? editingNotification.name : null,
@@ -40,18 +49,18 @@ const CreateNotificationPage = (props) => {
       </Text>
       <FormBox>
         <FormGroup>
-          <Dropdown
-            label="Choose Instance"
-            chosenValue={chosenInstance}
-            onChange={e => setChosenInstance(e.value)}
-            options={parsedInstances}
+          <Label>Choose Instance</Label>
+          <DecisionDropdown
+            value={chosenInstance}
+            onChange={e => setChosenInstance(e)}
+            data={parsedInstances}
           />
         </FormGroup>
         <FormGroup>
+          <Label>Notification Name</Label>
           <InputField
             value={notificationName}
             onChange={e => setNotificationName(e.target.value)}
-            label="Notification Name"
           />
         </FormGroup>
       </FormBox>
@@ -65,11 +74,11 @@ const CreateNotificationPage = (props) => {
           onClick={() => (editingNotification
             ? submitHandler({
               ...editingNotification,
-              instanceId: chosenInstance,
+              instanceId: chosenInstance.value,
               name: notificationName,
             })
             : submitHandler({
-              instanceId: chosenInstance,
+              instanceId: chosenInstance.value,
               name: notificationName,
             }))
           }

@@ -4,10 +4,10 @@ import { Box, Text, Table } from 'sms-sdk-toolbox-ui';
 
 const columns = [
   {
-    Header: 'Name',
+    header: 'Name',
     accessor: 'name',
   }, {
-    Header: 'URL',
+    header: 'URL',
     accessor: 'url',
   }, {
     sortable: false,

@@ -15,14 +15,13 @@ const LINK_PREFIX = setupLinkPrefix();
 
 const columns = [
   {
-    Header: 'Name',
+    header: 'Name',
     accessor: 'name',
-    width: undefined,
+    sortable: false,
   },
   {
-    Header: 'Instance',
+    header: 'Instance',
     accessor: 'instance',
-    width: undefined,
     tooltip: 'This column is sortable!',
   },
   {
