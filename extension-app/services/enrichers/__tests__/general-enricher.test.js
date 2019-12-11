@@ -40,12 +40,6 @@ describe('GeneralEnricher', () => {
     );
   });
 
-  it('should call SYMPHONY services.subscribe once upon register', () => {
-    enricher.register();
-    expect(SYMPHONY.services.subscribe).toBeCalledTimes(1);
-    expect(registerRenderer).toBeCalledWith(MESSAGE_TYPE, {}, NAME);
-  });
-
   it('should reduce the Actions into a single object with actionFactory', () => {
     const mockActions = [
       {

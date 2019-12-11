@@ -15919,9 +15919,9 @@ slice-ansi@^2.1.0:
     yargs "^13.3.0"
     yup "^0.27.0"
 
-"sms-sdk-renderer-node@git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-renderer-node#master":
+"sms-sdk-renderer-node@git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-renderer-node#stage":
   version "1.0.13"
-  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-renderer-node#cb14a8bf92a094de76f700c4a3f26a7144a073e9"
+  resolved "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-renderer-node#320921178afcb63d26a95b248e4de347c5aa35c6"
   dependencies:
     browserify-fs "^1.0.0"
     handlebars "^4.1.2"
