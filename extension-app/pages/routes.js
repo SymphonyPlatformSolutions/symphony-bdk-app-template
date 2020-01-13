@@ -1,7 +1,7 @@
 /* global SYMPHONY */
 
 import React, { useEffect, useState } from 'react';
-import Styled, { ThemeProvider } from 'styled-components';
+import Styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import {
   BrowserRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
@@ -11,7 +11,11 @@ import { bindActionCreators } from 'redux';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 import { getJWTFromSymphony } from 'reducers/users/actions';
 import {
-  THEME_TYPES, Loader, ToasterProvider, ModalProvider, ModalRoot,
+  THEME_TYPES,
+  Loader,
+  ToasterProvider,
+  ModalProvider,
+  ModalRoot,
 } from 'sms-sdk-toolbox-ui';
 import ToastConnector from 'components/toast-connector';
 import { PROJECT_THEMES } from '../utils/themes/PROJECT_THEMES';
@@ -33,14 +37,43 @@ const ContainerWrapper = Styled.div`
   margin: 0px 21px;
 `;
 
+const getFontSize = ({ theme }) => {
+  switch (theme.size) {
+    case 'xsmall':
+      return '12px';
+    case 'small':
+      return '13px';
+    case 'large':
+      return '17px';
+    default:
+      return '14px';
+  }
+};
+const GlobalChanger = createGlobalStyle`
+  html {
+    font-size: ${props => getFontSize(props)};
+  }
+
+  body {
+    background-color: ${({ theme }) => theme.colors.mainbackground};
+  }
+`;
+
 const Routes = (props) => {
   const [currentTheme, setTheme] = useState(PROJECT_THEMES[0]);
 
   const setThemeProps = () => {
     const isDark = window.themeColor
-      ? (window.themeColor === THEME_TYPES.DARK) : false;
-    setTheme(isDark ? PROJECT_THEMES[1] : PROJECT_THEMES[0]);
-    document.body.className = `symphony-external-app ${window.themeColor.toLowerCase()} ${window.themeSize}`;
+      ? window.themeColor === THEME_TYPES.DARK
+      : false;
+    setTheme(
+      isDark
+        ? { ...PROJECT_THEMES[1], size: window.themeSize }
+        : { ...PROJECT_THEMES[0], size: window.themeSize },
+    );
+    document.body.className = `symphony-external-app ${window.themeColor.toLowerCase()} ${
+      window.themeSize
+    }`;
   };
 
   useEffect(() => {
@@ -74,21 +107,42 @@ const Routes = (props) => {
 
   if (jwt) {
     if (jwt === 'loading') {
-      return (<LoadContainer><Loader /></LoadContainer>);
+      return (
+        <LoadContainer>
+          <Loader />
+        </LoadContainer>
+      );
     }
 
     return (
       <ContainerWrapper>
         <ThemeProvider theme={currentTheme}>
+          <GlobalChanger />
           <ToasterProvider>
             <ModalProvider>
               <ModalRoot />
               <BrowserRouter>
                 <Switch>
-                  <Route exact path={`${LINK_PREFIX}/app.html`} component={LocationRouter} />
-                  <Route exact path={`${LINK_PREFIX}/home/:tab`} component={MainPageContainer} />
-                  <Route exact path={`${LINK_PREFIX}/createNotification`} component={CreateNotificationContainer} />
-                  <Route exact path={`${LINK_PREFIX}/editNotification`} component={CreateNotificationContainer} />
+                  <Route
+                    exact
+                    path={`${LINK_PREFIX}/app.html`}
+                    component={LocationRouter}
+                  />
+                  <Route
+                    exact
+                    path={`${LINK_PREFIX}/home/:tab`}
+                    component={MainPageContainer}
+                  />
+                  <Route
+                    exact
+                    path={`${LINK_PREFIX}/createNotification`}
+                    component={CreateNotificationContainer}
+                  />
+                  <Route
+                    exact
+                    path={`${LINK_PREFIX}/editNotification`}
+                    component={CreateNotificationContainer}
+                  />
                   <Route component={Default} />
                 </Switch>
               </BrowserRouter>
@@ -119,4 +173,7 @@ const mapStateToProps = state => ({
   jwt: state.user.jwt,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Routes);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Routes);
