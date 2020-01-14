@@ -9,8 +9,9 @@ const setupURL = () => {
     // Using JSON Server
     ROOT_URL = 'http://localhost:3000';
   } else if (currEnv === envs.DEV) {
-    // BE from another PC
-    ROOT_URL = 'Enter a Valid URL';
+    // BE with another source
+    ROOT_URL = process.env.backendUrl || APP_CONFIG.API_EXT_URL;
+    console.log('DOING IT WITH', ROOT_URL);
   } else {
     ROOT_URL = APP_CONFIG.API_ROOT_URL;
   }
