@@ -6,7 +6,7 @@ Object.defineProperties(APP_CONFIG,
       writable: false,
     },
     API_EXT_URL: {
-      value: 'http://localhost:8080/testbot',
+      value: 'http://localhost:8080/templateapp',
       writable: false,
     },
     LINK_PREFIX: {

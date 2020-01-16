@@ -3,28 +3,32 @@
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
 const webpack = require('webpack');
 
 
 module.exports = (env) => {
   const mockEnv = env.localServe ? 'DEV' : 'MOCK';
   const backendUrl = env.backendUrl;
+  const plugins = [
+    new webpack.DefinePlugin({
+      'process.env.backendUrl': JSON.stringify(backendUrl),
+    }),
+    new CopyWebpackPlugin([
+      { from: './extension-app/public/bundle.json', to: '' },
+    ]),
+  ];
+
+  // Add mock client when mocking the FE
+  if (mockEnv === 'MOCK') {
+    plugins.push(new CopyWebpackPlugin([
+        { from: './node_modules/sms-dev-tool-mock-client/dist', to: '' },
+    ]));
+  }
 
   return merge(
     commonConfig(mockEnv),
     {
-      plugins: [
-        new webpack.DefinePlugin({
-          'process.env.backendUrl': JSON.stringify(backendUrl),
-        }),
-        new CopyWebpackPlugin([
-          { from: './extension-app/public/bundle.json', to: '' },
-        ]),
-        new CopyWebpackPlugin([
-          { from: './node_modules/sms-dev-tool-mock-client/dist', to: '' },
-        ]),
-      ]
+      plugins,
     },
     {
       mode: 'development',
