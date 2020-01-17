@@ -121,7 +121,8 @@ testing library) and cucumber.
 Since the template app has the Symphony Mock Client as a dependency, directly accessing port 4000
 (by going to https://localhost:4000 on your browser) will open the Mock Client shell alongside your Extension App.
 > Note: The Mock Client however does not get in the way of externalizing your files. You can still access the Extension App directly in the POD by importing it through the URL (done by adding the ```?bundle=https://localhost:4000/bundle.json``` query parameter after your POD's URL). You can read more on this by accessing [Symphony's official documentation](https://developers.symphony.com/symphony-developer/docs/creating-an-extension-application#section-load-your-application).
-- ```yarn start:mock-ext```: 
+- ```yarn start:dev```: compiles the project and exposes the main files under port ```:4000``` - similar to ```yarn start:mock```,  but does not copy the Symphony Mock Client code to overwrite the Frontend APIs. It also does not boot up the mock JSON server. This is used for when you would like to open the frontend application through Symphony. For such, the Application must be registered in the AC Portal, and a Backend must be running to execute Sympony's four-way authentication.
+> Important: The Frontend is designed to call authentication APIs as soon as the controller.html file is bootstrapped. The endpoint path is defined in the config.js file, and assumes ```https://localhost:8080/templateapp``` by default. To overwrite this value, you can run ```yarn start:dev --env.backendUrl=<YOUR URL>``` with your URL as a parameter.
 
 ## Acknowledgments
 
