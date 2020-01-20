@@ -5,6 +5,10 @@ Object.defineProperties(APP_CONFIG,
       value: `https://${window.location.host}/template`,
       writable: false,
     },
+    API_EXT_URL: {
+      value: 'http://localhost:8080/templateapp',
+      writable: false,
+    },
     LINK_PREFIX: {
       value: '/template/app',
       writable: false,
