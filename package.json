@@ -8,7 +8,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --maxWorkers=2",
     "build": "webpack --env.prod --progress --config webpack.prod.js",
-    "start:mock": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --config webpack.mock.js & nodemon mock-json-server/mock-server.js",
+    "start:mock": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.mock --config webpack.mock.js & nodemon mock-json-server/mock-server.js",
     "start:dev": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.localServe --config webpack.mock.js",
     "start:node-mock": "nodemon mock-json-server/mock-server.js",
     "storybook": "start-storybook -p 6006",
