@@ -13,7 +13,7 @@ import {
 
 const INITIAL_STATE = {
   message: null,
-  type: true,
+  type: '',
 };
 
 export default function (state = INITIAL_STATE, action) {

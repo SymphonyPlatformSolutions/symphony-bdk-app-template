@@ -108,9 +108,11 @@ const Routes = (props) => {
   if (jwt) {
     if (jwt === 'loading') {
       return (
-        <LoadContainer>
-          <Loader />
-        </LoadContainer>
+        <ThemeProvider theme={currentTheme}>
+          <LoadContainer>
+            <Loader />
+          </LoadContainer>
+        </ThemeProvider>
       );
     }
 

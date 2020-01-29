@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box, Tabs, HelpPageBuilder } from 'sms-sdk-toolbox-ui';
+import { Box, NavTabs, HelpPageBuilder } from 'sms-sdk-toolbox-ui';
 import NotificationPageContainer from 'pages/notification-manage/container';
 import InstanceManagePage from 'pages/instance-page';
 import instanceImage from 'public/assets/instance.gif';
@@ -84,7 +84,7 @@ const MainPage = (props) => {
   return (
     <Box space={20}>
       <Box horizontal space={60} style={{ maxWidth: '50rem' }}>
-        <Tabs activeTab={chosenTab}>
+        <NavTabs activeTab={chosenTab}>
           <div label="Instances">
             <InstanceManagePage instances={instances} />
           </div>
@@ -94,7 +94,7 @@ const MainPage = (props) => {
           <div label="Help" align="right">
             <HelpPageBuilder config={PAGE_DATA_TWO_LEVELS} />
           </div>
-        </Tabs>
+        </NavTabs>
       </Box>
     </Box>
   );
