@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class Index {
+export default class ApiCaller {
   constructor(baseUrl) {
     this.baseAuthUrl = `${baseUrl}/application`;
   }

@@ -1,4 +1,4 @@
-import Api from 'services/api';
+import { RestClient } from 'sms-sdk-toolbox-ui';
 import {
   GET_NOTIFICATIONS,
   GET_NOTIFICATIONS_SUCCESS,
@@ -19,7 +19,7 @@ const ROOT_URL = 'v1/notifications';
 export function getNotifications() {
   return (dispatch) => {
     dispatch({ type: GET_NOTIFICATIONS });
-    return Api.get(ROOT_URL)
+    return RestClient.get(ROOT_URL)
       .then(res => dispatch({ type: GET_NOTIFICATIONS_SUCCESS, payload: res.data }))
       .catch(error => dispatch({ type: GET_NOTIFICATIONS_FAILURE, payload: error.data }));
   };
@@ -28,7 +28,7 @@ export function getNotifications() {
 export function postNotification(notification) {
   return (dispatch) => {
     dispatch({ type: POST_NOTIFICATION });
-    return Api.post(ROOT_URL, {
+    return RestClient.post(ROOT_URL, {
       name: notification.name,
       instance_id: notification.instanceId,
     })
@@ -47,7 +47,7 @@ export function postNotification(notification) {
 export function deleteNotification(notificationId) {
   return (dispatch) => {
     dispatch({ type: DELETE_NOTIFICATIONS });
-    return Api.delete(`${ROOT_URL}/${notificationId}`)
+    return RestClient.delete(`${ROOT_URL}/${notificationId}`)
       .then(() => dispatch({
         type: DELETE_NOTIFICATIONS_SUCCESS,
         payload: notificationId,
@@ -59,7 +59,7 @@ export function deleteNotification(notificationId) {
 export function editNotification(notification) {
   return (dispatch) => {
     dispatch({ type: PUT_NOTIFICATION });
-    return Api.put(`${ROOT_URL}/${notification.id}`, {
+    return RestClient.put(`${ROOT_URL}/${notification.id}`, {
       name: notification.name,
       is_editable: notification.isEditable,
       id: notification.id,

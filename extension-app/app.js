@@ -1,10 +1,11 @@
 /* global SYMPHONY */
+/* global APP_CONFIG */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
-  THEME_TYPES, Logger,
+  THEME_TYPES, Logger, RestClient,
 } from 'sms-sdk-toolbox-ui';
 import configureStore from './reducers';
 import Routes from './pages/routes';
@@ -20,6 +21,8 @@ Logger.setEnv({
   apiUrl: null,
   debugLevel: 1,
 });
+
+RestClient.setBaseConfig({ baseUrl: APP_CONFIG.API_ROOT_URL, headers: {}, jwt: null });
 
 handleOutline(); // Accessibility
 
@@ -80,7 +83,7 @@ const appWrapper = async () => {
       const store = configureStore();
       ReactDOM.render(
         <Provider store={store}>
-          <Routes userId={userId} jwtService={MOCK_USER_SERVICE || extendedUserInfoService} />
+          <Routes userId={userId} jwtService={extendedUserInfoService || MOCK_USER_SERVICE} />
         </Provider>, document.getElementById('root'),
       );
     }).catch((error) => {

@@ -2,7 +2,7 @@ const APP_CONFIG = {};
 Object.defineProperties(APP_CONFIG,
   {
     API_ROOT_URL: {
-      value: `https://${window.location.host}/template`,
+      value: 'http://localhost:3000',
       writable: false,
     },
     API_EXT_URL: {
