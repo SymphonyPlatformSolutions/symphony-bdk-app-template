@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Text, Table } from 'sms-sdk-toolbox-ui';
+import { Box, Text, Table } from 'symphony-sdk-toolbox-ui';
 
 const columns = [
   {

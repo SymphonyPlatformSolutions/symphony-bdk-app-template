@@ -1,4 +1,4 @@
-import { RestClient } from 'sms-sdk-toolbox-ui';
+import { RestClient } from 'symphony-sdk-toolbox-ui';
 import { simplifyRooms } from 'utils/helpers/help-functions';
 import {
   JWT_AUTH_SUCCESS,

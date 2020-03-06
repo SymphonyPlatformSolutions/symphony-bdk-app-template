@@ -6,12 +6,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
   THEME_TYPES, Logger, RestClient,
-} from 'sms-sdk-toolbox-ui';
+} from 'symphony-sdk-toolbox-ui';
 import configureStore from './reducers';
 import Routes from './pages/routes';
 import { handleOutline } from './utils/helpers/help-functions';
 import './public/sass/main.scss';
-import '../node_modules/sms-sdk-toolbox-ui/dist/index.css';
+import '../node_modules/symphony-sdk-toolbox-ui/dist/index.css';
 
 const { APP_ID, APP_TITLE } = window.APP_CONFIG;
 

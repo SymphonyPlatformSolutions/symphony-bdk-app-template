@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box, NavTabs, HelpPageBuilder } from 'sms-sdk-toolbox-ui';
+import { Box, NavTabs, HelpPageBuilder } from 'symphony-sdk-toolbox-ui';
 import NotificationPageContainer from 'pages/notification-manage/container';
 import InstanceManagePage from 'pages/instance-page';
 import instanceImage from 'public/assets/instance.gif';

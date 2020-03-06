@@ -7,7 +7,7 @@ import {
   Button,
   ModalConsumer,
   DangerConfirmationModal,
-} from 'sms-sdk-toolbox-ui';
+} from 'symphony-sdk-toolbox-ui';
 import { Link, Redirect } from 'react-router-dom';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 

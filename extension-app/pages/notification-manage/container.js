@@ -6,7 +6,7 @@ import {
   getNotifications,
   deleteNotification,
 } from 'reducers/notifications/actions';
-import { Loader, Box } from 'sms-sdk-toolbox-ui';
+import { Loader, Box } from 'symphony-sdk-toolbox-ui';
 import NotificationManagePage from '.';
 
 const NotificationPageContainer = (props) => {

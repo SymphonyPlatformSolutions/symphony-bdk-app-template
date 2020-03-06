@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getInstances } from 'reducers/instances/actions';
-import { Loader, Box } from 'sms-sdk-toolbox-ui';
+import { Loader, Box } from 'symphony-sdk-toolbox-ui';
 import MainPage from '.';
 
 const MainPageContainer = (props) => {

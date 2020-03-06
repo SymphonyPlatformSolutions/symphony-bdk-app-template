@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from 'sms-sdk-toolbox-ui';
+import { Box, Text } from 'symphony-sdk-toolbox-ui';
 
 const ExampleModal = (props) => {
   const { data } = props;

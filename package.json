@@ -1,7 +1,7 @@
 {
-  "name": "sms-dev-fe-template-app",
+  "name": "symphony-ext-app-template",
   "version": "1.0.0",
-  "description": "Generic Template for Applications",
+  "description": "Generic Template for Extension Applications",
   "main": "index.js",
   "scripts": {
     "test": "jest --maxWorkers=1",
@@ -16,13 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SymphonyPlatformSolutions/sms-dev-fe-template-app.git"
+    "url": "git+https://github.com/SymphonyPlatformSolutions/symphony-ext-app-template.git"
   },
-  "author": "Market Solutions",
+  "author": "Symphony",
   "bugs": {
-    "url": "https://github.com/SymphonyPlatformSolutions/sms-dev-fe-template-app/issues"
+    "url": "https://github.com/SymphonyPlatformSolutions/symphony-ext-app-template/issues"
   },
-  "homepage": "https://github.com/SymphonyPlatformSolutions/sms-dev-fe-template-app#readme",
+  "homepage": "https://github.com/SymphonyPlatformSolutions/symphony-ext-app-template#readme",
   "dependencies": {
     "@testing-library/react": "^8.0.1",
     "axios": "^0.18.0",
@@ -54,8 +54,8 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "request": "2.81.0",
-    "sms-dev-tool-mock-client": "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-dev-tool-mock-client#master",
-    "sms-sdk-renderer-node": "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-renderer-node#stage",
+    "symphony-sdk-mock-client": "git+ssh://git@github.com:SymphonyPlatformSolutions/symphony-sdk-mock-client#master",
+    "sms-sdk-renderer-node": "git+ssh://git@github.com:SymphonyPlatformSolutions/symphony-sdk-renderer-node#stage",
     "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
     "webpack-strip-block": "^0.2.0",
@@ -108,7 +108,7 @@
     "react-testing-library": "^8.0.1",
     "redux-mock-store": "^1.5.3",
     "sass-loader": "^7.1.0",
-    "sms-sdk-toolbox-ui": "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-toolbox-ui.git#nightly",
+    "symphony-sdk-toolbox-ui": "git+ssh://git@github.com:SymphonyPlatformSolutions/symphony-sdk-toolbox-ui.git#nightly",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.30.0",

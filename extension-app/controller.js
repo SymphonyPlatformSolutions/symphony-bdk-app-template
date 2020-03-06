@@ -5,7 +5,7 @@ import Index from 'services/controller/authentication';
 import { frontendURL, setupURL, setupLinkPrefix } from 'utils/system/setup-url';
 import GeneralEnricher from 'services/enrichers/general-enricher';
 import { ENRICHER_EVENTS, MODAL_IDS } from 'services/enrichers/entities';
-import { RestClient } from 'sms-sdk-toolbox-ui';
+import { RestClient } from 'symphony-sdk-toolbox-ui';
 import { showExtensionApp } from 'services/controller/extension-app';
 import { parseStreamIdToBackend } from 'utils/helpers/help-functions';
 import { openModal } from 'services/modal-service';
