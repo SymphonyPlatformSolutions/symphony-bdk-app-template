@@ -1,4 +1,4 @@
-import { THEMES } from 'symphony-sdk-toolbox-ui';
+import { THEMES } from 'symphony-bdk-ui-toolkit';
 
 export const PROJECT_THEMES = [
   {

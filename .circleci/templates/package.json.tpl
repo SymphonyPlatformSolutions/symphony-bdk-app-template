@@ -1,5 +1,5 @@
 {
-  "name": "symphony-ext-app-template",
+  "name": "symphony-bdk-app-template",
   "version": "1.0.0",
   "description": "Generic Template for Applications",
   "main": "index.js",
@@ -16,13 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SymphonyPlatformSolutions/symphony-ext-app-template.git"
+    "url": "git+https://github.com/SymphonyPlatformSolutions/symphony-bdk-app-template.git"
   },
   "author": "Symphony",
   "bugs": {
-    "url": "https://github.com/SymphonyPlatformSolutions/symphony-ext-app-template/issues"
+    "url": "https://github.com/SymphonyPlatformSolutions/symphony-bdk-app-template/issues"
   },
-  "homepage": "https://github.com/SymphonyPlatformSolutions/symphony-ext-app-template#readme",
+  "homepage": "https://github.com/SymphonyPlatformSolutions/symphony-bdk-app-template#readme",
   "dependencies": {
     "@testing-library/react": "^8.0.1",
     "axios": "^0.18.0",
@@ -53,7 +53,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "request": "2.81.0",
-    "symphony-sdk-mock-client": "https://${CLONE_TOKEN}@github.com/SymphonyPlatformSolutions/symphony-sdk-mock-client.git#master",
+    "symphony-bdk-mock-client": "https://${CLONE_TOKEN}@github.com/SymphonyPlatformSolutions/symphony-bdk-mock-client.git#master",
     "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
     "webpack-strip-block": "^0.2.0",
@@ -107,7 +107,7 @@
     "redux-mock-store": "^1.5.3",
     "sass-loader": "^7.1.0",
     "sms-sdk-renderer-node": "https://$CLONE_TOKEN@github.com/SymphonyPlatformSolutions/sms-sdk-renderer-node.git#stage",
-    "symphony-sdk-toolbox-ui": "https://$CLONE_TOKEN@github.com/SymphonyPlatformSolutions/symphony-sdk-toolbox-ui.git#stage",
+    "symphony-bdk-ui-toolkit": "https://$CLONE_TOKEN@github.com/SymphonyPlatformSolutions/symphony-bdk-ui-toolkit.git#stage",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.30.0",

@@ -21,7 +21,7 @@ module.exports = (env) => {
   // Add mock client when mocking the FE
   if (mockEnv === 'MOCK') {
     plugins.push(new CopyWebpackPlugin([
-        { from: './node_modules/symphony-sdk-mock-client/dist', to: '' },
+        { from: './node_modules/symphony-bdk-mock-client/dist', to: '' },
     ]));
   }
 

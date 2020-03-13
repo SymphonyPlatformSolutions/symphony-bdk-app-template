@@ -1,4 +1,4 @@
-import { RestClient } from 'symphony-sdk-toolbox-ui';
+import { RestClient } from 'symphony-bdk-ui-toolkit';
 import {
   GET_NOTIFICATIONS,
   GET_NOTIFICATIONS_SUCCESS,

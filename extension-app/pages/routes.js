@@ -16,7 +16,7 @@ import {
   ToasterProvider,
   ModalProvider,
   ModalRoot,
-} from 'symphony-sdk-toolbox-ui';
+} from 'symphony-bdk-ui-toolkit';
 import ToastConnector from 'components/toast-connector';
 import { PROJECT_THEMES } from '../utils/themes/PROJECT_THEMES';
 import LocationRouter from './location-router';

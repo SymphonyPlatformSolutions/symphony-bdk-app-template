@@ -4,9 +4,9 @@ App - Template using Symphony Extension-Api frontend code.
 This project contains: 
 
 - React, to render the components
-- [symphony-sdk-toolbox-ui](https://github.com/SymphonyPlatformSolutions/symphony-sdk-toolbox-ui) Symphony Component
+- [symphony-bdk-ui-toolkit](https://github.com/SymphonyPlatformSolutions/symphony-bdk-ui-toolkit) Symphony Component
 library, for fast development and prototyping
-- [symphony-sdk-mock-client](https://github.com/SymphonyPlatformSolutions/symphony-sdk-mock-client) Mock Client, a
+- [symphony-bdk-mock-client](https://github.com/SymphonyPlatformSolutions/symphony-bdk-mock-client) Mock Client, a
 Symphony mock client that has all functionality used by an extension app inside a real symphony client,
 used for offline development and zero dependency to infrastructure.
 
