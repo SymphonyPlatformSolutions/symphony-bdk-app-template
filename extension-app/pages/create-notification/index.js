@@ -8,7 +8,7 @@ import {
   Label,
   InputField,
   Button,
-} from 'sms-sdk-toolbox-ui';
+} from 'symphony-bdk-ui-toolkit';
 import { Link } from 'react-router-dom';
 import { setupLinkPrefix } from 'utils/system/setup-url';
 

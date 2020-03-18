@@ -23,7 +23,7 @@ export const ENRICHER_EVENTS = {
       title: 'Something Interesting occurred!',
       content: {
         header: 'This is an example of a notification, expand to see more',
-        body: 'The SDK comes with ready-to-use message templates that you can use to render messages with your own data. You can add you own templates using the extension application.',
+        body: 'The BDK comes with ready-to-use message templates that you can use to render messages with your own data. You can add you own templates using the extension application.',
       },
       showStatusBar: true,
       comment: {
@@ -47,7 +47,7 @@ export const ENRICHER_EVENTS = {
           text: 'Example',
         },
         {
-          text: 'SDK',
+          text: 'BDK',
         },
         {
           text: 'MS',

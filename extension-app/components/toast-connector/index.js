@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { ToasterConsumer } from 'sms-sdk-toolbox-ui';
+import { ToasterConsumer } from 'symphony-bdk-ui-toolkit';
 import { connect } from 'react-redux';
 
 const ToastConnector = (props) => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Text, Box, InputField, FormBox, FormGroup, Button,
-} from 'sms-sdk-toolbox-ui';
+} from 'symphony-bdk-ui-toolkit';
 import { ExchangeAlt } from 'styled-icons/fa-solid';
 import styled from 'styled-components';
 
