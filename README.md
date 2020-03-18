@@ -1,4 +1,4 @@
-# Symphony Extension App Template
+# Symphony BDK Extension App Template
 
 App - Template using Symphony Extension-Api frontend code.
 This project contains: 
