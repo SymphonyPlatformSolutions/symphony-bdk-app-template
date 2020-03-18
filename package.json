@@ -55,7 +55,7 @@
     "redux-thunk": "^2.3.0",
     "request": "2.81.0",
     "symphony-bdk-mock-client": "git+ssh://git@github.com:SymphonyPlatformSolutions/symphony-bdk-mock-client#master",
-    "sms-sdk-renderer-node": "git+ssh://git@github.com:SymphonyPlatformSolutions/symphony-sdk-renderer-node#stage",
+    "sms-sdk-renderer-node": "git+ssh://git@github.com:SymphonyPlatformSolutions/sms-sdk-renderer-node#stage",
     "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
     "webpack-strip-block": "^0.2.0",

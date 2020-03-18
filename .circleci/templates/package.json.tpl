@@ -1,15 +1,15 @@
 {
   "name": "symphony-bdk-app-template",
   "version": "1.0.0",
-  "description": "Generic Template for Applications",
+  "description": "Generic Template for Extension Applications",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/jest --maxWorkers=1",
     "test:watch": "./node_modules/.bin/jest --watch",
     "test:coverage": "./node_modules/.bin/jest --coverage --maxWorkers=2",
     "build": "webpack --env.prod --progress --config webpack.prod.js",
-    "start:dev": "webpack-dev-server --watch --progress --colors --https --env.dev --config webpack.dev.js ",
     "start:mock": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.mock --config webpack.mock.js & nodemon mock-json-server/mock-server.js",
+    "start:dev": "webpack-dev-server --watch --host 0.0.0.0 --disable-host-checkKIL --progress --colors --https --env.localServe --config webpack.mock.js",
     "start:node-mock": "nodemon mock-json-server/mock-server.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -30,6 +30,7 @@
     "babel-plugin-module-resolver": "^3.2.0",
     "cucumber": "^5.1.0",
     "formik": "^1.5.4",
+    "image-webpack-loader": "^6.0.0",
     "install": "^0.12.2",
     "jest-cucumber": "^2.0.11",
     "lodash": "^4.17.11",
@@ -54,6 +55,7 @@
     "redux-thunk": "^2.3.0",
     "request": "2.81.0",
     "symphony-bdk-mock-client": "https://${CLONE_TOKEN}@github.com/SymphonyPlatformSolutions/symphony-bdk-mock-client.git#master",
+    "sms-sdk-renderer-node": "https://$CLONE_TOKEN@github.com/SymphonyPlatformSolutions/sms-sdk-renderer-node.git#stage",
     "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
     "webpack-strip-block": "^0.2.0",
@@ -106,14 +108,18 @@
     "react-testing-library": "^8.0.1",
     "redux-mock-store": "^1.5.3",
     "sass-loader": "^7.1.0",
-    "sms-sdk-renderer-node": "https://$CLONE_TOKEN@github.com/SymphonyPlatformSolutions/sms-sdk-renderer-node.git#stage",
     "symphony-bdk-ui-toolkit": "https://$CLONE_TOKEN@github.com/SymphonyPlatformSolutions/symphony-bdk-ui-toolkit.git#stage",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "d3-scale": "^3.2.1",
+    "d3-shape": "^1.3.7",
+    "d3-time": "^1.1.0",
+    "d3-time-format": "^2.2.2",
+    "react-stockcharts": "^0.7.8"
   },
   "resolutions": {
     "styled-components": "4.3.2"
