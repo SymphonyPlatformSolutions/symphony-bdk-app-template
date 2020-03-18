@@ -126,4 +126,4 @@ Since the template app has the Symphony Mock Client as a dependency, directly ac
 
 ## Acknowledgments
 
-You can find more about Symphony Extesion-Api in this link: https://extension-api.symphony.com/
+You can find more about Symphony Extension-Api in this link: https://extension-api.symphony.com/
