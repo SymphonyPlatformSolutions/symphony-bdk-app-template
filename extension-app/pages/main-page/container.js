@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getInstances } from 'reducers/instances/actions';
-import { Loader, Box } from 'sms-sdk-toolbox-ui';
+import { Loader, Box } from 'symphony-bdk-ui-toolkit';
 import MainPage from '.';
 
 const MainPageContainer = (props) => {
@@ -22,7 +22,7 @@ const MainPageContainer = (props) => {
   }, []);
 
   if (loading) {
-    return <Box horizontal><Loader type="v2" /></Box>;
+    return <Box horizontal><Loader /></Box>;
   }
 
   return (<MainPage instances={instances} chosenTab={chosenTab} />);

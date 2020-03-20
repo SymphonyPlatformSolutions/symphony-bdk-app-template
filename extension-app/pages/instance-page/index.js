@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Text, Table } from 'sms-sdk-toolbox-ui';
+import { Box, Text, Table } from 'symphony-bdk-ui-toolkit';
 
 const columns = [
   {
-    Header: 'Name',
+    header: 'Name',
     accessor: 'name',
   }, {
-    Header: 'URL',
+    header: 'URL',
     accessor: 'url',
   }, {
     sortable: false,
@@ -22,7 +22,7 @@ const InstanceManagePage = (props) => {
 
   return (
     <Box style={{ width: '100%' }}>
-      <Text isTitle type="primary">Manage Instances</Text>
+      <Text isTitle>Manage Instances</Text>
       <Table columns={columns} data={instances} />
     </Box>
   );

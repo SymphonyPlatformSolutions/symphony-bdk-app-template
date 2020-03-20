@@ -3,7 +3,7 @@
 
 import AuthApiCaller from '../api-caller';
 
-export default class Index {
+export default class Authentication {
   constructor({
     appId, dependencies, exportedDependencies, baseAuthenticationUrl,
   }) {

@@ -2,7 +2,11 @@ const APP_CONFIG = {};
 Object.defineProperties(APP_CONFIG,
   {
     API_ROOT_URL: {
-      value: `https://${window.location.host}/template`,
+      value: 'http://localhost:3000',
+      writable: false,
+    },
+    API_EXT_URL: {
+      value: 'http://localhost:8080/templateapp',
       writable: false,
     },
     LINK_PREFIX: {
@@ -26,7 +30,7 @@ Object.defineProperties(APP_CONFIG,
       writable: false,
     },
     APP_ICON_NAME: {
-      value: 'favicon.svg',
+      value: 'favicon.png',
       writable: false,
     },
   });

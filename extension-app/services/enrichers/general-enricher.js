@@ -2,12 +2,15 @@
 import { openModal } from 'services/modal-service';
 import { frontendURL, setupLinkPrefix } from 'utils/system/setup-url';
 import { SmsRenderer } from 'sms-sdk-renderer-node';
+import { CURRENCY_LOOKUP } from 'utils/helpers/currency-lookup';
 import { ENRICHER_EVENTS, MODAL_IDS } from './entities';
 import AlertTest from './templates/base/alert-test-body.hbs';
 import LinkTemplate from './templates/text/link.hbs';
 import MyTemplate from './templates/base/custom-template.hbs';
 import CurrencyQuote from './templates/base/currency-quote.hbs';
 import ActionButton from './templates/components/action-button.hbs';
+import FlagTemplate from './templates/components/flag.hbs';
+import { FLAG_CODES } from './templates/components/flag-position';
 
 const LINK_PREFIX = setupLinkPrefix();
 const FRONTEND_SERVE_URL = frontendURL();
@@ -21,6 +24,7 @@ const partials = {
   'alert-test': AlertTest,
   link: LinkTemplate,
   'action-button': ActionButton,
+  flag: FlagTemplate,
 };
 
 const customTemplates = {
@@ -69,37 +73,50 @@ export default class GeneralEnricher {
 
     let actionData = {};
     let template;
-
+    let from;
+    let to;
     switch (type) {
+      case ENRICHER_EVENTS.NOTIFICATION.type:
+        template = SmsRenderer.renderAppMessage(
+          {
+            alert: data.alert,
+            title: data.title,
+            content: data.content,
+            showStatusBar: data.showStatusBar,
+            comment: data.comment,
+            description: data.description,
+            assignee: data.assignee,
+            type: data.type,
+            status: data.status,
+            priority: data.priority,
+            labels: data.labels,
+          },
+          SmsRenderer.smsTypes.NOTIFICATION,
+        );
+        break;
       case ENRICHER_EVENTS.HELP_COMMAND.type:
         template = SmsRenderer.renderAppMessage(
           {
-            title: 'Bot Commands',
-            description:
-              'You can use the bot for the following commands: issue, note and page',
+            title: data.title,
+            content: data.content,
           },
-          SmsRenderer.smsTypes.INFORMATION,
+          SmsRenderer.smsTypes.LIST,
         );
         break;
       case ENRICHER_EVENTS.WELCOME_MESSAGE_DIRECT_CHAT.type:
-      case ENRICHER_EVENTS.WELCOME_MESSAGE_ROOM.type:
         template = SmsRenderer.renderAppMessage(
           {
             title: 'Welcome!',
-            description:
-            'Thank you for using the template app!',
+            description: data.message,
           },
           SmsRenderer.smsTypes.INFORMATION,
         );
         break;
-      case ENRICHER_EVENTS.TESTING.type:
+      case ENRICHER_EVENTS.EXTENDED_CARD.type:
         template = SmsRenderer.renderAppMessage(
           {
             title: 'My custom entity editor',
-            link: {
-              url: 'https://google.com',
-              content: 'Click here for google!',
-            },
+            link: data.link,
             extraContent: data.extraContent,
           },
           CUSTOM_TEMPLATE_NAMES.MY_TEMPLATE,
@@ -119,13 +136,27 @@ export default class GeneralEnricher {
           this.name,
           MODAL_IDS.CURRENCY_QUOTE_MODAL.entity,
         );
+
+        from = data.from.toUpperCase();
+        to = data.to.toUpperCase();
+
         template = SmsRenderer.renderAppMessage(
           {
-            header: data,
+            header: {
+              ...data,
+              from,
+              from_flag: FLAG_CODES[CURRENCY_LOOKUP[from].flag],
+              from_name: CURRENCY_LOOKUP[from].name,
+              to,
+              to_flag: FLAG_CODES[CURRENCY_LOOKUP[to].flag],
+              to_name: CURRENCY_LOOKUP[to].name,
+              rate: data.rate,
+            },
             buttons: [{ buttonId: 'Buy' }],
           },
           CUSTOM_TEMPLATE_NAMES.CURRENCY_QUOTE,
         );
+
         break;
       default:
         template = `<messageML><p>No template found for this message entity</p><br />Caught: ${type}</messageML>`;
@@ -140,13 +171,13 @@ export default class GeneralEnricher {
 
   action(data) {
     switch (data.type) {
-      case MODAL_IDS.EXAMPLE_MODAL.entity:
+      case MODAL_IDS.EXAMPLE_MODAL.type:
         openModal(
           MODAL_IDS.EXAMPLE_MODAL.entity,
           this.name,
           `${FRONTEND_SERVE_URL}${LINK_PREFIX}`,
           '560px',
-          { page: 'exampleModal' },
+          { page: MODAL_IDS.EXAMPLE_MODAL.entity, data },
         );
         break;
       case MODAL_IDS.CURRENCY_QUOTE_MODAL.type:
@@ -155,7 +186,7 @@ export default class GeneralEnricher {
           this.name,
           `${FRONTEND_SERVE_URL}${LINK_PREFIX}`,
           '260px',
-          { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity },
+          { page: MODAL_IDS.CURRENCY_QUOTE_MODAL.entity, data },
         );
         break;
       default:

@@ -1,21 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box, Tabs, HelpPageBuilder } from 'sms-sdk-toolbox-ui';
+import { Box, NavTabs, HelpPageBuilder } from 'symphony-bdk-ui-toolkit';
 import NotificationPageContainer from 'pages/notification-manage/container';
 import InstanceManagePage from 'pages/instance-page';
+import instanceImage from 'public/assets/instance.gif';
+import notifStep1Image from 'public/assets/n_step1.gif';
+import notifStep2Image from 'public/assets/n_step2.gif';
+import notifStep3Image from 'public/assets/n_step3.gif';
 import { BookBookmark, Bookmark } from 'styled-icons/boxicons-regular';
 
 const StyledBookBookmarkIcon = styled(BookBookmark)`
   width: 32px;
   height: 32px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary_500};
 `;
 
 const StyledBookmarkIcon = styled(Bookmark)`
   width: 32px;
   height: 32px;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.primary_500};
 `;
 
 const PAGE_DATA_TWO_LEVELS = {
@@ -36,17 +40,17 @@ const PAGE_DATA_TWO_LEVELS = {
             {
               title: 'Step 1',
               description: 'Go to the Manage Notifications Tab',
-              imageUrl: 'https://picsum.photos/640/480',
+              imageUrl: notifStep1Image,
             },
             {
               title: 'Step 2',
               description: 'Click the Create Notification button',
-              imageUrl: 'https://picsum.photos/640/480',
+              imageUrl: notifStep2Image,
             },
             {
               title: 'Step 3',
               description: 'On the Create Notification page fill the form and press Create',
-              imageUrl: 'https://picsum.photos/640/480',
+              imageUrl: notifStep3Image,
             },
           ],
         },
@@ -61,7 +65,7 @@ const PAGE_DATA_TWO_LEVELS = {
         {
           title: 'Step 1',
           description: 'Go to the Instances Tab',
-          imageUrl: 'https://picsum.photos/640/480',
+          imageUrl: instanceImage,
         },
       ],
       relatedContent: [
@@ -80,7 +84,7 @@ const MainPage = (props) => {
   return (
     <Box space={20}>
       <Box horizontal space={60} style={{ maxWidth: '50rem' }}>
-        <Tabs activeTab={chosenTab}>
+        <NavTabs activeTab={chosenTab}>
           <div label="Instances">
             <InstanceManagePage instances={instances} />
           </div>
@@ -90,7 +94,7 @@ const MainPage = (props) => {
           <div label="Help" align="right">
             <HelpPageBuilder config={PAGE_DATA_TWO_LEVELS} />
           </div>
-        </Tabs>
+        </NavTabs>
       </Box>
     </Box>
   );
