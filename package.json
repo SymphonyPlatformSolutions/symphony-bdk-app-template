@@ -1,6 +1,6 @@
 {
   "name": "symphony-bdk-app-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generic Template for Extension Applications",
   "main": "index.js",
   "scripts": {
