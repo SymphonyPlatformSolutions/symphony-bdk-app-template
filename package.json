@@ -55,7 +55,7 @@
     "redux-thunk": "^2.3.0",
     "request": "2.81.0",
     "symphony-bdk-mock-client": "^1.0.20",
-    "sms-sdk-renderer-node": "^1.0.8",
+    "sms-sdk-renderer-node": "^1.0.13",
     "styled-components": "^4.2.1",
     "styled-icons": "^8.0.0",
     "webpack-strip-block": "^0.2.0",
