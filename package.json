@@ -33,7 +33,7 @@
     "image-webpack-loader": "^6.0.0",
     "install": "^0.12.2",
     "jest-cucumber": "^2.0.11",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.20",
     "marked": "^0.6.2",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
