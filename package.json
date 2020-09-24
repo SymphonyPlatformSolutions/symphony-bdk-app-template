@@ -29,7 +29,7 @@
     "axios-mock-adapter": "^1.16.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "cucumber": "^5.1.0",
-    "formik": "^1.5.4",
+    "formik": "^2.0.0",
     "image-webpack-loader": "^6.0.0",
     "install": "^0.12.2",
     "jest-cucumber": "^2.0.11",
